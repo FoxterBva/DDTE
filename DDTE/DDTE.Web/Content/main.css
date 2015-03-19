@@ -151,6 +151,40 @@ h3
     cursor: pointer;
 }
 
+.photo-item
+{
+    display: inline-block;
+    width: 176px;
+    height: 200px;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+.photo-image-container
+{
+    width: 176px;
+    height: 176px;
+    position: relative;
+    overflow: hidden;
+    
+}
+
+.photo-image 
+{
+    /*max-width: 176px;
+    max-height: 176px;*/
+    max-width: 640px;
+    max-height: 176px;
+}
+
+.img-link {
+    display: block;
+    width: 640px;
+    text-align: center;
+    margin-left: -320px;
+    height: 176px;
+}
+
 /* Special Section */
 
 .special-links-main

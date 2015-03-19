@@ -57,28 +57,76 @@ namespace DDTE.BL.Providers
 			throw new NotImplementedException();
 		}
 
-		public List<PhotoResultDTO> ListPhotos(int? albumId)
+		public List<PhotoViewerItem> ListPhotoItems(int? albumId)
 		{
-			var listFiles = new List<System.IO.FileInfo>();
-			var listDbPhotos = new List<Photo>();
+			List<PhotoViewerItem> res = new List<PhotoViewerItem>();
 
-			var res = new List<PhotoResultDTO>();
-
-			foreach (var file in listFiles)
+			if (albumId == null)
 			{
-				var dbPhoto = listDbPhotos.FirstOrDefault(p => file.Name.Equals(p.FileName, StringComparison.InvariantCultureIgnoreCase));
-
-				if (dbPhoto == null)
-					dbPhoto = new Photo();
-
-				res.Add(new PhotoResultDTO() { 
-					Description = dbPhoto.Description,
-					Title = dbPhoto.Title,
-					
-				});
+				var albums = ListAlbums();
+				foreach (var album in albums)
+				{
+					res.Add(new PhotoViewerItem()
+					{
+						Id = album.Id,
+						Description = album.Description,
+						ItemType = PhotoViewerItemType.Album,
+						Title = album.Name,
+						ImagePath = String.Empty
+					});
+				}
+			}
+			else
+			{
+				var photos = ListPhotos(albumId.Value);
+				foreach (var p in photos)
+				{
+					res.Add(new PhotoViewerItem() {
+						Id = p.Id,
+						Description = p.Description,
+						Title = p.Title,
+						ItemType = PhotoViewerItemType.Photo,
+						ImagePath = p.FileName
+					});
+				}
 			}
 
 			return res;
 		}
+
+		public List<Photo> ListPhotos(int albumId)
+		{
+			var res = new List<Photo>();
+
+			res = tempPhoto.Where(p => p.AlbumId == albumId || albumId == 0).ToList();
+
+			//var listFiles = new List<System.IO.FileInfo>();
+			//var listDbPhotos = new List<Photo>();
+
+			//var res = new List<PhotoResultDTO>();
+
+			//foreach (var file in listFiles)
+			//{
+			//	var dbPhoto = listDbPhotos.FirstOrDefault(p => file.Name.Equals(p.FileName, StringComparison.InvariantCultureIgnoreCase));
+
+			//	if (dbPhoto == null)
+			//		dbPhoto = new Photo();
+
+			//	res.Add(new PhotoResultDTO() { 
+			//		Description = dbPhoto.Description,
+			//		Title = dbPhoto.Title,
+					
+			//	});
+			//}
+
+			return res;
+		}
+
+		List<Photo> tempPhoto = new List<Photo>() {
+			new Photo() { Id = 1, Title = "Photo 1", Description = "First Photo", AlbumId = 1, FileName = "/Album0/WoWScrnShot_011315_210108.jpg" },
+			new Photo() { Id = 1, Title = "Photo 2", Description = "Second Photo", AlbumId = 1, FileName = "/Album0/WoWScrnShot_021715_013612.jpg" },
+			new Photo() { Id = 1, Title = "It's me", Description = "Third Photo", AlbumId = 1, FileName = "http://cs421029.vk.me/v421029555/64e8/CxsOwcNcA8s.jpg" },
+			new Photo() { Id = 1, Title = "It's me too", Description = "Fourth Photo", AlbumId = 2, FileName = "/Album1/WoWScrnShot_030115_185856.jpg" }
+		};
 	}
 }

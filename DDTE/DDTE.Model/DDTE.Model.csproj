@@ -52,6 +52,7 @@
     <Compile Include="DTO\DocumentDTO.cs" />
     <Compile Include="DTO\PhotoDTO.cs" />
     <Compile Include="DTO\PhotoResultDTO.cs" />
+    <Compile Include="DTO\PhotoViewerItem.cs" />
     <Compile Include="Photo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

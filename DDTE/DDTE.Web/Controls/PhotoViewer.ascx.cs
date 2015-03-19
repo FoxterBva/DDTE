@@ -9,7 +9,8 @@ namespace DDTE.Web.Controls
 {
 	public partial class PhotoViewer : System.Web.UI.UserControl
 	{
-		DDTE.BL.Facade.IPhotoProvider provider = new DDTE.BL.Providers.PhotoProvider();
+		readonly string PHOTOS_FOLDER = "Photos";
+		DDTE.BL.Facade.IPhotoProvider photoProvider = new DDTE.BL.Providers.PhotoProvider();
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
@@ -33,27 +34,41 @@ namespace DDTE.Web.Controls
 			}
 		}
 
-		public void RebindList()
+		protected void rptrPhotoItems_ItemDataBound(object sender, RepeaterItemEventArgs e)
 		{
-			if (SelectedAlbum == null)
+			if (e.Item != null)
 			{
-				var albums = provider.ListAlbums();
+				var d = e.Item.DataItem as DDTE.Model.DTO.PhotoViewerItem;
 
-				rptrPhotos.Visible = false;
-				rptrAlbums.Visible = true;
-				rptrAlbums.DataSource = albums;
-				rptrAlbums.DataBind();
-			}
-			else
-			{
-				var photos = provider.ListPhotos(SelectedAlbum);
+				if (d != null)
+				{
+					var pnlAlbum = e.Item.FindControl("pnlAlbum") as Panel;
+					pnlAlbum.Visible = d.ItemType == Model.DTO.PhotoViewerItemType.Album;
 
-				rptrAlbums.Visible = false;
-				rptrPhotos.Visible = true;
-				rptrPhotos.DataSource = photos;
-				rptrPhotos.DataBind();
+					var pnlPhoto = e.Item.FindControl("pnlPhoto") as Panel;
+					pnlPhoto.Visible = d.ItemType == Model.DTO.PhotoViewerItemType.Photo;
+
+					if (d.ItemType == Model.DTO.PhotoViewerItemType.Photo)
+					{
+						var img = e.Item.FindControl("imgPhoto") as System.Web.UI.HtmlControls.HtmlImage;
+						if (img != null)
+						{
+							img.Src = d.ImagePath.StartsWith("http") ? d.ImagePath : Page.ResolveUrl("~/" + PHOTOS_FOLDER + d.ImagePath);
+						}
+					}
+				}
 			}
 		}
+
+		public void RebindList()
+		{
+			var items = photoProvider.ListPhotoItems(SelectedAlbum);
+
+			rptrPhotoItems.DataSource = items;
+			rptrPhotoItems.DataBind();
+		}
+
+		
 
 		int? SelectedAlbum
 		{

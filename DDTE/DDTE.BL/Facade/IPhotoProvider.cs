@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DDTE.Model.DTO;
+using DDTE.Model;
 
 namespace DDTE.BL.Facade
 {
@@ -15,6 +16,13 @@ namespace DDTE.BL.Facade
 
 		void AddPhoto(PhotoDTO photo);
 		void UpdatePhoto(PhotoDTO photo);
-		List<PhotoResultDTO> ListPhotos(int? albumId);
+		List<Photo> ListPhotos(int albumId);
+
+		/// <summary>
+		/// Returns list of photo items (albums/photos)
+		/// </summary>
+		/// <param name="albumId"></param>
+		/// <returns></returns>
+		List<PhotoViewerItem> ListPhotoItems(int? albumId);
 	}
 }
