@@ -1,0 +1,37 @@
+﻿.login-anchor
+{
+    height: 25px;
+    width: 25px;
+    border: 1px solid #DEDEDE;
+    right: 15px;
+    top: 0px;
+    position: absolute;
+}
+
+.login-greetings
+{
+    right: 15px;
+    top: 5px;
+    position: absolute;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.login-form
+{
+    display: none;
+    position: absolute;
+    top: 25px;
+    right: 15px;
+    padding: 10px;
+    border: 1px solid #CDCDCD;
+    background-color: white;
+    box-shadow: #CDCDCD 0px 0px 5px 5px;
+}
+
+.login-form .input
+{
+    height: 25px;
+    margin-bottom: 10px;
+    padding: 0px 5px 0px 5px;
+}

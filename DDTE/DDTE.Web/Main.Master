@@ -1,0 +1,57 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="DDTE.Web.Main" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="/Content/reset.css" rel="stylesheet" />
+    <link href="/Content/main.css" rel="stylesheet" />
+    <link href="/Content/login.css" rel="stylesheet" />
+    <script src="/Scripts/jquery-1.8.2.js" ></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <header>
+            <div class="logo-main">
+                <div class="login-greetings" onclick="$('.login-form').toggle()"><asp:Label ID="lblGreetings" runat="server"></asp:Label></div>
+                <asp:Panel ID="pnlLoginContainer" class="login-form" runat="server">
+                    <asp:Panel ID="pnlLogOut" runat="server">
+                        <asp:Button ID="btnLogout" runat="server" OnClick="btnLogout_Click" Text="Выйти" CssClass="btn-login" />
+                    </asp:Panel>
+                    <asp:Panel ID="pnlLogIn" runat="server" >
+                        <div><asp:Label ID="ltlMesssage" runat="server" CssClass="error" /></div>
+                        <div><asp:TextBox ID="tbLogin" runat="server" placeholder="username" CssClass="input username" /></div>
+                        <div><asp:TextBox ID="tbPassword" runat="server" placeholder="password" CssClass="input password" TextMode="Password" /></div>
+                        <div>
+                            <asp:CheckBox ID="cbRememberMe" runat="server" Text="запомнить" />
+                            <asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="Войти" CssClass="btn-login" />
+                        </div>
+                        <%--<div style="text-align: center">
+                            <a href="#">forgot pasword</a>
+                        </div>--%>
+                    </asp:Panel>
+                </asp:Panel>
+                <nav>
+                    <ul class="nav-main">
+                        <li><a href="/Default.aspx">Главная</a></li>
+                        <li><a href="/Pages/Gallery.aspx">Галерея</a></li>
+                        <li><a href="/Pages/Contacts.aspx">Контакты</a></li>
+                        <li><a href="/Pages/SpecialSection/BasicInformation.aspx">Сведения об образовательной организации</a></li>
+                    </ul>
+                </nav>
+            </div>
+        
+        </header>
+    
+        <section class="section-main">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+            </asp:ContentPlaceHolder>
+        </section>
+    </form>
+</body>
+</html>
