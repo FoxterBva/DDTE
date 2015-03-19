@@ -57,6 +57,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -203,6 +204,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Controls\DocumentsList.ascx" />
+    <Content Include="Controls\PhotoViewer.ascx" />
     <Content Include="Default.aspx" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />
@@ -341,6 +343,13 @@
     </Compile>
     <Compile Include="Controls\DocumentsList.ascx.designer.cs">
       <DependentUpon>DocumentsList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PhotoViewer.ascx.cs">
+      <DependentUpon>PhotoViewer.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\PhotoViewer.ascx.designer.cs">
+      <DependentUpon>PhotoViewer.ascx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

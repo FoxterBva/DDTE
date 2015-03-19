@@ -7,18 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DDTE.Web.Pages {
+namespace DDTE.Web.Controls {
     
     
-    public partial class Gallery {
+    public partial class PhotoViewer {
         
         /// <summary>
-        /// pbPhotos control.
+        /// rptrAlbums control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DDTE.Web.Controls.PhotoViewer pbPhotos;
+        protected global::System.Web.UI.WebControls.Repeater rptrAlbums;
+        
+        /// <summary>
+        /// rptrPhotos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptrPhotos;
     }
 }
