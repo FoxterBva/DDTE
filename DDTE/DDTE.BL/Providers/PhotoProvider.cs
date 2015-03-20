@@ -32,7 +32,7 @@ namespace DDTE.BL.Providers
 				Folder = "",
 				Description = "This is a First Album",
 				IsPublic = true,
-				Name = "First Album"
+				Title = "First Album"
 			});
 
 			albums.Add(new AlbumDTO()
@@ -41,10 +41,20 @@ namespace DDTE.BL.Providers
 				Folder = "",
 				Description = "This is a Second Album",
 				IsPublic = true,
-				Name = "Second Album"
+				Title = "Second Album"
 			});
 
 			return albums;
+		}
+
+		public void DeleteAlbum(int id)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void DeleteAlbum(string folder)
+		{
+			throw new NotImplementedException();
 		}
 
 		public void AddPhoto(PhotoDTO photo)
@@ -71,7 +81,7 @@ namespace DDTE.BL.Providers
 						Id = album.Id,
 						Description = album.Description,
 						ItemType = PhotoViewerItemType.Album,
-						Title = album.Name,
+						Title = album.Title,
 						ImagePath = String.Empty
 					});
 				}
@@ -120,6 +130,11 @@ namespace DDTE.BL.Providers
 			//}
 
 			return res;
+		}
+
+		public void DeletePhoto(int photoId)
+		{ 
+
 		}
 
 		List<Photo> tempPhoto = new List<Photo>() {

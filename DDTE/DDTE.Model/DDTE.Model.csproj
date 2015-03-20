@@ -46,7 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Album.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="DataMapper.cs" />
     <Compile Include="DocumentFileInfo.cs" />
     <Compile Include="DTO\AlbumDTO.cs" />
     <Compile Include="DTO\DocumentDTO.cs" />

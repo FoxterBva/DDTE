@@ -25,9 +25,9 @@
         </HeaderTemplate>
         <ItemTemplate>
                 <li class="documents-item">
-                    <a href="#" class="document-link-download" title="загрузить"></a>
+                    <a href='/FileDownload.ashx?file=<%# (bool)Eval("IsLocal") ? Page.ResolveUrl("~/" + DocumentFolder + Eval("Link")) : Eval("Link") %>' class="document-link-download" title="загрузить" target="_blank">(загрузить)</a>
                     <a href="#" class="document-link-view" title="просмотреть"></a>
-                    <asp:HyperLink ID="hpDocumentLink" runat="server" ToolTip="Нажмите для просмотра"><%# Eval("LinkName") %></asp:HyperLink>
+                    <asp:HyperLink ID="hpDocumentLink" runat="server" ToolTip="Нажмите для просмотра" CssClass="extension-link"><%# Eval("LinkName") %></asp:HyperLink>
                     <asp:LinkButton ID="lbDelete" runat="server" ToolTip="Удалить документ" Text="(Удалить)" CssClass="btn-delete" OnClientClick="return confirm('Удалить файл?')" CommandName="Delete" CommandArgument='<%# Eval("Link") %>' />
                 </li>
         </ItemTemplate>

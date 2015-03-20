@@ -48,6 +48,11 @@
         </header>
     
         <section class="section-main">
+            <div class="breadcrumb">
+                <asp:SiteMapPath ID="SiteMapPath1" runat="server">
+                </asp:SiteMapPath>
+            </div>
+
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         
             </asp:ContentPlaceHolder>

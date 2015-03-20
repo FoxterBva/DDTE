@@ -32,6 +32,22 @@ namespace DDTE.Web.Controls
 
 				RebindList();
 			}
+			else if (e.CommandName == "Delete")
+			{
+				int id;
+				var parsed = Int32.TryParse((string)e.CommandArgument, out id);
+
+				if (SelectedAlbum == null)
+				{ 
+					// Delete folder
+					photoProvider.DeleteAlbum(id);
+				}
+				else
+				{ 
+					// Delete photo
+					photoProvider.DeletePhoto(id);
+				}
+			}
 		}
 
 		protected void rptrPhotoItems_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -67,8 +83,6 @@ namespace DDTE.Web.Controls
 			rptrPhotoItems.DataSource = items;
 			rptrPhotoItems.DataBind();
 		}
-
-		
 
 		int? SelectedAlbum
 		{

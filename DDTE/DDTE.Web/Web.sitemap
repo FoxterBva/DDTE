@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+	<siteMapNode url="/Default.aspx" title="Главная"  description="">
+		<siteMapNode url="Pages/Gallery.aspx" title="Галерея"  description="" />
+		<siteMapNode url="Pages/Contacts.aspx" title="Контакты"  description="" />
+		<siteMapNode url="Pages/SpecialSections.aspx" title="Спец. раздел"  description="" >
+			<siteMapNode url="Pages/SpecialSection/BasicInformation.aspx" title="Основные сведения"  description="" />
+			<siteMapNode url="Pages/SpecialSection/DocumentsDownload.aspx" title="Документы"  description="" />
+			<siteMapNode url="Pages/SpecialSection/Education.aspx" title="Образование"  description="" />
+			<siteMapNode url="Pages/SpecialSection/EducationStandards.aspx" title="Образовательные стандарты"  description="" />
+			<siteMapNode url="Pages/SpecialSection/FincanceEconomicActivity.aspx" title="Финансово-хозяйственная деятельность"  description="" />
+			<siteMapNode url="Pages/SpecialSection/Grants.aspx" title="Стипендии и иные виды материальной поддержки"  description="" />
+			<siteMapNode url="Pages/SpecialSection/Leaders.aspx" title="Руководство. Педагогический (научно-педагогический) состав"  description="" />
+			<siteMapNode url="Pages/SpecialSection/LogisticalSupport.aspx" title="Материально-техническое обеспечение и оснащенность образовательного процесса"  description="" />
+			<siteMapNode url="Pages/SpecialSection/PaidServices.aspx" title="Платные образовательные услуги"  description="" />
+			<siteMapNode url="Pages/SpecialSection/Structure.aspx" title="Структура и органы управления образовательной организацией"  description="" />
+			<siteMapNode url="Pages/SpecialSection/Vacancies.aspx" title="Вакантные места для приема (перевода)"  description="" />
+		</siteMapNode>
+	</siteMapNode>
+</siteMap>

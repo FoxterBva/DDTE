@@ -73,6 +73,13 @@ h3
     margin: auto;
 }
 
+.breadcrumb
+{
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 .news-list
 {
     list-style: none;
@@ -158,6 +165,27 @@ h3
     height: 200px;
     margin-left: 15px;
     margin-top: 15px;
+    border: 1px solid #EFEFEF;
+}
+
+.photo-item .photo-album
+{
+    padding: 10px;
+    text-decoration: none;
+    
+}
+
+.photo-item .photo-album .title
+{
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.photo-item .photo-album .descr
+{
+    text-align: center;
+    color: #ABABAB;
 }
 
 .photo-image-container
@@ -301,14 +329,23 @@ h3
     margin-bottom: 10px;
 }
 
-ul.documents a[href$='.zip'] { padding-left: 21px; display:inline-block; line-height:21px; background:transparent url(/Images/ExtensionIcons.png) 0 0 no-repeat; }
-ul.documents a[href$='.txt'] { padding-left: 21px; display:inline-block; line-height:21px; background:transparent url(/Images/ExtensionIcons.png) 0 0 no-repeat; }
-ul.documents a[href$='.pdf'] { padding-left: 21px; display:inline-block; line-height:21px; background:transparent url(/Images/ExtensionIcons.png) 0 -80px no-repeat; }
-ul.documents a[href$='.doc'] { padding-left: 21px; display:inline-block; line-height:21px; background:transparent url(/Images/ExtensionIcons.png) 0 -20px no-repeat; }
-ul.documents a[href$='.docx'] { padding-left: 21px; display:inline-block; line-height:21px; background:transparent url(/Images/ExtensionIcons.png) 0 -20px no-repeat; }
-ul.documents a[href$='.xls'] { padding-left: 21px; display:inline-block; line-height:21px; background:transparent url(/Images/ExtensionIcons.png) 0 -60px no-repeat; }
-ul.documents a[href$='.jpg'] { padding-left: 21px; display:inline-block; line-height:21px; background:transparent url(/Images/ExtensionIcons.png) 0 -40px no-repeat; }
-ul.documents a[href$='.png'] { padding-left: 21px; display:inline-block; line-height:21px; background:transparent url(/Images/ExtensionIcons.png) 0 -40px no-repeat; }
+ul.documents a.extension-link[href$='.zip'] { background:transparent url(/Images/ExtensionIcons.png) 0 0 no-repeat; }
+ul.documents a.extension-link[href$='.txt'] { background:transparent url(/Images/ExtensionIcons.png) 0 0 no-repeat; }
+ul.documents a.extension-link[href$='.pdf'] { background:transparent url(/Images/ExtensionIcons.png) 0 -80px no-repeat; }
+ul.documents a.extension-link[href$='.doc'] { background:transparent url(/Images/ExtensionIcons.png) 0 -20px no-repeat; }
+ul.documents a.extension-link[href$='.docx'] { background:transparent url(/Images/ExtensionIcons.png) 0 -20px no-repeat; }
+ul.documents a.extension-link[href$='.xls'] { background:transparent url(/Images/ExtensionIcons.png) 0 -60px no-repeat; }
+ul.documents a.extension-link[href$='.jpg'] { background:transparent url(/Images/ExtensionIcons.png) 0 -40px no-repeat; }
+ul.documents a.extension-link[href$='.png'] { background:transparent url(/Images/ExtensionIcons.png) 0 -40px no-repeat; }
+
+ul.documents a.extension-link
+{
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 21px; 
+    display:inline-block; 
+    line-height:21px;
+}
 
 ul.documents
 {
@@ -325,11 +362,11 @@ ul.documents .documents-item
 
 .document-link-download
 {
-    display: inline-block;
+    /*display: inline-block;
     height: 21px;
     width: 21px;
     line-height: 21px;
-    background:transparent url(/Images/download.png) no-repeat;
+    background:transparent url(/Images/download.png) no-repeat;*/
 }
 
 

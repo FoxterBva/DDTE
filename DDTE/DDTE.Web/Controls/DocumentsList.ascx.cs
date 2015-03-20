@@ -14,9 +14,9 @@ namespace DDTE.Web.Controls
 {
 	public partial class DocumentsList : System.Web.UI.UserControl
 	{
-		NLog.Logger logger = LogHelper.GetLogger("");
-		const string documentFolder = "Documents";
-		string physicalFolder = AppDomain.CurrentDomain.BaseDirectory + documentFolder;
+		NLog.Logger logger = LogHelper.GetLogger("DocumentList");
+		public static readonly string DocumentFolder = "Documents";
+		string physicalFolder = AppDomain.CurrentDomain.BaseDirectory + DocumentFolder;
 
 		IDocumentProvider documentProvider = new DocumentProvider();
 		bool displayAddFileDialog = false;
@@ -111,9 +111,8 @@ namespace DDTE.Web.Controls
 
 		public void RefreshList()
 		{ 
-			// TODO: get file's list from the DB
 			var fileProvider = new FileProvider();
-			string path = Server.MapPath("~/Documents");
+			string path = Server.MapPath("~/" + DocumentFolder);
 			var files = fileProvider.ListFiles(path, String.Empty);
 
 			var documents = documentProvider.ListDocuments(this.Category, files);
@@ -132,7 +131,7 @@ namespace DDTE.Web.Controls
 					var link = e.Item.FindControl("hpDocumentLink") as HyperLink;
 					if (link != null)
 					{
-						link.NavigateUrl = dto.IsLocal ? Page.ResolveUrl("~/" + documentFolder + dto.Link) : dto.Link;
+						link.NavigateUrl = dto.IsLocal ? Page.ResolveUrl("~/" + DocumentFolder + dto.Link) : dto.Link;
 						link.Target = "_blank";
 					}
 
