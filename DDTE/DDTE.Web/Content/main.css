@@ -2,7 +2,10 @@
 {
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     font-size: 14px;
-    /*background-color: #55C4FF;*/
+    background-color: #2BDAEC;
+    background-image: url(/Images/Background.png);
+    background-repeat: no-repeat;
+    background-position: top;
 }
 
 ul
@@ -40,28 +43,58 @@ h3
     left: 50%;
     margin-left: -585px;
     width: 1170px;
-
 }
 
-.nav-main li
+.nav-main > li
 {
     display: inline-block;
     border: 1px solid #ABABAB;
     background-color: #EFEFEF;
 }
 
-.nav-main li:hover
-{
-    background-color: #D5D5D5;
+.nav-main > li ul {
+    z-index: 501;
 }
 
-.nav-main li a
+.nav-main > li ul > li {
+    border-bottom: 1px solid #ABABAB;
+    border-left: 1px solid #ABABAB;
+    border-right: 1px solid #ABABAB;
+    background-color: #EFEFEF;
+}
+
+.nav-main > li ul > li {
+    display: block;
+}
+
+.nav-main > li:hover,
+.nav-main > li:hover ul > li:hover
+{
+    background-color: #D5D5D5;
+    position: relative;
+}
+
+.nav-main > li:hover ul {
+    display: block !important;
+    position: absolute;
+    left: -1px;
+    top: 35px;
+}
+
+.nav-main > li > a
 {
     padding: 10px 30px 10px 30px;
     display: block;
     text-decoration: none;
     font-weight: bold;
     text-transform: uppercase;
+    color: blue;
+}
+
+.nav-main > li > ul > li > a {
+    padding: 5px 10px 5px 10px;
+    display: block;
+    text-decoration: none;
     color: blue;
 }
 
@@ -302,6 +335,11 @@ h3
 
 /*  Documents */
 
+.documents-list 
+{
+    margin-top: 10px;
+}
+
 .add-document-main
 {
     padding-top: 10px;
@@ -350,7 +388,6 @@ ul.documents a.extension-link
 ul.documents
 {
     list-style: none;
-    margin-top: 20px;
 }
 
 ul.documents .documents-item

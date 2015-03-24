@@ -46,7 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Album.cs" />
+    <Compile Include="Classes\Search\NewsSearchParameters.cs" />
+    <Compile Include="Classes\Search\SearchParametersBase.cs" />
+    <Compile Include="Partial\Album.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="DataMapper.cs" />
     <Compile Include="DocumentFileInfo.cs" />
@@ -55,7 +57,8 @@
     <Compile Include="DTO\PhotoDTO.cs" />
     <Compile Include="DTO\PhotoResultDTO.cs" />
     <Compile Include="DTO\PhotoViewerItem.cs" />
-    <Compile Include="Photo.cs" />
+    <Compile Include="Partial\News.cs" />
+    <Compile Include="Partial\Photo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

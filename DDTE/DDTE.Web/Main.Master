@@ -40,7 +40,21 @@
                         <li><a href="/Default.aspx">Главная</a></li>
                         <li><a href="/Pages/Gallery.aspx">Галерея</a></li>
                         <li><a href="/Pages/Contacts.aspx">Контакты</a></li>
-                        <li><a href="/Pages/SpecialSection/BasicInformation.aspx">Сведения об образовательной организации</a></li>
+                        <li><a href="/Pages/SpecialSection/BasicInformation.aspx">Сведения об образовательной организации</a>
+                            <ul style="display: none">
+                                <li><a href="/Pages/SpecialSection/BasicInformation.aspx">Основные сведения</a></li>
+                                <li><a href="/Pages/SpecialSection/Structure.aspx">Структура и органы управления образовательной организацией</a></li>
+                                <li><a href="/Pages/SpecialSection/DocumentsDownload.aspx">Документы</a></li>
+                                <li><a href="/Pages/SpecialSection/Education.aspx">Образование</a></li>
+                                <li><a href="/Pages/SpecialSection/EducationStandards.aspx">Образовательные стандарты</a></li>
+                                <li><a href="/Pages/SpecialSection/Leaders.aspx">Руководство. Педагогический (научно-педагогический) состав</a></li>
+                                <li><a href="/Pages/SpecialSection/LogisticalSupport.aspx">Материально-техническое обеспечение и оснащенность образовательного процесса</a></li>
+                                <li><a href="/Pages/SpecialSection/Grants.aspx">Стипендии и иные виды материальной поддержки</a></li>
+                                <li><a href="/Pages/SpecialSection/PaidServices.aspx">Платные образовательные услуги</a></li>
+                                <li><a href="/Pages/SpecialSection/FinanceEcomonicActivity.aspx">Финансово-хозяйственная деятельность</a></li>
+                                <li><a href="/Pages/SpecialSection/Vacancies.aspx">Вакантные места для приема (перевода)</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
             </div>

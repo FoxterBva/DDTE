@@ -41,11 +41,13 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Facade\IDocumentProvider.cs" />
+    <Compile Include="Facade\INewsProvider.cs" />
     <Compile Include="Facade\IPhotoProvider.cs" />
     <Compile Include="PermissionHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\DocumentProvider.cs" />
     <Compile Include="Providers\FileProvider.cs" />
+    <Compile Include="Providers\NewsProvider.cs" />
     <Compile Include="Providers\PhotoProvider.cs" />
   </ItemGroup>
   <ItemGroup>
