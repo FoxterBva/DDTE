@@ -14,63 +14,67 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <form id="form1" runat="server">
-        <header>
-            <div class="logo-main">
-                <div class="login-greetings" onclick="$('.login-form').toggle()"><asp:Label ID="lblGreetings" runat="server"></asp:Label></div>
-                <asp:Panel ID="pnlLoginContainer" class="login-form" runat="server">
-                    <asp:Panel ID="pnlLogOut" runat="server">
-                        <asp:Button ID="btnLogout" runat="server" OnClick="btnLogout_Click" Text="Выйти" CssClass="btn-login" />
+    <div class="border-bottom">
+        <form id="form1" runat="server">
+            <header>
+                <div class="logo-main">
+                    <div class="logo-main2">
+                    <div class="login-greetings" onclick="$('.login-form').toggle()"><asp:Label ID="lblGreetings" runat="server"></asp:Label></div>
+                    <asp:Panel ID="pnlLoginContainer" class="login-form" runat="server">
+                        <asp:Panel ID="pnlLogOut" runat="server">
+                            <asp:Button ID="btnLogout" runat="server" OnClick="btnLogout_Click" Text="Выйти" CssClass="btn-login" />
+                        </asp:Panel>
+                        <asp:Panel ID="pnlLogIn" runat="server" >
+                            <div><asp:Label ID="ltlMesssage" runat="server" CssClass="error" /></div>
+                            <div><asp:TextBox ID="tbLogin" runat="server" placeholder="username" CssClass="input username" /></div>
+                            <div><asp:TextBox ID="tbPassword" runat="server" placeholder="password" CssClass="input password" TextMode="Password" /></div>
+                            <div>
+                                <asp:CheckBox ID="cbRememberMe" runat="server" Text="запомнить" />
+                                <asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="Войти" CssClass="btn-login" />
+                            </div>
+                            <%--<div style="text-align: center">
+                                <a href="#">forgot pasword</a>
+                            </div>--%>
+                        </asp:Panel>
                     </asp:Panel>
-                    <asp:Panel ID="pnlLogIn" runat="server" >
-                        <div><asp:Label ID="ltlMesssage" runat="server" CssClass="error" /></div>
-                        <div><asp:TextBox ID="tbLogin" runat="server" placeholder="username" CssClass="input username" /></div>
-                        <div><asp:TextBox ID="tbPassword" runat="server" placeholder="password" CssClass="input password" TextMode="Password" /></div>
-                        <div>
-                            <asp:CheckBox ID="cbRememberMe" runat="server" Text="запомнить" />
-                            <asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="Войти" CssClass="btn-login" />
-                        </div>
-                        <%--<div style="text-align: center">
-                            <a href="#">forgot pasword</a>
-                        </div>--%>
-                    </asp:Panel>
-                </asp:Panel>
-                <nav>
-                    <ul class="nav-main">
-                        <li><a href="/Default.aspx">Главная</a></li>
-                        <li><a href="/Pages/Gallery.aspx">Галерея</a></li>
-                        <li><a href="/Pages/Contacts.aspx">Контакты</a></li>
-                        <li><a href="/Pages/SpecialSection/BasicInformation.aspx">Сведения об образовательной организации</a>
-                            <ul style="display: none">
-                                <li><a href="/Pages/SpecialSection/BasicInformation.aspx">Основные сведения</a></li>
-                                <li><a href="/Pages/SpecialSection/Structure.aspx">Структура и органы управления образовательной организацией</a></li>
-                                <li><a href="/Pages/SpecialSection/DocumentsDownload.aspx">Документы</a></li>
-                                <li><a href="/Pages/SpecialSection/Education.aspx">Образование</a></li>
-                                <li><a href="/Pages/SpecialSection/EducationStandards.aspx">Образовательные стандарты</a></li>
-                                <li><a href="/Pages/SpecialSection/Leaders.aspx">Руководство. Педагогический (научно-педагогический) состав</a></li>
-                                <li><a href="/Pages/SpecialSection/LogisticalSupport.aspx">Материально-техническое обеспечение и оснащенность образовательного процесса</a></li>
-                                <li><a href="/Pages/SpecialSection/Grants.aspx">Стипендии и иные виды материальной поддержки</a></li>
-                                <li><a href="/Pages/SpecialSection/PaidServices.aspx">Платные образовательные услуги</a></li>
-                                <li><a href="/Pages/SpecialSection/FinanceEcomonicActivity.aspx">Финансово-хозяйственная деятельность</a></li>
-                                <li><a href="/Pages/SpecialSection/Vacancies.aspx">Вакантные места для приема (перевода)</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+                    <nav>
+                        <ul class="nav-main">
+                            <li><a href="/Default.aspx">Главная</a></li>
+                            <li><a href="/Pages/Gallery.aspx">Галерея</a></li>
+                            <li><a href="/Pages/Contacts.aspx">Контакты</a></li>
+                            <li><a href="/Pages/SpecialSection/BasicInformation.aspx">Сведения об образовательной организации</a>
+                                <ul style="display: none">
+                                    <li><a href="/Pages/SpecialSection/BasicInformation.aspx">Основные сведения</a></li>
+                                    <li><a href="/Pages/SpecialSection/Structure.aspx">Структура и органы управления образовательной организацией</a></li>
+                                    <li><a href="/Pages/SpecialSection/DocumentsDownload.aspx">Документы</a></li>
+                                    <li><a href="/Pages/SpecialSection/Education.aspx">Образование</a></li>
+                                    <li><a href="/Pages/SpecialSection/EducationStandards.aspx">Образовательные стандарты</a></li>
+                                    <li><a href="/Pages/SpecialSection/Leaders.aspx">Руководство. Педагогический (научно-педагогический) состав</a></li>
+                                    <li><a href="/Pages/SpecialSection/LogisticalSupport.aspx">Материально-техническое обеспечение и оснащенность образовательного процесса</a></li>
+                                    <li><a href="/Pages/SpecialSection/Grants.aspx">Стипендии и иные виды материальной поддержки</a></li>
+                                    <li><a href="/Pages/SpecialSection/PaidServices.aspx">Платные образовательные услуги</a></li>
+                                    <li><a href="/Pages/SpecialSection/FinanceEcomonicActivity.aspx">Финансово-хозяйственная деятельность</a></li>
+                                    <li><a href="/Pages/SpecialSection/Vacancies.aspx">Вакантные места для приема (перевода)</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                </div>
         
-        </header>
+            </header>
     
-        <section class="section-main">
-            <div class="breadcrumb">
-                <asp:SiteMapPath ID="SiteMapPath1" runat="server">
-                </asp:SiteMapPath>
-            </div>
+            <section class="section-main">
+                <div class="breadcrumb">
+                    <asp:SiteMapPath ID="SiteMapPath1" runat="server">
+                    </asp:SiteMapPath>
+                </div>
 
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         
-            </asp:ContentPlaceHolder>
-        </section>
-    </form>
+                </asp:ContentPlaceHolder>
+            </section>
+        </form>
+    </div>
 </body>
 </html>
