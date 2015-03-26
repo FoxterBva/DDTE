@@ -70,6 +70,7 @@
             <section class="section-main">
                 <div class="breadcrumb">
                     <asp:SiteMapPath ID="SiteMapPath1" runat="server">
+                        <PathSeparatorTemplate>&nbsp;/&nbsp;</PathSeparatorTemplate>
                     </asp:SiteMapPath>
                 </div>
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
