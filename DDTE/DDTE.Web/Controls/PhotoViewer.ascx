@@ -13,12 +13,12 @@
         <asp:Panel ID="pnlPhoto" runat="server" CssClass="photo-item">
             <div class="photo-image-container">
                 <a class="img-link" href="#"><span style=""></span><img id="imgPhoto" runat="server" src="#" class="photo-image"  /></a>
-                <div class="img-title"><%# Eval("Title") %></div>
-                <asp:Panel ID="pnlImageActions" runat="server" class="img-actions">
-                    <asp:LinkButton ID="lblEdit" runat="server">Edit</asp:LinkButton>
-                    <asp:LinkButton ID="lbDelete" runat="server" OnClientClick="return confirm('Delete?')" CommandName="Delete" CommandArgument='<%# Eval("Id") %>'>Delete</asp:LinkButton>
-                </asp:Panel>
             </div>
+            <div class="img-title"><%# Eval("Title") %></div>
+            <asp:Panel ID="pnlImageActions" runat="server" class="img-actions">
+                <asp:LinkButton ID="lblEdit" runat="server">Edit</asp:LinkButton>
+                <asp:LinkButton ID="lbDelete" runat="server" OnClientClick="return confirm('Delete?')" CommandName="Delete" CommandArgument='<%# Eval("Id") %>'>Delete</asp:LinkButton>
+            </asp:Panel>
         </asp:Panel>
     </ItemTemplate>
 </asp:Repeater>

@@ -40,9 +40,12 @@
                     <nav>
                         <ul class="nav-main">
                             <li><a href="/Default.aspx">Главная</a></li>
+                            <li><a href="/Pages/Welcome.aspx">Добро пожаловать</a></li>
+                            <li><a href="/Pages/Schedule.aspx">Расписание</a></li>
+                            <li><a href="/Pages/Contests.aspx">Конкурсы</a></li>
                             <li><a href="/Pages/Gallery.aspx">Галерея</a></li>
                             <li><a href="/Pages/Contacts.aspx">Контакты</a></li>
-                            <li><a href="/Pages/SpecialSection/BasicInformation.aspx">Сведения об образовательной организации</a>
+                            <li><a href="/Pages/SpecialSection/BasicInformation.aspx" title="Сведения об образовательной организации">Информация</a>
                                 <ul style="display: none">
                                     <li><a href="/Pages/SpecialSection/BasicInformation.aspx">Основные сведения</a></li>
                                     <li><a href="/Pages/SpecialSection/Structure.aspx">Структура и органы управления образовательной организацией</a></li>
@@ -69,7 +72,6 @@
                     <asp:SiteMapPath ID="SiteMapPath1" runat="server">
                     </asp:SiteMapPath>
                 </div>
-
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         
                 </asp:ContentPlaceHolder>

@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
         $(window).bind('scroll', function() {
-            if ($(window).scrollTop() > 170) {
+            if ($(window).scrollTop() > 270) {
                 $('.special-links-container').addClass('fixed');
             }
             else {

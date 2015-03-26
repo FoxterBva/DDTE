@@ -3,7 +3,10 @@
 	<siteMapNode url="/Default.aspx" title="Главная"  description="">
 		<siteMapNode url="Pages/Gallery.aspx" title="Галерея"  description="" />
 		<siteMapNode url="Pages/Contacts.aspx" title="Контакты"  description="" />
-		<siteMapNode url="Pages/SpecialSections.aspx" title="Спец. раздел"  description="" >
+		<siteMapNode url="Pages/Schedule.aspx" title="Расписание"  description="" />
+		<siteMapNode url="Pages/Welcome.aspx" title="Добро Пожаловать"  description="" />
+		<siteMapNode url="Pages/Contests.aspx" title="Конкурсы"  description="" />
+		<siteMapNode url="Pages/SpecialSections.aspx" title="Информация"  description="" >
 			<siteMapNode url="Pages/SpecialSection/BasicInformation.aspx" title="Основные сведения"  description="" />
 			<siteMapNode url="Pages/SpecialSection/DocumentsDownload.aspx" title="Документы"  description="" />
 			<siteMapNode url="Pages/SpecialSection/Education.aspx" title="Образование"  description="" />
