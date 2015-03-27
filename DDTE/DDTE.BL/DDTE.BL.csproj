@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +52,10 @@
     <Compile Include="Providers\PhotoProvider.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DDTE.Common\DDTE.Common.csproj">
+      <Project>{0ceb682b-4866-48ce-89ec-1f82149cd93b}</Project>
+      <Name>DDTE.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DDTE.Model\DDTE.Model.csproj">
       <Project>{78d50339-b158-4218-b364-7cfb3079cc08}</Project>
       <Name>DDTE.Model</Name>

@@ -10,7 +10,7 @@ namespace DDTE.BL.Facade
 {
 	public interface IPhotoProvider
 	{
-		void AddAlbum(AlbumDTO album);
+		void CreateAlbum(AlbumDTO album);
 		void UpdateAlbum(AlbumDTO album);
 		List<AlbumDTO> ListAlbums();
 		void DeleteAlbum(int id);

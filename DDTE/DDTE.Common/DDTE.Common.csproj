@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="Exceptions\FileExistsException.cs" />
     <Compile Include="LogHelper.cs" />
     <Compile Include="MessageFormatter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

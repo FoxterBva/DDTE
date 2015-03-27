@@ -74,7 +74,7 @@ namespace DDTE.Web.Controls
 								return;
 							}
 						}
-
+						
 						if (!File.Exists(directoryPath + "\\" + fileName))
 						{
 							hpf.SaveAs(directoryPath + "\\" + fileName);

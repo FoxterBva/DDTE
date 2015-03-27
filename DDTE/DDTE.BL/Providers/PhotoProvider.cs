@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DDTE.BL.Facade;
+using DDTE.Common.Exceptions;
 using DDTE.Model;
 using DDTE.Model.DTO;
 
@@ -11,17 +16,35 @@ namespace DDTE.BL.Providers
 {
 	public class PhotoProvider : IPhotoProvider
 	{
+		public static readonly string TmbSuffix = "_tmb";
 
-		public void AddAlbum(AlbumDTO album)
+		/// <summary>
+		/// Creates album
+		/// </summary>
+		public void CreateAlbum(AlbumDTO album)
 		{
 			throw new NotImplementedException();
+
+			// TODO:
+			// 1. Add physical folder (do we really need separate folder for each album?)
+			//    - Generate folder name
+			//    - Create folder
+			// 2. Add to the DB
 		}
 
+		/// <summary>
+		/// Updates fields of the album object
+		/// </summary>
 		public void UpdateAlbum(AlbumDTO album)
 		{
 			throw new NotImplementedException();
+
+			// TODO: update album fields
 		}
 
+		/// <summary>
+		/// Returns list of albums
+		/// </summary>
 		public List<AlbumDTO> ListAlbums()
 		{
 			List<AlbumDTO> albums = new List<AlbumDTO>();
@@ -47,26 +70,85 @@ namespace DDTE.BL.Providers
 			return albums;
 		}
 
+		/// <summary>
+		/// Deletes album and all its content
+		/// </summary>
 		public void DeleteAlbum(int id)
 		{
 			throw new NotImplementedException();
+			// TODO: 
+			// 1. Delete all related photos
+			// 2. Delete all related photo files
+			// 3. Delete folder
+			// 4. Delete db record
 		}
 
+		/// <summary>
+		/// Deletes album and all its content
+		/// </summary>
 		public void DeleteAlbum(string folder)
 		{
 			throw new NotImplementedException();
+			// TODO: 
+			// 1. Delete all related photos
+			// 2. Delete all related photo files
+			// 3. Delete folder
+			// 4. Delete db record
 		}
 
-		public void AddPhoto(PhotoDTO photo)
+		/// <summary>
+		/// Adds photo
+		/// </summary>
+		public void AddPhoto(PhotoDTO photo, Stream photoStream, string photoPath)
 		{
-			throw new NotImplementedException();
+			var maxImageHeight = 150;
+
+			// TODO: 
+			// 1. add to DB
+
+
+			// 2. Save file
+			Image img = Image.FromStream(photoStream);
+			if (File.Exists(photoPath))
+				throw new FileExistsException("File '" + photoPath + "' already exists.");
+
+			img.Save(photoPath);
+
+			// 3. Create tumbnail file
+			double scale = (double)maxImageHeight / img.Height;
+			int tmbWidth = (int)(img.Width * scale);
+			int tmbHeight = (int)(img.Height * scale);
+
+			using (Bitmap tmb = new Bitmap(tmbWidth, tmbHeight))
+			{
+				using (Graphics g = Graphics.FromImage(tmb))
+				{
+					g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+					g.SmoothingMode = SmoothingMode.HighQuality;
+					g.CompositingQuality = CompositingQuality.HighQuality;
+					g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+					g.DrawImage(img, 0, 0, tmbWidth, tmbHeight);
+
+					tmb.Save(String.Format("{0}{1}{2}", Path.GetFileNameWithoutExtension(photoPath), TmbSuffix, "png"), ImageFormat.Png);
+				}
+			}
 		}
 
+		/// <summary>
+		/// Updates fields of the photo object
+		/// </summary>
 		public void UpdatePhoto(PhotoDTO photo)
 		{
 			throw new NotImplementedException();
+			// TODO: update photo fields (title, descr)
+
+			// TODO: do we need a possibility to reassign photo and albums?
 		}
 
+		/// <summary>
+		/// Returns display items for photo viewer
+		/// </summary>
 		public List<PhotoViewerItem> ListPhotoItems(int? albumId)
 		{
 			List<PhotoViewerItem> res = new List<PhotoViewerItem>();
@@ -104,37 +186,27 @@ namespace DDTE.BL.Providers
 			return res;
 		}
 
+		/// <summary>
+		/// Returns list of photo associated with given album
+		/// </summary>
 		public List<Photo> ListPhotos(int albumId)
 		{
 			var res = new List<Photo>();
 
 			res = tempPhoto.Where(p => p.AlbumId == albumId || albumId == 0).ToList();
 
-			//var listFiles = new List<System.IO.FileInfo>();
-			//var listDbPhotos = new List<Photo>();
-
-			//var res = new List<PhotoResultDTO>();
-
-			//foreach (var file in listFiles)
-			//{
-			//	var dbPhoto = listDbPhotos.FirstOrDefault(p => file.Name.Equals(p.FileName, StringComparison.InvariantCultureIgnoreCase));
-
-			//	if (dbPhoto == null)
-			//		dbPhoto = new Photo();
-
-			//	res.Add(new PhotoResultDTO() { 
-			//		Description = dbPhoto.Description,
-			//		Title = dbPhoto.Title,
-					
-			//	});
-			//}
-
 			return res;
 		}
 
+		/// <summary>
+		/// Deletes photo
+		/// </summary>
 		public void DeletePhoto(int photoId)
-		{ 
+		{
+			throw new NotImplementedException();
 
+			// 1. Delete photo file
+			// 2. Delete record
 		}
 
 		List<Photo> tempPhoto = new List<Photo>() {
