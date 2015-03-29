@@ -1,9 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Welcome.aspx.cs" Inherits="DDTE.Web.Pages.Welcome" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MainRight.Master" AutoEventWireup="true" CodeBehind="Welcome.aspx.cs" Inherits="DDTE.Web.Pages.Welcome" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="cphHeader" runat="server">
 </asp:Content>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
     <ul class="welcome-list">
         <li>Объединение «Мастерская художника»</li>
         <li>Объединение «Кудесники»</li>

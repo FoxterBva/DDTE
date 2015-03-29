@@ -9,7 +9,12 @@
     <link href="/Content/reset.css" rel="stylesheet" />
     <link href="/Content/main.css" rel="stylesheet" />
     <link href="/Content/login.css" rel="stylesheet" />
+    <link href="/Content/themes/base/jquery.ui.datepicker.css" rel="stylesheet" />
+    <link href="/Content/themes/base/jquery.ui.theme.css" rel="stylesheet" />
+    
     <script src="/Scripts/jquery-1.8.2.js" ></script>
+    <script src="/Scripts/jquery-ui-1.8.24.js" ></script>
+    <script src="/Scripts/datepicker-ru.js" ></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -56,7 +61,7 @@
                                     <li><a href="/Pages/SpecialSection/LogisticalSupport.aspx">Материально-техническое обеспечение и оснащенность образовательного процесса</a></li>
                                     <li><a href="/Pages/SpecialSection/Grants.aspx">Стипендии и иные виды материальной поддержки</a></li>
                                     <li><a href="/Pages/SpecialSection/PaidServices.aspx">Платные образовательные услуги</a></li>
-                                    <li><a href="/Pages/SpecialSection/FinanceEcomonicActivity.aspx">Финансово-хозяйственная деятельность</a></li>
+                                    <li><a href="/Pages/SpecialSection/FinanceEconomicActivity.aspx">Финансово-хозяйственная деятельность</a></li>
                                     <li><a href="/Pages/SpecialSection/Vacancies.aspx">Вакантные места для приема (перевода)</a></li>
                                 </ul>
                             </li>

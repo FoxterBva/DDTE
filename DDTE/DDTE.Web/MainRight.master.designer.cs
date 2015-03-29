@@ -7,18 +7,27 @@
 // </автоматически создаваемое>
 //------------------------------------------------------------------------------
 
-namespace DDTE.Web.Pages {
+namespace DDTE.Web {
     
     
-    public partial class Gallery {
+    public partial class MainRight {
         
         /// <summary>
-        /// pbPhotos элемент управления.
+        /// cphHeader элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::DDTE.Web.Controls.PhotoViewer pbPhotos;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder cphHeader;
+        
+        /// <summary>
+        /// cphContent элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder cphContent;
     }
 }
