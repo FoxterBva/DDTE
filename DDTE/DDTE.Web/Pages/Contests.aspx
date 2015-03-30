@@ -1,5 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Contests.aspx.cs" Inherits="DDTE.Web.Pages.Contests" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MainRight.Master" AutoEventWireup="true" CodeBehind="Contests.aspx.cs" Inherits="DDTE.Web.Pages.Contests" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="cphHeader" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+<asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
 </asp:Content>

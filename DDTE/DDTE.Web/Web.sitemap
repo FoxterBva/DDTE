@@ -11,7 +11,7 @@
 			<siteMapNode url="Pages/SpecialSection/DocumentsDownload.aspx" title="Документы"  description="" />
 			<siteMapNode url="Pages/SpecialSection/Education.aspx" title="Образование"  description="" />
 			<siteMapNode url="Pages/SpecialSection/EducationStandards.aspx" title="Образовательные стандарты"  description="" />
-			<siteMapNode url="Pages/SpecialSection/FincanceEconomicActivity.aspx" title="Финансово-хозяйственная деятельность"  description="" />
+			<siteMapNode url="Pages/SpecialSection/FinanceEconomicActivity.aspx" title="Финансово-хозяйственная деятельность"  description="" />
 			<siteMapNode url="Pages/SpecialSection/Grants.aspx" title="Стипендии и иные виды материальной поддержки"  description="" />
 			<siteMapNode url="Pages/SpecialSection/Leaders.aspx" title="Руководство. Педагогический (научно-педагогический) состав"  description="" />
 			<siteMapNode url="Pages/SpecialSection/LogisticalSupport.aspx" title="Материально-техническое обеспечение и оснащенность образовательного процесса"  description="" />

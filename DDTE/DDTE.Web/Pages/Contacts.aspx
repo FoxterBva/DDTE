@@ -1,8 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Contacts.aspx.cs" Inherits="DDTE.Web.Pages.Contacts" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MainRight.Master" AutoEventWireup="true" CodeBehind="Contacts.aspx.cs" Inherits="DDTE.Web.Pages.Contacts" %>
 
+<asp:Content ID="Content1" ContentPlaceHolderID="cphHeader" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+<asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
     <div class="map-content">
         <script type="text/javascript" charset="utf-8" src="//api-maps.yandex.ru/services/constructor/1.0/js/?sid=7fbAAyO--H9kH2FNdGUXNILqNzAAozwc&width=100%&height=450"></script>
 

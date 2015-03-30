@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DDTE.Model.DTO;
 using DDTE.Model;
+using System.IO;
 
 namespace DDTE.BL.Facade
 {
@@ -16,7 +17,7 @@ namespace DDTE.BL.Facade
 		void DeleteAlbum(int id);
 		void DeleteAlbum(string folder);
 
-		void AddPhoto(PhotoDTO photo);
+		void AddPhoto(PhotoDTO photo, Stream photoStream, string photoPath);
 		void UpdatePhoto(PhotoDTO photo);
 		List<Photo> ListPhotos(int albumId);
 		void DeletePhoto(int id);

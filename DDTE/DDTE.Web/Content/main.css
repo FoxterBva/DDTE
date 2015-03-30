@@ -136,8 +136,6 @@ ul.nav-main > li ul {
     margin-left: 0px;
 }
 
-
-
 .nav-main > li > ul > li > a {
     padding: 5px 10px 5px 10px;
     display: block;
@@ -161,16 +159,30 @@ ul.nav-main > li ul {
     border-radius: 5px;
 }
 
+.main-right
+{
+    width: 280px;
+    padding: 5px;
+    float: right;
+    min-height: 500px;
+}
+
+.search-panel {
+    border: 1px solid #EFEFEF;
+    text-align: center;
+    padding: 10px 0px 10px 0px;
+    margin: 5px 10px 5px 10px;
+}
+
 .news-list
 {
     list-style: none;
+    margin-right: 300px;
 }
 
 .news-list li.news
 {
     border-bottom: 1px solid #DEDEDE;
-    margin-right: 30px;
-    margin-left: 30px;
     padding-bottom: 15px;
 }
 

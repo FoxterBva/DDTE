@@ -7,18 +7,9 @@
 // </автоматически создаваемое>
 //------------------------------------------------------------------------------
 
-namespace DDTE.Web.Pages {
+namespace DDTE.Web.Pages.SpecialSection {
     
     
-    public partial class Gallery {
-        
-        /// <summary>
-        /// pbPhotos элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::DDTE.Web.Controls.PhotoViewer pbPhotos;
+    public partial class FinanceEcomonicActivity {
     }
 }
