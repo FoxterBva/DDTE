@@ -209,11 +209,16 @@
     <Content Include="DataActionService.asmx" />
     <Content Include="Default.aspx" />
     <Content Include="Images\accent.png" />
+    <Content Include="Images\Background.png" />
+    <Content Include="Images\Background2.png" />
     <Content Include="Images\bullet.png" />
     <Content Include="Images\ddte_structure.png" />
     <Content Include="Images\download.png" />
     <Content Include="Images\ExtensionIcons.png" />
     <Content Include="Images\heroAccent.png" />
+    <Content Include="Images\LineBackground.png" />
+    <Content Include="Images\LineBackground2.png" />
+    <Content Include="Images\logo.png" />
     <Content Include="Images\orderedList0.png" />
     <Content Include="Images\orderedList1.png" />
     <Content Include="Images\orderedList2.png" />

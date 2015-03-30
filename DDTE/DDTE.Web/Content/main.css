@@ -2,13 +2,19 @@
 {
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     font-size: 14px;
-    background-color: #2BDAEC;
-    background-image: url(/Images/LineBackground.png);
-    background-repeat: repeat-y;
+    /*background-color: #2BDAEC;*/
+    /*background-color: #22B14C;*/
+    background-color: #6BDDE2;
+    /*background-image: url(/Images/LineBackground.png);
+    background-repeat: repeat-y;*/
     background-position: top;
-
+    
     overflow-y: scroll;
     color: #0A6F6E;
+
+    background-image: url(/Images/polosa.png);
+    background-repeat: repeat-y;
+    background-position: top;
 }
 
 a, a:visited
@@ -18,7 +24,7 @@ a, a:visited
 
 .border-bottom
 {
-    background-image: url(/Images/Background.png);
+    background-image: url(/Images/fon24.png);
     background-repeat: no-repeat;
     background-position: top;
 }
@@ -42,25 +48,40 @@ h3
 
 .logo-main
 {
-    width: 100%;
+    /*width: 100%;
     height: 255px;
     position: relative;
-    /*background-image: url(/Images/Evrika.png);*/
+    background-image: url(/Images/Evrika.png);
     background-repeat: no-repeat;
     background-position-x: center;
-    background-position-y: -55px;
+    background-position-y: -55px;*/
+    position: relative;
+    width: 1170px;
+    height: 275px;
+    margin: auto;
 }
 
-.logo-main2
+.logo1 {
+    position: absolute;
+    left: 10px;
+}
+
+.logo2 {
+    position: absolute;
+    left: 670px;
+    top: 40px;
+}
+
+/*.logo-main2
 {
     width: 100%;
     height: 255px;
     position: relative;
-    /*background-image: url(/Images/logo.png);*/
+    background-image: url(/Images/logo.png);
     background-repeat: no-repeat;
     background-position-x: center;
     
-}
+}*/
 
 ul.nav-main
 {
@@ -171,6 +192,13 @@ ul.nav-main > li ul {
     border: 1px solid #EFEFEF;
     text-align: center;
     padding: 10px 0px 10px 0px;
+    margin: 5px 10px 5px 10px;
+}
+
+.calendar-container 
+{
+    /*margin: auto;
+    width: 230px;*/
     margin: 5px 10px 5px 10px;
 }
 
