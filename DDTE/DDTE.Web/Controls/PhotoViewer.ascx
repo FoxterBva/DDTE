@@ -12,7 +12,7 @@
         </asp:Panel>
         <asp:Panel ID="pnlPhoto" runat="server" CssClass="photo-item">
             <div class="photo-image-container">
-                <a class="img-link" href="#"><span style=""></span><img id="imgPhoto" runat="server" src="#" class="photo-image"  /></a>
+                <a class="img-link" href="#" onclick="$('#overlay').toggle();$('#bigImage').attr('src', $(this).children().first().attr('src')); return false;"><img id="imgPhoto" runat="server" src="#" class="photo-image"  /></a>
             </div>
             <div class="img-title"><%# Eval("Title") %></div>
             <asp:Panel ID="pnlImageActions" runat="server" class="img-actions">
@@ -22,3 +22,14 @@
         </asp:Panel>
     </ItemTemplate>
 </asp:Repeater>
+
+<div id="overlay" class="photo-overaly" onclick="$(this).toggle()">
+    
+</div>
+
+    <div class="photo-big">
+        <img id="bigImage" />
+        <div class="photo-big-descr">
+            This is a temp description
+        </div>
+    </div>
