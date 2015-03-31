@@ -214,11 +214,15 @@
     <Content Include="Images\bullet.png" />
     <Content Include="Images\ddte_structure.png" />
     <Content Include="Images\download.png" />
+    <Content Include="Images\Evrika.png" />
     <Content Include="Images\ExtensionIcons.png" />
+    <Content Include="Images\fon24.png" />
     <Content Include="Images\heroAccent.png" />
     <Content Include="Images\LineBackground.png" />
     <Content Include="Images\LineBackground2.png" />
     <Content Include="Images\logo.png" />
+    <Content Include="Images\logo1.png" />
+    <Content Include="Images\logo2.png" />
     <Content Include="Images\orderedList0.png" />
     <Content Include="Images\orderedList1.png" />
     <Content Include="Images\orderedList2.png" />
@@ -232,6 +236,7 @@
     <Content Include="DefaultOld.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\polosa.png" />
     <Content Include="packages.config" />
     <Content Include="Main.Master" />
     <Content Include="FileDownload.ashx" />
