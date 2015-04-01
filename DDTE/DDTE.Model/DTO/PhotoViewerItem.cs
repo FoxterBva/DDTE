@@ -8,8 +8,8 @@ namespace DDTE.Model.DTO
 {
     public enum PhotoViewerItemType
     { 
-        Album,
-        Photo
+        Album = 0,
+        Photo = 1
     }
 
     public class PhotoViewerItem

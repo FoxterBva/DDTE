@@ -269,20 +269,59 @@ ul.nav-main > li ul {
     background-color: black;
     opacity: 0.5;
     z-index: 502;
-    display: none;
 }
 
 .photo-big
 {
+    position: fixed;
+    max-height: 80%;
+    top: 10%;
     display: table;
-    margin: auto;
     z-index: 503;
-    position: absolute;
+    margin: auto;
+    padding: 15px;
+    border: 1px solid red;
+    border-radius: 10px;
+    box-shadow: red 0px 0px 6px 2px;
+    background-color: black;
 }
+
+.photo-big .btn-close
+{
+    border: 1px solid Red;
+    padding: 3px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    color: red;
+    font-weight: bold;
+}
+
+.photo-big .btn-close:hover
+{
+    background-color: red;
+    color: black;
+}
+
+.photo-big-title
+{
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
 
 .photo-big-descr
 {
-    padding: 5px;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.img-big
+{
+    max-height: 950px;
+    max-width: 1150px;
 }
 
 .gallery-main
@@ -321,7 +360,6 @@ ul.nav-main > li ul {
 {
     padding: 10px;
     text-decoration: none;
-    
 }
 
 .photo-item .photo-album .title
@@ -329,6 +367,7 @@ ul.nav-main > li ul {
     font-weight: bold;
     margin-bottom: 10px;
     text-align: center;
+    cursor: pointer;
 }
 
 .photo-item .photo-album .descr

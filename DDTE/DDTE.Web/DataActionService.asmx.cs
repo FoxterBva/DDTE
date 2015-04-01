@@ -46,6 +46,29 @@ namespace DDTE.Web
 			}
 		}
 
+		[WebMethod]
+		public ListPhotoItemResult ListPhotoItems(int albumId)
+		{
+
+			ListPhotoItemResult res = new ListPhotoItemResult();
+
+			try
+			{
+				var items = photoProvider.ListPhotoItems(albumId >= 0 ? albumId : (int?)null);
+				foreach (var i in items)
+					i.ImagePath = i.ImagePath.StartsWith("http") ? i.ImagePath : "/Photos" + i.ImagePath;
+
+				res.PhotoItems = items;
+
+			} catch (Exception ex)
+			{
+				res.ErrorMessage = "Не удается получить список объектов.";
+				LogError("ListPhotoItems", "Unexpected error", ex);
+			}
+
+			return res;
+		}
+
 		//public CreateUpdateAlbumResult CreateUpdateAlbum(int? albumId, string albumName, string albumDescription, bool isPublic)
 		//{
 		//	var res = new CreateUpdateAlbumResult();
@@ -93,5 +116,16 @@ namespace DDTE.Web
 	public class ListPhotosResult : ServiceResultBase
 	{
 
+	}
+
+	public class ListPhotoItemResult : ServiceResultBase
+	{
+		public ListPhotoItemResult()
+			: base()
+		{
+			PhotoItems = new List<PhotoViewerItem>();
+		}
+
+		public List<PhotoViewerItem> PhotoItems { get; set; }
 	}
 }

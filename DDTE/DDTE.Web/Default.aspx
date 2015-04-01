@@ -5,7 +5,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
     <h2>Новости</h2>
-    <ul class="news-list">
+    <%--<ul class="news-list">
         <li class="news">
             <article class="news-main">
                 <header class="news-header">
@@ -90,5 +90,5 @@
                 </footer>
             </article>
         </li>
-    </ul>
+    </ul>--%>
 </asp:Content>

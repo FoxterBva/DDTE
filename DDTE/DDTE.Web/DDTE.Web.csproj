@@ -246,6 +246,7 @@
     <Content Include="Pages\Contacts.aspx" />
     <Content Include="Pages\Contests.aspx" />
     <Content Include="Pages\Gallery.aspx" />
+    <Content Include="Pages\GalleryAng.aspx" />
     <Content Include="Pages\Schedule.aspx" />
     <Content Include="Pages\SpecialSections.aspx" />
     <Content Include="Pages\SpecialSection\BasicInformation.aspx" />
@@ -261,6 +262,9 @@
     <Content Include="Pages\SpecialSection\Vacancies.aspx" />
     <Content Include="Pages\Welcome.aspx" />
     <Content Include="Scripts\datepicker-ru.js" />
+    <Content Include="Scripts\Gallery\app.js" />
+    <Content Include="Scripts\Gallery\galleryController.js" />
+    <Content Include="Scripts\Gallery\galleryService.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
@@ -429,6 +433,13 @@
     </Compile>
     <Compile Include="Pages\Gallery.aspx.designer.cs">
       <DependentUpon>Gallery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\GalleryAng.aspx.cs">
+      <DependentUpon>GalleryAng.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\GalleryAng.aspx.designer.cs">
+      <DependentUpon>GalleryAng.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Schedule.aspx.cs">
       <DependentUpon>Schedule.aspx</DependentUpon>
