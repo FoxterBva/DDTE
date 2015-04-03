@@ -14,7 +14,7 @@ using DDTE.Model.DTO;
 
 namespace DDTE.BL.Providers
 {
-	public class PhotoProvider : IPhotoProvider
+	public class PhotoProvider : DbProviderBase, IPhotoProvider
 	{
 		public static readonly string TmbSuffix = "_tmb";
 
@@ -66,6 +66,21 @@ namespace DDTE.BL.Providers
 				IsPublic = true,
 				Title = "Second Album"
 			});
+
+			using (var db = GetObjectContext())
+			{
+				var q = from a in db.Albums
+						select new AlbumDTO()
+						{
+							Id = a.AlbumId,
+							Folder = a.FolderName,
+							IsPublic = a.IsPublic,
+							Title = a.Title,
+							Description = a.Description
+						};
+
+				albums.AddRange(q.ToList());
+			}
 
 			return albums;
 		}
@@ -174,7 +189,7 @@ namespace DDTE.BL.Providers
 				foreach (var p in photos)
 				{
 					res.Add(new PhotoViewerItem() {
-						Id = p.Id,
+						Id = p.PhotoId,
 						Description = p.Description,
 						Title = p.Title,
 						ItemType = PhotoViewerItemType.Photo,
@@ -210,10 +225,10 @@ namespace DDTE.BL.Providers
 		}
 
 		List<Photo> tempPhoto = new List<Photo>() {
-			new Photo() { Id = 1, Title = "Photo 1", Description = "First Photo", AlbumId = 1, FileName = "/Album0/WoWScrnShot_011315_210108.jpg" },
-			new Photo() { Id = 1, Title = "Photo 2", Description = "Second Photo", AlbumId = 1, FileName = "/Album0/WoWScrnShot_021715_013612.jpg" },
-			new Photo() { Id = 1, Title = "It's me", Description = "Third Photo", AlbumId = 1, FileName = "http://cs421029.vk.me/v421029555/64e8/CxsOwcNcA8s.jpg" },
-			new Photo() { Id = 1, Title = "It's me too", Description = "Fourth Photo", AlbumId = 2, FileName = "/Album1/WoWScrnShot_030115_185856.jpg" }
+			new Photo() { PhotoId = 1, Title = "Photo 1", Description = "First Photo", AlbumId = 1, FileName = "/Album0/WoWScrnShot_011315_210108.jpg" },
+			new Photo() { PhotoId = 1, Title = "Photo 2", Description = "Second Photo", AlbumId = 1, FileName = "/Album0/WoWScrnShot_021715_013612.jpg" },
+			new Photo() { PhotoId = 1, Title = "It's me", Description = "Third Photo", AlbumId = 1, FileName = "http://cs421029.vk.me/v421029555/64e8/CxsOwcNcA8s.jpg" },
+			new Photo() { PhotoId = 1, Title = "It's me too", Description = "Fourth Photo", AlbumId = 2, FileName = "/Album1/WoWScrnShot_030115_185856.jpg" }
 		};
 	}
 }

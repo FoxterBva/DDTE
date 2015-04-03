@@ -9,10 +9,6 @@ namespace DDTE.Model
 {
 	public partial class Album
 	{
-		public int Id { get; set; }
-		public string Title { get; set; }
-		public string Description { get; set; }
-		public bool IsPublic { get; set; }
-		public string FolderName { get; set; }
+		
 	}
 }

@@ -46,8 +46,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Album.cs">
+      <DependentUpon>DdteDbEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Classes\Search\NewsSearchParameters.cs" />
     <Compile Include="Classes\Search\SearchParametersBase.cs" />
+    <Compile Include="DdteDbEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DdteDbEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DdteDbEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DdteDbEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DdteDbEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DdteDbEntities.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Partial\Album.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="DataMapper.cs" />
@@ -59,10 +77,30 @@
     <Compile Include="DTO\PhotoViewerItem.cs" />
     <Compile Include="Partial\News.cs" />
     <Compile Include="Partial\Photo.cs" />
+    <Compile Include="Photo.cs">
+      <DependentUpon>DdteDbEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
+    <EntityDeploy Include="DdteDbEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DdteDbEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DdteDbEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DdteDbEntities.edmx</DependentUpon>
+      <LastGenOutput>DdteDbEntities.Context.cs</LastGenOutput>
+    </None>
+    <None Include="DdteDbEntities.edmx.diagram">
+      <DependentUpon>DdteDbEntities.edmx</DependentUpon>
+    </None>
+    <None Include="DdteDbEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DdteDbEntities.edmx</DependentUpon>
+      <LastGenOutput>DdteDbEntities.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

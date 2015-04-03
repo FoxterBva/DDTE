@@ -13,7 +13,7 @@ namespace DDTE.Model
 		{
 			var res = new AlbumDTO() 
 			{ 
-				Id = album.Id,
+				Id = album.AlbumId,
 				Folder = album.FolderName,
 				Title = album.Title,
 				IsPublic = album.IsPublic,
@@ -26,8 +26,8 @@ namespace DDTE.Model
 		public Album GetAlbum(AlbumDTO album)
 		{
 			var res = new Album() 
-			{ 
-				Id = album.Id,
+			{
+				AlbumId = album.Id,
 				FolderName = album.Folder,
 				Title = album.Title,
 				IsPublic = album.IsPublic,
