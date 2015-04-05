@@ -222,3 +222,4 @@ packages/
 # And deploy
 Deploy/
 DDTE/DDTE.Web/Deploy/DDTE.Web.zip
+DDTE/DDTE.Web/Web.config
