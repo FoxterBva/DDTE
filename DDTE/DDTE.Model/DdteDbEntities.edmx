@@ -1,41 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DdteDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="DdteDBModelStoreContainer">
-          <EntitySet Name="Album" EntityType="DdteDBModel.Store.Album" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Photo" EntityType="DdteDBModel.Store.Photo" store:Type="Tables" Schema="dbo" />
-          <AssociationSet Name="FK_Pghoto_AlbumId" Association="DdteDBModel.Store.FK_Pghoto_AlbumId">
-            <End Role="Album" EntitySet="Album" />
-            <End Role="Photo" EntitySet="Photo" />
-          </AssociationSet>
-        </EntityContainer>
+      <Schema Namespace="Хранилище DdteDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityType Name="Album">
           <Key>
             <PropertyRef Name="AlbumId" />
           </Key>
-          <Property Name="AlbumId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AlbumId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="200" />
           <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="FolderName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="FolderName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IsPublic" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Photo">
           <Key>
             <PropertyRef Name="PhotoId" />
           </Key>
-          <Property Name="PhotoId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PhotoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AlbumId" Type="int" Nullable="false" />
           <Property Name="FileName" Type="nvarchar" MaxLength="1000" />
           <Property Name="Title" Type="nvarchar" MaxLength="200" />
           <Property Name="Description" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="FK_Pghoto_AlbumId">
-          <End Role="Album" Type="DdteDBModel.Store.Album" Multiplicity="1" />
-          <End Role="Photo" Type="DdteDBModel.Store.Photo" Multiplicity="*" />
+          <End Role="Album" Type="Self.Album" Multiplicity="1" />
+          <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Album">
               <PropertyRef Name="AlbumId" />
@@ -45,43 +37,44 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema></edmx:StorageModels>
-    <!-- CSDL content -->
-    <edmx:ConceptualModels>
-      <Schema Namespace="DdteDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="DdteDBEntitiesConn" p1:LazyLoadingEnabled="true" >
-          <EntitySet Name="Albums" EntityType="DdteDBModel.Album" />
-          <EntitySet Name="Photos" EntityType="DdteDBModel.Photo" />
-          <AssociationSet Name="FK_Pghoto_AlbumId" Association="DdteDBModel.FK_Pghoto_AlbumId">
-            <End Role="Album" EntitySet="Albums" />
-            <End Role="Photo" EntitySet="Photos" />
+        <EntityContainer Name="Хранилище DdteDBModelContainer">
+          <EntitySet Name="Album" EntityType="Self.Album" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Photo" EntityType="Self.Photo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Pghoto_AlbumId" Association="Self.FK_Pghoto_AlbumId">
+            <End Role="Album" EntitySet="Album" />
+            <End Role="Photo" EntitySet="Photo" />
           </AssociationSet>
         </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DdteDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityType Name="Album">
           <Key>
             <PropertyRef Name="AlbumId" />
           </Key>
-          <Property Type="Int32" Name="AlbumId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Title" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="FolderName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="IsPublic" Nullable="false" />
-          <NavigationProperty Name="Photos" Relationship="DdteDBModel.FK_Pghoto_AlbumId" FromRole="Album" ToRole="Photo" />
+          <Property Name="AlbumId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FolderName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsPublic" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Photos" Relationship="Self.FK_Pghoto_AlbumId" FromRole="Album" ToRole="Photo" />
         </EntityType>
         <EntityType Name="Photo">
           <Key>
             <PropertyRef Name="PhotoId" />
           </Key>
-          <Property Type="Int32" Name="PhotoId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="AlbumId" Nullable="false" />
-          <Property Type="String" Name="FileName" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Title" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Album" Relationship="DdteDBModel.FK_Pghoto_AlbumId" FromRole="Photo" ToRole="Album" />
+          <Property Name="PhotoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AlbumId" Type="Int32" Nullable="false" />
+          <Property Name="FileName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Album" Relationship="Self.FK_Pghoto_AlbumId" FromRole="Photo" ToRole="Album" />
         </EntityType>
         <Association Name="FK_Pghoto_AlbumId">
-          <End Type="DdteDBModel.Album" Role="Album" Multiplicity="1" />
-          <End Type="DdteDBModel.Photo" Role="Photo" Multiplicity="*" />
+          <End Role="Album" Type="Self.Album" Multiplicity="1" />
+          <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Album">
               <PropertyRef Name="AlbumId" />
@@ -91,31 +84,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="DdteDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Albums" EntityType="Self.Album" />
+          <EntitySet Name="Photos" EntityType="Self.Photo" />
+          <AssociationSet Name="FK_Pghoto_AlbumId" Association="Self.FK_Pghoto_AlbumId">
+            <End Role="Album" EntitySet="Albums" />
+            <End Role="Photo" EntitySet="Photos" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DdteDBModelStoreContainer" CdmEntityContainer="DdteDBEntitiesConn" >
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище DdteDBModelContainer" CdmEntityContainer="DdteDBEntities">
           <EntitySetMapping Name="Albums">
             <EntityTypeMapping TypeName="DdteDBModel.Album">
               <MappingFragment StoreEntitySet="Album">
-                <ScalarProperty Name="IsPublic" ColumnName="IsPublic" />
-                <ScalarProperty Name="FolderName" ColumnName="FolderName" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FolderName" ColumnName="FolderName" />
+                <ScalarProperty Name="IsPublic" ColumnName="IsPublic" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Photos">
             <EntityTypeMapping TypeName="DdteDBModel.Photo">
               <MappingFragment StoreEntitySet="Photo">
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="FileName" ColumnName="FileName" />
-                <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
                 <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+                <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -124,7 +125,7 @@
     </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
-  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <Connection>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
@@ -133,9 +134,10 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

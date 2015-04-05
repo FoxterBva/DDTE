@@ -9,9 +9,9 @@ namespace DDTE.BL.Providers
 {
 	public class DbProviderBase
 	{
-		protected DdteDBEntitiesConn GetObjectContext()
+		protected DdteDBEntities GetObjectContext()
 		{
-			return new DdteDBEntitiesConn();
+			return new DdteDBEntities();
 		}
 	}
 }

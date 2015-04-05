@@ -62,8 +62,62 @@ namespace DDTE.Web
 
 			} catch (Exception ex)
 			{
-				res.ErrorMessage = "Не удается получить список объектов.";
+				res.ErrorMessage = "Не удалось получить список объектов.";
 				LogError("ListPhotoItems", "Unexpected error", ex);
+			}
+
+			return res;
+		}
+
+		[WebMethod]
+		public ServiceResultBase CreateAlbum(string title, string description, bool isPublic)
+		{
+			var res = new ServiceResultBase();
+
+			try
+			{
+				if (!CanEditAlbums())
+				{
+					res.ErrorMessage = "Недостаточно прав";
+					return res;
+				}
+
+				AlbumDTO album = new AlbumDTO()
+				{
+					Description = description,
+					IsPublic = isPublic,
+					Title = title
+				};
+				photoProvider.CreateAlbum(album);
+			}
+			catch (Exception ex)
+			{
+				res.ErrorMessage = "Не удалось создать альбом";
+				LogError("CreateAlbum", "Unexpected error", ex);
+			}
+
+			return res;
+		}
+
+		[WebMethod]
+		public ServiceResultBase DeleteAlbum(string albumId)
+		{
+			var res = new ServiceResultBase();
+
+			try
+			{
+				if (!CanEditAlbums())
+				{
+					res.ErrorMessage = "Недостаточно прав";
+					return res;
+				}
+
+				photoProvider.DeleteAlbum(albumId);
+			}
+			catch (Exception ex)
+			{
+				res.ErrorMessage = "Не удалось создать альбом";
+				LogError("CreateAlbum", "Unexpected error", ex);
 			}
 
 			return res;
@@ -97,9 +151,14 @@ namespace DDTE.Web
 		//	}
 		//}
 
+		bool CanEditAlbums()
+		{
+			return HttpContext.Current.Request.IsAuthenticated;
+		}
+
 		void LogError(string method, string msg, Exception ex)
 		{
-			logger.Error("DataActionService." + method + ": " + msg);
+			logger.ErrorException("DataActionService." + method + ": " + msg, ex);
 		}
 	}
 

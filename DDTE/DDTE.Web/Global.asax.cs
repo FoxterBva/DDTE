@@ -89,15 +89,15 @@ namespace DDTE.Web
 				}
 				else
 				{
-					logger.Error(String.Format("App http error at {0}  ip:{1}  session: {2}  u-a:{3}", Request.Url.ToString(), Request.UserHostAddress, Session[RequestSessionId], browserInfo), ex);
+					logger.ErrorException(String.Format("App http error at {0}  ip:{1}  session: {2}  u-a:{3}", Request.Url.ToString(), Request.UserHostAddress, Session[RequestSessionId], browserInfo), ex);
 				}
 			}
 			else
 			{
-				logger.Error(String.Format("App error at {0}  ip:{1}  session: {2}  u-a:{3}", Request.Url.ToString(), Request.UserHostAddress, Session[RequestSessionId], browserInfo), ex);
+				logger.ErrorException(String.Format("App error at {0}  ip:{1}  session: {2}  u-a:{3}", Request.Url.ToString(), Request.UserHostAddress, Session[RequestSessionId], browserInfo), ex);
 			}
 
-			logger.Error("Unexpected application error", ex);
+			logger.ErrorException("Unexpected application error", ex);
 		}
 
 		string GetBrowserInfo(HttpRequest request)

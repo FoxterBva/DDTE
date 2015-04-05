@@ -17,19 +17,28 @@ namespace DDTE.BL.Providers
 	public class PhotoProvider : DbProviderBase, IPhotoProvider
 	{
 		public static readonly string TmbSuffix = "_tmb";
+		public static readonly string AlbumFolderPrefix = "Album";
 
 		/// <summary>
 		/// Creates album
 		/// </summary>
 		public void CreateAlbum(AlbumDTO album)
 		{
-			throw new NotImplementedException();
-
 			// TODO:
 			// 1. Add physical folder (do we really need separate folder for each album?)
 			//    - Generate folder name
 			//    - Create folder
 			// 2. Add to the DB
+			using (var db = GetObjectContext())
+			{
+				var a = new Album() { 
+					Description = album.Description,
+					IsPublic = album.IsPublic,
+					Title = album.Title
+				};
+
+				db.Albums.Add(a);
+			}
 		}
 
 		/// <summary>
@@ -49,23 +58,23 @@ namespace DDTE.BL.Providers
 		{
 			List<AlbumDTO> albums = new List<AlbumDTO>();
 
-			albums.Add(new AlbumDTO()
-			{
-				Id = 1,
-				Folder = "",
-				Description = "This is a First Album",
-				IsPublic = true,
-				Title = "First Album"
-			});
+			//albums.Add(new AlbumDTO()
+			//{
+			//	Id = 1,
+			//	Folder = "",
+			//	Description = "This is a First Album",
+			//	IsPublic = true,
+			//	Title = "First Album"
+			//});
 
-			albums.Add(new AlbumDTO()
-			{
-				Id = 2,
-				Folder = "",
-				Description = "This is a Second Album",
-				IsPublic = true,
-				Title = "Second Album"
-			});
+			//albums.Add(new AlbumDTO()
+			//{
+			//	Id = 2,
+			//	Folder = "",
+			//	Description = "This is a Second Album",
+			//	IsPublic = true,
+			//	Title = "Second Album"
+			//});
 
 			using (var db = GetObjectContext())
 			{
@@ -208,7 +217,15 @@ namespace DDTE.BL.Providers
 		{
 			var res = new List<Photo>();
 
-			res = tempPhoto.Where(p => p.AlbumId == albumId || albumId == 0).ToList();
+			//res = tempPhoto.Where(p => p.AlbumId == albumId || albumId == 0).ToList();
+			using (var db = GetObjectContext())
+			{
+				var q = from p in db.Photos
+						where p.AlbumId == albumId || albumId == 0
+						select p;
+
+				res.AddRange(q.ToList());
+			}
 
 			return res;
 		}
@@ -226,9 +243,9 @@ namespace DDTE.BL.Providers
 
 		List<Photo> tempPhoto = new List<Photo>() {
 			new Photo() { PhotoId = 1, Title = "Photo 1", Description = "First Photo", AlbumId = 1, FileName = "/Album0/WoWScrnShot_011315_210108.jpg" },
-			new Photo() { PhotoId = 1, Title = "Photo 2", Description = "Second Photo", AlbumId = 1, FileName = "/Album0/WoWScrnShot_021715_013612.jpg" },
-			new Photo() { PhotoId = 1, Title = "It's me", Description = "Third Photo", AlbumId = 1, FileName = "http://cs421029.vk.me/v421029555/64e8/CxsOwcNcA8s.jpg" },
-			new Photo() { PhotoId = 1, Title = "It's me too", Description = "Fourth Photo", AlbumId = 2, FileName = "/Album1/WoWScrnShot_030115_185856.jpg" }
+			new Photo() { PhotoId = 2, Title = "Photo 2", Description = "Second Photo", AlbumId = 1, FileName = "/Album0/WoWScrnShot_021715_013612.jpg" },
+			new Photo() { PhotoId = 3, Title = "It's me", Description = "Third Photo", AlbumId = 1, FileName = "http://cs421029.vk.me/v421029555/64e8/CxsOwcNcA8s.jpg" },
+			new Photo() { PhotoId = 4, Title = "It's me too", Description = "Fourth Photo", AlbumId = 2, FileName = "/Album1/WoWScrnShot_030115_185856.jpg" }
 		};
 	}
 }

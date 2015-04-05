@@ -61,7 +61,7 @@ namespace DDTE.Web.Account
 				else
 				{
 
-					ModelState.AddModelError("NewPassword", result.ErrorMessage);
+					//ModelState.AddModelError("NewPassword", result.ErrorMessage);
 
 				}
 			}

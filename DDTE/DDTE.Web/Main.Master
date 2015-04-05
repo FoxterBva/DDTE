@@ -50,7 +50,7 @@
                         <li><a href="/Pages/Welcome.aspx">Добро пожаловать</a></li>
                         <li><a href="/Pages/Schedule.aspx">Расписание</a></li>
                         <li><a href="/Pages/Contests.aspx">Конкурсы</a></li>
-                        <li><a href="/Pages/Gallery.aspx">Галерея</a></li>
+                        <li><a href="/Pages/GalleryAng.aspx">Галерея</a></li>
                         <li><a href="/Pages/Contacts.aspx">Контакты</a></li>
                         <li><a href="/Pages/SpecialSection/BasicInformation.aspx" title="Сведения об образовательной организации">Информация</a>
                             <ul style="display: none">

@@ -44,7 +44,7 @@ namespace DDTE.Web
 			}
 			catch (Exception ex)
 			{
-				logger.Error("FileDownload: unexpected error", ex);
+				logger.ErrorException("FileDownload: unexpected error", ex);
 				ReturnError(context, "Не могу загрузить документ.");
 			}
 		}

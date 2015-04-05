@@ -69,7 +69,7 @@ namespace DDTE.Web.Controls
 							catch (Exception ex)
 							{
 								displayAddFileDialog = true;
-								logger.Error("DocumentList.Upload: Failed to create directory " + directoryPath, ex);
+								logger.ErrorException("DocumentList.Upload: Failed to create directory " + directoryPath, ex);
 								ltlMessage.Text = MessageFormatter.GetFormattedErrorMessage("Не могу создать директорию");
 								return;
 							}
@@ -89,7 +89,7 @@ namespace DDTE.Web.Controls
 					catch (Exception ex)
 					{
 						displayAddFileDialog = true;
-						logger.Error("DocumentList.Upload: Unexpected error", ex);
+						logger.ErrorException("DocumentList.Upload: Unexpected error", ex);
 						ltlMessage.Text = MessageFormatter.GetFormattedErrorMessage("Не получилось загрузить файл");
 						return;
 					}
@@ -161,7 +161,7 @@ namespace DDTE.Web.Controls
 				}
 				catch (Exception ex)
 				{
-					logger.Error("DocumentList.Delete: Unexpected error", ex);
+					logger.ErrorException("DocumentList.Delete: Unexpected error", ex);
 					ltlMessage.Text = MessageFormatter.GetFormattedErrorMessage("Не получилось удалить файл");
 				}
 			}
