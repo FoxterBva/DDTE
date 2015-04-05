@@ -90,5 +90,10 @@ namespace DDTE.Web.Helpers
 		{
 			FormsAuthentication.SignOut();
 		}
+
+		public static bool CanEditAlbum()
+		{
+			return HttpContext.Current.Request.IsAuthenticated;
+		}
 	}
 }

@@ -32,7 +32,7 @@
 
         $scope.AddItem = function () {
             if ($scope.currentFolder == -1) {
-                // AddFolder();
+                GalleryServiceFactory.AddFolder($scope.AlbumTitle, $scope.AlbumDescr, $scope.IsPublic, onAlbumCreated, onError);
             } else {
                 // AddPhoto();
             }
@@ -45,6 +45,13 @@
                 alert(data.d.ErrorMessage);
             else
                 $scope.photoItems = data.d.PhotoItems;
+        }
+
+        function onAlbumCreated(data) {
+            if (data.d.ErrorMessage)
+                alert(data.d.ErrorMessage);
+            else
+                alert('Альбом создан!');
         }
 
         function GetEmptyImage() {

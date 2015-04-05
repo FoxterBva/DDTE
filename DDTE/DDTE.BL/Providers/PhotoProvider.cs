@@ -11,6 +11,7 @@ using DDTE.BL.Facade;
 using DDTE.Common.Exceptions;
 using DDTE.Model;
 using DDTE.Model.DTO;
+using System.Transactions;
 
 namespace DDTE.BL.Providers
 {
@@ -22,22 +23,37 @@ namespace DDTE.BL.Providers
 		/// <summary>
 		/// Creates album
 		/// </summary>
-		public void CreateAlbum(AlbumDTO album)
+		public void CreateAlbum(AlbumDTO album, string photoAlbumPath)
 		{
-			// TODO:
-			// 1. Add physical folder (do we really need separate folder for each album?)
-			//    - Generate folder name
-			//    - Create folder
-			// 2. Add to the DB
 			using (var db = GetObjectContext())
 			{
-				var a = new Album() { 
-					Description = album.Description,
-					IsPublic = album.IsPublic,
-					Title = album.Title
-				};
+				using (TransactionScope transaction = new TransactionScope())
+				{
+					var a = new Album() { 
+						Description = album.Description,
+						IsPublic = album.IsPublic,
+						Title = album.Title
+					};
 
-				db.Albums.Add(a);
+					db.Albums.Add(a);
+
+					db.SaveChanges();
+
+					var id = a.AlbumId;
+
+					var path = Path.Combine(photoAlbumPath, AlbumFolderPrefix + id.ToString());
+					try
+					{
+						Directory.CreateDirectory(path);
+					}
+					catch (Exception ex)
+					{
+						// TODO: log
+						throw;
+					}
+
+					transaction.Complete();
+				}
 			}
 		}
 

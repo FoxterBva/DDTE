@@ -8,7 +8,16 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
     <div data-ng-app="ddteGalleryApp">
         <div data-ng-controller="GalleryController">
-            <a class="btn-add" id="btnAddPhotoItem" runat="server" href="#" data-ng-click="AddItem()"></a>
+            <asp:Panel ID="pnlAddAlbum" runat="server">
+                <div>
+                    <div>Title: <input type="text" data-ng-model="AlbumTitle" /></div>
+                    <div>Description: <input type="text" data-ng-model="AlbumDescr" /></div>
+                    <div>Public?: <input type="checkbox" data-ng-model="IsPublic" /></div>
+                </div>
+                <a class="btn-add" id="btnAddPhotoItem" runat="server" href="#" data-ng-click="AddItem()">Add</a>
+                
+            </asp:Panel>
+            
             <div data-ng-repeat="pi in photoItems" class="photo-item">
                 <div data-ng-if="pi.ItemType == 0">
                     <div class="photo-album">

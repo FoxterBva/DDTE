@@ -88,7 +88,8 @@ namespace DDTE.Web
 					IsPublic = isPublic,
 					Title = title
 				};
-				photoProvider.CreateAlbum(album);
+
+				photoProvider.CreateAlbum(album, HttpRuntime.AppDomainAppPath);
 			}
 			catch (Exception ex)
 			{

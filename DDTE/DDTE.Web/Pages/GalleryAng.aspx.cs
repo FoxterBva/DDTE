@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DDTE.Web.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,13 @@ namespace DDTE.Web.Pages
 		protected void Page_Load(object sender, EventArgs e)
 		{
 
+		}
+
+		protected override void OnPreRender(EventArgs e)
+		{
+			base.OnPreRender(e);
+
+			pnlAddAlbum.Visible = SecurityHelper.CanEditAlbum();
 		}
 	}
 }

@@ -22,6 +22,24 @@
             });
         }
 
+        factory.AddFolder = function (title, descr, isPublic, onCompleted, onError) {
+            var httpParams = {
+                url: '/DataActionService.asmx/CreateAlbum',
+                dataType: 'json',
+                method: 'POST',
+                data: "{ 'title': '" + title + "', 'description': '" + descr + "', 'isPublic': '" + isPublic + "' }"
+            };
+
+            $http(httpParams)
+            .success(function (data, satatus, headers, config) {
+                onCompleted(data)
+            })
+            .error(function (data, satatus, headers, config) {
+                alert('Error !');
+                onError(data);
+            });
+        }
+
         return factory;
     }
 
