@@ -13,16 +13,16 @@
             };
 
             $http(httpParams)
-            .success(function (data, satatus, headers, config) {
+            .success(function (data, status, headers, config) {
                 onCompleted(data)
             })
-            .error(function (data, satatus, headers, config) {
+            .error(function (data, status, headers, config) {
                 alert('Error !');
                 onError(data);
             });
         }
 
-        factory.AddFolder = function (title, descr, isPublic, onCompleted, onError) {
+        factory.AddAlbum = function (title, descr, isPublic, onCompleted, onError) {
             var httpParams = {
                 url: '/DataActionService.asmx/CreateAlbum',
                 dataType: 'json',
@@ -31,12 +31,30 @@
             };
 
             $http(httpParams)
-            .success(function (data, satatus, headers, config) {
+            .success(function (data, status, headers, config) {
                 onCompleted(data)
             })
-            .error(function (data, satatus, headers, config) {
+            .error(function (data, status, headers, config) {
                 alert('Error !');
                 onError(data);
+            });
+        }
+
+        factory.DeleteAlbum = function (albumId, onCompleted, onError) {
+            var httpParams = {
+                url: '/DataActionService.asmx/DeleteAlbum',
+                dataType: 'json',
+                method: 'POST',
+                data: "{ 'albumId': '" + albumId + "' }"
+            };
+
+            $http(httpParams)
+            .success(function (data, status, headers, config) {
+                onCompleted(data)
+            })
+            .error(function (data, status, headers, config) {
+                alert('Error !');
+                onError(data, status, headers, config);
             });
         }
 

@@ -7,6 +7,8 @@
         $scope.currentImage = GetEmptyImage();
         $scope.displayImage = false;
         $scope.currentFolder = -1;
+        $scope.IsPublic = true;
+        $scope.Errors = [];                 // list of recent errors
 
         $scope.GetItems = function (albumId) {
             GalleryServiceFactory.GetPhotoItems(albumId, onItemsLoaded, onError)
@@ -32,12 +34,18 @@
 
         $scope.AddItem = function () {
             if ($scope.currentFolder == -1) {
-                GalleryServiceFactory.AddFolder($scope.AlbumTitle, $scope.AlbumDescr, $scope.IsPublic, onAlbumCreated, onError);
+                GalleryServiceFactory.AddAlbum($scope.AlbumTitle, $scope.AlbumDescr, $scope.IsPublic, onAlbumCreated, onError);
             } else {
                 // AddPhoto();
             }
 
             return false;
+        }
+
+        $scope.DeleteAlbum = function (id, title) {
+            if (confirm("Вы действительно хотите удалить альбом '" + title + "' со всеми фотографиями?")) {
+                GalleryServiceFactory.DeleteAlbum(id, onAlbumDeleted, onError);
+            }
         }
 
         function onItemsLoaded(data) {
@@ -50,8 +58,19 @@
         function onAlbumCreated(data) {
             if (data.d.ErrorMessage)
                 alert(data.d.ErrorMessage);
-            else
+            else {
+                $scope.GetItems($scope.currentFolder);
                 alert('Альбом создан!');
+            }
+        }
+
+        function onAlbumDeleted(data) {
+            if (data.d.ErrorMessage)
+                alert(data.d.ErrorMessage);
+            else {
+                $scope.GetItems($scope.currentFolder);
+                alert('Альбом удален!');
+            }
         }
 
         function GetEmptyImage() {
@@ -62,8 +81,9 @@
             };
         }
 
-        function onError(data) {
-            alert(data);
+        function onError(data, status, headers, config) {
+            $scope.Errors.push({ Data: data, Status: status, Headers: headers, Config: config });
+            alert('Операция завершена с ошибкой');
         }
 
         $scope.GetItems($scope.currentFolder);

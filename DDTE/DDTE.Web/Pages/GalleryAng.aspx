@@ -9,20 +9,25 @@
     <div data-ng-app="ddteGalleryApp">
         <div data-ng-controller="GalleryController">
             <asp:Panel ID="pnlAddAlbum" runat="server">
-                <div>
+                <a href="#" onclick="$(this).next().toggle();return false;">Добавить альбом</a>
+                <div style="display: none">
                     <div>Title: <input type="text" data-ng-model="AlbumTitle" /></div>
                     <div>Description: <input type="text" data-ng-model="AlbumDescr" /></div>
                     <div>Public?: <input type="checkbox" data-ng-model="IsPublic" /></div>
+                    <a class="btn-add" id="btnAddPhotoItem" runat="server" href="#" data-ng-click="AddItem()">Создать</a>
                 </div>
-                <a class="btn-add" id="btnAddPhotoItem" runat="server" href="#" data-ng-click="AddItem()">Add</a>
-                
             </asp:Panel>
             
-            <div data-ng-repeat="pi in photoItems" class="photo-item">
+            <div data-ng-repeat="pi in photoItems" class="photo-item" style="position: relative">
                 <div data-ng-if="pi.ItemType == 0">
-                    <div class="photo-album">
+                    <div class="photo-album" >
                         <div class="title" data-ng-click="SelectFolder(pi.Id)">{{ pi.Title }}</div>
                         <div class="descr">{{ pi.Description }}</div>
+                        <asp:Literal ID="ltltAlbumActions" runat="server">
+                            <div class="actions" style="position: absolute; bottom: 0px; height: 20px; border: 1px solid #EFEFEF; display: block;">
+                                <div data-ng-click="DeleteAlbum(pi.Id, pi.Title)" title="Удалить альбом" style="cursor: pointer">X</div>
+                            </div>
+                        </asp:Literal>
                     </div>
                 </div>
                 <div data-ng-if="pi.ItemType == 1">

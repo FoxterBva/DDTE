@@ -98,7 +98,7 @@ namespace DDTE.BL.Providers
 						select new AlbumDTO()
 						{
 							Id = a.AlbumId,
-							Folder = a.FolderName,
+							//Folder = AlbumFolderPrefix + a.AlbumId,
 							IsPublic = a.IsPublic,
 							Title = a.Title,
 							Description = a.Description
@@ -113,14 +113,29 @@ namespace DDTE.BL.Providers
 		/// <summary>
 		/// Deletes album and all its content
 		/// </summary>
-		public void DeleteAlbum(int id)
+		public void DeleteAlbum(int albumId, string path)
 		{
-			throw new NotImplementedException();
-			// TODO: 
-			// 1. Delete all related photos
-			// 2. Delete all related photo files
-			// 3. Delete folder
-			// 4. Delete db record
+			using (var db = GetObjectContext())
+			{
+				var q = (from a in db.Albums
+						 where a.AlbumId == albumId
+						 select a).FirstOrDefault();
+
+				if (q == null)
+					throw new KeyNotFoundException("Выбранный альбом не найден.");
+
+				var folder = Path.Combine(path, AlbumFolderPrefix + q.AlbumId.ToString());
+
+				using (TransactionScope transaction = new TransactionScope())
+				{
+					db.Albums.Remove(q);
+					db.SaveChanges();
+
+					Directory.Delete(folder, true);
+
+					transaction.Complete();
+				}
+			}
 		}
 
 		/// <summary>

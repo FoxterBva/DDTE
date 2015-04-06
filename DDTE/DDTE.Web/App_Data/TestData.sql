@@ -1,7 +1,7 @@
 ﻿-- Creating Albums
 INSERT INTO Album (AlbumId, FolderName, Description, IsPublic, Title)
-SELECT 1, 'Album1', 'This is a first album', 1, 'Firsst Album' UNION ALL
-SELECT 2, 'Album2', 'This is a second album', 1, 'Second Album' 
+SELECT 1, 'This is a first album', 1, 'Firsst Album' UNION ALL
+SELECT 2, 'This is a second album', 1, 'Second Album' 
 GO
 
 -- Creating Photos

@@ -7,7 +7,6 @@ BEGIN
 		[AlbumId] INT NOT NULL identity(1,1),
 		[Title] NVARCHAR (200) NULL,
 		[Description] NVARCHAR(max) NULL,
-		[FolderName] NVARCHAR(50) NOT NULL,
 		[IsPublic] BIT NOT NULL CONSTRAINT DF_Album_IsPublic DEFAULT(0),
 		CONSTRAINT [PK_Album] PRIMARY KEY CLUSTERED 
 		(

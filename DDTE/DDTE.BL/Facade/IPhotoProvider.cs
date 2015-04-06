@@ -14,8 +14,7 @@ namespace DDTE.BL.Facade
 		void CreateAlbum(AlbumDTO album, string photoAlbumPath);
 		void UpdateAlbum(AlbumDTO album);
 		List<AlbumDTO> ListAlbums();
-		void DeleteAlbum(int id);
-		void DeleteAlbum(string folder);
+		void DeleteAlbum(int albumId, string path);
 
 		void AddPhoto(PhotoDTO photo, Stream photoStream, string photoPath);
 		void UpdatePhoto(PhotoDTO photo);

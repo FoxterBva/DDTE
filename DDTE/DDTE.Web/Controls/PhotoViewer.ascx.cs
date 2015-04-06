@@ -40,7 +40,7 @@ namespace DDTE.Web.Controls
 				if (SelectedAlbum == null)
 				{ 
 					// Delete folder
-					photoProvider.DeleteAlbum(id);
+					photoProvider.DeleteAlbum(id, HttpRuntime.AppDomainAppPath + "\\Photos");
 				}
 				else
 				{ 

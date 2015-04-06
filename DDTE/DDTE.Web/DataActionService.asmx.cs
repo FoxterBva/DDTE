@@ -89,7 +89,7 @@ namespace DDTE.Web
 					Title = title
 				};
 
-				photoProvider.CreateAlbum(album, HttpRuntime.AppDomainAppPath);
+				photoProvider.CreateAlbum(album, HttpRuntime.AppDomainAppPath + "\\Photos");
 			}
 			catch (Exception ex)
 			{
@@ -113,7 +113,7 @@ namespace DDTE.Web
 					return res;
 				}
 
-				photoProvider.DeleteAlbum(albumId);
+				photoProvider.DeleteAlbum(Int32.Parse(albumId), HttpRuntime.AppDomainAppPath + "\\Photos");
 			}
 			catch (Exception ex)
 			{
