@@ -188,6 +188,11 @@ ul.nav-main > li ul {
     min-height: 500px;
 }
 
+.content
+{
+    margin-right: 290px;
+}
+
 .search-panel {
     border: 1px solid #EFEFEF;
     text-align: center;
@@ -256,6 +261,23 @@ ul.nav-main > li ul {
 }
 
 /****  Gallery  ****/
+
+.gallery-main .photo-items
+{
+    position: relative;
+}
+
+.gallery-main .data-load-overlay
+{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    opacity: 0.5;
+    background-color: #ABABAB;
+    z-index: 100;
+}
 
 .button
 {
@@ -340,14 +362,6 @@ ul.nav-main > li ul {
 {
     max-height: 950px;
     max-width: 1150px;
-}
-
-.gallery-main
-{
-    width: 1170px;
-    overflow-y: auto;
-    margin: auto;
-    padding: 10px;
 }
 
 .photo-placeholder

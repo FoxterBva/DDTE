@@ -7,19 +7,22 @@
         $scope.currentImage = GetEmptyImage();
         $scope.displayImage = false;
         $scope.currentFolder = -1;
+        $scope.CurrentFolderTitle = '';
         $scope.Errors = [];                 // list of recent errors
         $scope.SelectedAlbum = GetEmptyAlbum()
+        $scope.SelectedPhoto = GetEmptyPhoto()
         $scope.DisplayEditForm = false;
         $scope.DisplayLoading = false;
 
         $scope.GetItems = function (albumId) {
-            GalleryServiceFactory.GetPhotoItems(albumId, onItemsLoaded, onError)
             $scope.DisplayLoading = true;
+            GalleryServiceFactory.GetPhotoItems(albumId, onItemsLoaded, onError)
             $scope.currentFolder = albumId;
         }
 
-        $scope.SelectFolder = function (albumId) {
+        $scope.SelectFolder = function (albumId, title) {
             $scope.GetItems(albumId);
+            $scope.CurrentFolderTitle = title;
         }
 
         $scope.ViewImage = function (img) {
@@ -36,7 +39,14 @@
             }
         }
 
-        $scope.ToggleCreateEditForm = function (albumId) {
+        $scope.ToggleCreatePhotoForm = function () {
+            $scope.DisplayEditForm = !$scope.DisplayEditForm;
+            if ($scope.DisplayEditForm) {
+                $scope.SelectedPhoto = GetEmptyPhoto()
+            }
+        }
+
+        $scope.ToggleEditAlbumForm = function (albumId) {
             $scope.DisplayEditForm = true;
             var items = $scope.photoItems;
 
@@ -118,7 +128,14 @@
         function GetEmptyAlbum() {
             return {
                 Id: null,
-                IsPublic: false
+                IsPublic: true
+            };
+        }
+
+        function GetEmptyPhoto() {
+            return {
+                Id: null,
+                IsPublic: true
             };
         }
 
@@ -136,7 +153,12 @@
             alert('Операция завершена с ошибкой');
         }
 
-        $scope.GetItems($scope.currentFolder);
+        function Init()
+        {
+            $scope.GetItems($scope.currentFolder);
+        }
+
+        Init();
     }
 
     GalleryController.$inject = injectParams;

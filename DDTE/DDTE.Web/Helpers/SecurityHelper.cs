@@ -95,5 +95,10 @@ namespace DDTE.Web.Helpers
 		{
 			return HttpContext.Current.Request.IsAuthenticated;
 		}
+
+		public static bool CanEditPhoto()
+		{
+			return HttpContext.Current.Request.IsAuthenticated;
+		}
 	}
 }

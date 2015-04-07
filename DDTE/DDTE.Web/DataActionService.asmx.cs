@@ -53,8 +53,8 @@ namespace DDTE.Web
 					i.ImagePath = i.ImagePath.StartsWith("http") ? i.ImagePath : "/Photos" + i.ImagePath;
 
 				res.PhotoItems = items;
-
-			} catch (Exception ex)
+			} 
+			catch (Exception ex)
 			{
 				res.ErrorMessage = "Не удалось получить список объектов.";
 				LogError("ListPhotoItems", "Unexpected error", ex);

@@ -22,6 +22,15 @@ namespace DDTE.Web.Pages {
         protected global::System.Web.UI.WebControls.Panel pnlAddAlbum;
         
         /// <summary>
+        /// pnlAddPhoto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlAddPhoto;
+        
+        /// <summary>
         /// ltlAlbumActions control.
         /// </summary>
         /// <remarks>
