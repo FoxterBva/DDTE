@@ -256,6 +256,24 @@ ul.nav-main > li ul {
 }
 
 /****  Gallery  ****/
+
+.button
+{
+    border-radius: 5px;
+    border: 1px solid #0A6F6E;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 6px;
+    padding-right: 6px;
+    cursor: pointer;
+    display: inline-table;
+    background-color: #6BE2E0;
+}
+
+.button:hover {
+    background-color: #90f7f5;
+}
+
 .photo-overaly
 {
     position: fixed;

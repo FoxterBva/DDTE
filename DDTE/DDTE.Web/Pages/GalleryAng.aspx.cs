@@ -20,6 +20,7 @@ namespace DDTE.Web.Pages
 			base.OnPreRender(e);
 
 			pnlAddAlbum.Visible = SecurityHelper.CanEditAlbum();
+			ltlAlbumActions.Visible = SecurityHelper.CanEditAlbum();
 		}
 	}
 }

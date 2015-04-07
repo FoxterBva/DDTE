@@ -22,12 +22,6 @@ namespace DDTE.Web
 		Logger logger = LogHelper.GetLogger("DataService");
 		IPhotoProvider photoProvider = new DDTE.BL.Providers.PhotoProvider();
 
-		[WebMethod]
-		public string HelloWorld()
-		{
-			return "Hello World";
-		}
-
 		public ListPhotosResult ListPhotos(int albumId)
 		{
 			var res = new ListPhotosResult();
@@ -95,6 +89,38 @@ namespace DDTE.Web
 			{
 				res.ErrorMessage = "Не удалось создать альбом";
 				LogError("CreateAlbum", "Unexpected error", ex);
+			}
+
+			return res;
+		}
+
+		[WebMethod]
+		public ServiceResultBase UpdateAlbum(int albumId, string title, string description, bool isPublic)
+		{
+			var res = new ServiceResultBase();
+
+			try
+			{
+				if (!CanEditAlbums())
+				{
+					res.ErrorMessage = "Недостаточно прав";
+					return res;
+				}
+
+				AlbumDTO album = new AlbumDTO()
+				{
+					Id = albumId,
+					Description = description,
+					IsPublic = isPublic,
+					Title = title
+				};
+
+				photoProvider.UpdateAlbum(album);
+			}
+			catch (Exception ex)
+			{
+				res.ErrorMessage = "Не удалось создать альбом";
+				LogError("UpdateAlbum", "Unexpected error", ex);
 			}
 
 			return res;

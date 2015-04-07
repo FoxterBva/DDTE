@@ -7,17 +7,19 @@
         $scope.currentImage = GetEmptyImage();
         $scope.displayImage = false;
         $scope.currentFolder = -1;
-        $scope.IsPublic = true;
         $scope.Errors = [];                 // list of recent errors
+        $scope.SelectedAlbum = GetEmptyAlbum()
+        $scope.DisplayEditForm = false;
+        $scope.DisplayLoading = false;
 
         $scope.GetItems = function (albumId) {
             GalleryServiceFactory.GetPhotoItems(albumId, onItemsLoaded, onError)
+            $scope.DisplayLoading = true;
             $scope.currentFolder = albumId;
         }
 
         $scope.SelectFolder = function (albumId) {
             $scope.GetItems(albumId);
-            return false;
         }
 
         $scope.ViewImage = function (img) {
@@ -26,17 +28,42 @@
             return false;
         }
 
+        $scope.ToggleCreateAlbumForm = function () {
+            $scope.DisplayEditForm = !$scope.DisplayEditForm;
+            if ($scope.DisplayEditForm)
+            {
+                $scope.SelectedAlbum = GetEmptyAlbum()
+            }
+        }
+
+        $scope.ToggleCreateEditForm = function (albumId) {
+            $scope.DisplayEditForm = true;
+            var items = $scope.photoItems;
+
+            for (var i = 0; i < items.length; i++)
+            {
+                var item = items[i];
+                if (item.ItemType == 0 && item.Id == albumId) {
+                    $scope.SelectedAlbum = { Title: item.Title, Description: item.Description, IsPublic: item.IsPublic, Id: item.Id };
+                }
+            }
+        }
+
         $scope.CloseImage = function () {
             $scope.currentImage = GetEmptyImage();
             $scope.displayImage = false;
             return false;
         }
 
-        $scope.AddItem = function () {
+        $scope.AddAlbum = function () {
             if ($scope.currentFolder == -1) {
-                GalleryServiceFactory.AddAlbum($scope.AlbumTitle, $scope.AlbumDescr, $scope.IsPublic, onAlbumCreated, onError);
+                if ($scope.SelectedAlbum.Id != null) {
+                    GalleryServiceFactory.UpdateAlbum($scope.SelectedAlbum.Id, $scope.SelectedAlbum.Title, $scope.SelectedAlbum.Description, $scope.SelectedAlbum.IsPublic, onAlbumUpdated, onError);
+                } else {
+                    GalleryServiceFactory.AddAlbum($scope.SelectedAlbum.Title, $scope.SelectedAlbum.Description, $scope.SelectedAlbum.IsPublic, onAlbumCreated, onError);
+                }
             } else {
-                // AddPhoto();
+                
             }
 
             return false;
@@ -48,11 +75,17 @@
             }
         }
 
+        $scope.AddPhoto = function () {
+
+        }
+
         function onItemsLoaded(data) {
             if (data.d.ErrorMessage)
                 alert(data.d.ErrorMessage);
             else
                 $scope.photoItems = data.d.PhotoItems;
+
+            $scope.DisplayLoading = false;
         }
 
         function onAlbumCreated(data) {
@@ -61,6 +94,15 @@
             else {
                 $scope.GetItems($scope.currentFolder);
                 alert('Альбом создан!');
+            }
+        }
+
+        function onAlbumUpdated(data) {
+            if (data.d.ErrorMessage)
+                alert(data.d.ErrorMessage);
+            else {
+                $scope.GetItems($scope.currentFolder);
+                alert('Альбом обновлен!');
             }
         }
 
@@ -73,6 +115,13 @@
             }
         }
 
+        function GetEmptyAlbum() {
+            return {
+                Id: null,
+                IsPublic: false
+            };
+        }
+
         function GetEmptyImage() {
             return {
                 Title: '',
@@ -82,6 +131,7 @@
         }
 
         function onError(data, status, headers, config) {
+            $scope.DisplayLoading = false;
             $scope.Errors.push({ Data: data, Status: status, Headers: headers, Config: config });
             alert('Операция завершена с ошибкой');
         }

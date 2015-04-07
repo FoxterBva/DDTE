@@ -17,7 +17,6 @@
                 onCompleted(data)
             })
             .error(function (data, status, headers, config) {
-                alert('Error !');
                 onError(data);
             });
         }
@@ -35,7 +34,23 @@
                 onCompleted(data)
             })
             .error(function (data, status, headers, config) {
-                alert('Error !');
+                onError(data);
+            });
+        }
+
+        factory.UpdateAlbum = function (id, title, descr, isPublic, onCompleted, onError) {
+            var httpParams = {
+                url: '/DataActionService.asmx/UpdateAlbum',
+                dataType: 'json',
+                method: 'POST',
+                data: "{ 'albumId': '" + id + "', 'title': '" + title + "', 'description': '" + descr + "', 'isPublic': '" + isPublic + "' }"
+            };
+
+            $http(httpParams)
+            .success(function (data, status, headers, config) {
+                onCompleted(data)
+            })
+            .error(function (data, status, headers, config) {
                 onError(data);
             });
         }
@@ -53,7 +68,6 @@
                 onCompleted(data)
             })
             .error(function (data, status, headers, config) {
-                alert('Error !');
                 onError(data, status, headers, config);
             });
         }

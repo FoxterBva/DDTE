@@ -62,9 +62,21 @@ namespace DDTE.BL.Providers
 		/// </summary>
 		public void UpdateAlbum(AlbumDTO album)
 		{
-			throw new NotImplementedException();
+			using (var db = GetObjectContext())
+			{
+				var q = (from a in db.Albums
+						 where a.AlbumId == album.Id
+						 select a).FirstOrDefault();
 
-			// TODO: update album fields
+				if (q != null)
+				{ 
+					q.Title = album.Title;
+					q.Description = album.Description;
+					q.IsPublic = album.IsPublic;
+
+					db.SaveChanges();
+				}
+			}
 		}
 
 		/// <summary>
@@ -219,7 +231,8 @@ namespace DDTE.BL.Providers
 						Description = album.Description,
 						ItemType = PhotoViewerItemType.Album,
 						Title = album.Title,
-						ImagePath = String.Empty
+						ImagePath = String.Empty,
+						IsPublic = album.IsPublic
 					});
 				}
 			}
@@ -233,7 +246,8 @@ namespace DDTE.BL.Providers
 						Description = p.Description,
 						Title = p.Title,
 						ItemType = PhotoViewerItemType.Photo,
-						ImagePath = p.FileName
+						ImagePath = p.FileName,
+						IsPublic = true// p.IsPublic
 					});
 				}
 			}

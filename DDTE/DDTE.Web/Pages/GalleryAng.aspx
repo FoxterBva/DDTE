@@ -9,23 +9,29 @@
     <div data-ng-app="ddteGalleryApp">
         <div data-ng-controller="GalleryController">
             <asp:Panel ID="pnlAddAlbum" runat="server">
-                <a href="#" onclick="$(this).next().toggle();return false;">Добавить альбом</a>
-                <div style="display: none">
-                    <div>Title: <input type="text" data-ng-model="AlbumTitle" /></div>
-                    <div>Description: <input type="text" data-ng-model="AlbumDescr" /></div>
-                    <div>Public?: <input type="checkbox" data-ng-model="IsPublic" /></div>
-                    <a class="btn-add" id="btnAddPhotoItem" runat="server" href="#" data-ng-click="AddItem()">Создать</a>
+                <div class="button" data-ng-click="ToggleCreateAlbumForm()">Добавить альбом</div>
+                <div data-ng-show="DisplayEditForm  && currentFolder < 0" class="album-edit-form">
+                    <fieldset>
+                        <legend>Редактирование альбома:</legend>
+                        <div class="album-edit-title">Название: <input type="text" data-ng-model="SelectedAlbum.Title" /></div>
+                        <div class="album-edit-descr">Описание: <input type="text" data-ng-model="SelectedAlbum.Description" /></div>
+                        <div class="album-edit-public">Публичный?: <input type="checkbox" data-ng-model="SelectedAlbum.IsPublic" /></div>
+                    </fieldset>
+                    
+                    <div class="button" id="btnAddPhotoItem" data-ng-click="AddAlbum()" >Подтвердить</div>
+                    <div class="button" id="btnCloseAlbumEditForm" data-ng-click="ToggleCreateAlbumForm()" >Закрыть</div>
                 </div>
             </asp:Panel>
             
             <div data-ng-repeat="pi in photoItems" class="photo-item" style="position: relative">
                 <div data-ng-if="pi.ItemType == 0">
                     <div class="photo-album" >
-                        <div class="title" data-ng-click="SelectFolder(pi.Id)">{{ pi.Title }}</div>
+                        <div class="title" data-ng-click="SelectFolder(pi.Id)" title="Смотреть">{{ pi.Title }}</div>
                         <div class="descr">{{ pi.Description }}</div>
-                        <asp:Literal ID="ltltAlbumActions" runat="server">
-                            <div class="actions" style="position: absolute; bottom: 0px; height: 20px; border: 1px solid #EFEFEF; display: block;">
-                                <div data-ng-click="DeleteAlbum(pi.Id, pi.Title)" title="Удалить альбом" style="cursor: pointer">X</div>
+                        <asp:Literal ID="ltlAlbumActions" runat="server">
+                            <div class="actions" style="position: absolute; bottom: 0px; left: 0px; right: 0px; height: 20px; border: 1px solid #EFEFEF; display: block;">
+                                <div class="button" data-ng-click="ToggleCreateEditForm(pi.Id)" title="Редактировать альбом" style="cursor: pointer; display: inline-block">Изменить</div>
+                                <div class="button" data-ng-click="DeleteAlbum(pi.Id, pi.Title)" title="Удалить альбом" style="cursor: pointer; display: inline-block">Удалить</div>
                             </div>
                         </asp:Literal>
                     </div>
