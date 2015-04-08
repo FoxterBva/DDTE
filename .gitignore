@@ -223,3 +223,4 @@ packages/
 Deploy/
 DDTE/DDTE.Web/Deploy/DDTE.Web.zip
 DDTE/DDTE.Web/Web.config
+DDTE/DDTE.Web/connectionString.config
