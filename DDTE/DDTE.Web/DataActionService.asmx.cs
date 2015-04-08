@@ -119,7 +119,7 @@ namespace DDTE.Web
 			}
 			catch (Exception ex)
 			{
-				res.ErrorMessage = "Не удалось создать альбом";
+				res.ErrorMessage = "Не удалось обновить альбом";
 				LogError("UpdateAlbum", "Unexpected error", ex);
 			}
 
@@ -127,7 +127,7 @@ namespace DDTE.Web
 		}
 
 		[WebMethod]
-		public ServiceResultBase DeleteAlbum(string albumId)
+		public ServiceResultBase DeleteAlbum(int albumId)
 		{
 			var res = new ServiceResultBase();
 
@@ -139,12 +139,99 @@ namespace DDTE.Web
 					return res;
 				}
 
-				photoProvider.DeleteAlbum(Int32.Parse(albumId), HttpRuntime.AppDomainAppPath + "\\Photos");
+				photoProvider.DeleteAlbum(albumId, HttpRuntime.AppDomainAppPath + "\\Photos");
 			}
 			catch (Exception ex)
 			{
-				res.ErrorMessage = "Не удалось создать альбом";
-				LogError("CreateAlbum", "Unexpected error", ex);
+				res.ErrorMessage = "Не удалось удалить альбом";
+				LogError("DeleteAlbum", "Unexpected error", ex);
+			}
+
+			return res;
+		}
+
+		[WebMethod]
+		public ServiceResultBase AddPhoto(string title, string description, bool isPublic, string url, int albumId)
+		{
+			var res = new ServiceResultBase();
+
+			try
+			{
+				if (!CanEditPhotos())
+				{
+					res.ErrorMessage = "Недостаточно прав";
+					return res;
+				}
+
+				PhotoDTO photo = new PhotoDTO()
+				{
+					Name = title,
+					Path = url,
+					Description = description,
+					AlbumId = albumId
+				};
+
+				photoProvider.AddPhoto(photo, null, HttpRuntime.AppDomainAppPath + "\\Photos");
+			}
+			catch (Exception ex)
+			{
+				res.ErrorMessage = "Не удалось удалить фотографию";
+				LogError("DeletePhoto", "Unexpected error", ex);
+			}
+
+			return res;
+		}
+
+		[WebMethod]
+		public ServiceResultBase UpdatePhoto(int photoId, string title, string description, bool isPublic)
+		{
+			var res = new ServiceResultBase();
+
+			try
+			{
+				if (!CanEditPhotos())
+				{
+					res.ErrorMessage = "Недостаточно прав";
+					return res;
+				}
+
+				PhotoDTO photo = new PhotoDTO()
+				{
+					Id = photoId,
+					Name = title,
+					Description = description,
+				};
+
+				photoProvider.UpdatePhoto(photo);
+			}
+			catch (Exception ex)
+			{
+				res.ErrorMessage = "Не удалось удалить фотографию";
+				LogError("DeletePhoto", "Unexpected error", ex);
+			}
+
+			return res;
+		}
+
+		[WebMethod]
+		public ServiceResultBase DeletePhoto(int photoId)
+		{
+			var res = new ServiceResultBase();
+
+			try
+			{
+				if (!CanEditPhotos())
+				{
+					res.ErrorMessage = "Недостаточно прав";
+					return res;
+				}
+
+				photoProvider.DeletePhoto(photoId, HttpRuntime.AppDomainAppPath + "\\Photos");
+			}
+			catch (Exception ex)
+			{
+				res.ErrorMessage = "Не удалось удалить фотографию";
+				LogError("DeletePhoto", "Unexpected error", ex);
 			}
 
 			return res;
@@ -179,6 +266,11 @@ namespace DDTE.Web
 		//}
 
 		bool CanEditAlbums()
+		{
+			return HttpContext.Current.Request.IsAuthenticated;
+		}
+
+		bool CanEditPhotos()
 		{
 			return HttpContext.Current.Request.IsAuthenticated;
 		}

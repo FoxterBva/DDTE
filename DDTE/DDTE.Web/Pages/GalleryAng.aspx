@@ -31,9 +31,11 @@
                 <div data-ng-show="DisplayEditForm  && currentFolder > 0" class="photo-edit-form">
                     <fieldset>
                         <legend>Редактирование фотографии:</legend>
-                        <div class="album-edit-title">Название: <input type="text" data-ng-model="SelectedPhoto.Title" /></div>
-                        <div class="album-edit-descr">Описание: <input type="text" data-ng-model="SelectedPhoto.Description" /></div>
-                        <div class="album-edit-public">Публичная?: <input type="checkbox" data-ng-model="SelectedPhoto.IsPublic" /></div>
+                        <div class="photo-edit-title">Название: <input type="text" data-ng-model="SelectedPhoto.Title" /></div>
+                        <div class="photo-edit-descr">Описание: <input type="text" data-ng-model="SelectedPhoto.Description" /></div>
+                        <div class="photo-edit-public">Публичная?: <input type="checkbox" data-ng-model="SelectedPhoto.IsPublic" /></div>
+                        <div class="photo-edit-url">URL-адрес: <input type="text" data-ng-model="SelectedPhoto.Url" /></div>
+                        <div class="photo-edit-file">либо <input type="file" data-ng-model="SelectedPhoto.File" /></div>
                     </fieldset>
                     
                     <div class="button" id="btnAddPhoto" data-ng-click="AddPhoto()" >Подтвердить</div>
@@ -64,6 +66,12 @@
                             </a>
                         </div>
                         <div class="img-title">{{ pi.Title }}</div>
+                        <asp:Literal ID="ltlPhotoActions" runat="server">
+                            <div class="actions" style="position: absolute; bottom: 0px; left: 0px; right: 0px; height: 20px; border: 1px solid #EFEFEF; display: block;">
+                                <div class="button" data-ng-click="ToggleEditPhotoForm(pi.Id)" title="Редактировать фотографию" >Изменить</div>
+                                <div class="button" data-ng-click="DeletePhoto(pi.Id, pi.Title)" title="Удалить фотографию" >Удалить</div>
+                            </div>
+                        </asp:Literal>
                     </div>
                 </div>
             </div>
