@@ -1,6 +1,6 @@
 ﻿-- Creating Albums
 SET IDENTITY_INSERT Album ON
-INSERT INTO Album (AlbumId, FolderName, Description, IsPublic, Title, CreatedDate, ModifiedDate)
+INSERT INTO Album (AlbumId, Description, IsPublic, Title, CreatedDate, ModifiedDate)
 SELECT 1, 'This is a first album', 1, 'Firsst Album', '2000-01-01', '2000-01-01' UNION ALL
 SELECT 2, 'This is a second album', 1, 'Second Album', '2000-01-01', '2000-01-01' 
 GO
