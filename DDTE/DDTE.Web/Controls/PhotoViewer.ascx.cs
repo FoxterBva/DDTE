@@ -45,7 +45,7 @@ namespace DDTE.Web.Controls
 				else
 				{ 
 					// Delete photo
-					photoProvider.DeletePhoto(id);
+					photoProvider.DeletePhoto(id, HttpRuntime.AppDomainAppPath + "\\Photos");
 				}
 			}
 		}

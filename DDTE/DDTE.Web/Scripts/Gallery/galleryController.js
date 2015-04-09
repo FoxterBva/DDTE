@@ -31,6 +31,12 @@
             return false;
         }
 
+        $scope.CloseImage = function () {
+            $scope.currentImage = GetEmptyImage();
+            $scope.displayImage = false;
+            return false;
+        }
+
         $scope.ToggleCreateAlbumForm = function () {
             $scope.DisplayEditForm = !$scope.DisplayEditForm;
             if ($scope.DisplayEditForm)
@@ -59,10 +65,16 @@
             }
         }
 
-        $scope.CloseImage = function () {
-            $scope.currentImage = GetEmptyImage();
-            $scope.displayImage = false;
-            return false;
+        $scope.ToggleEditPhotoForm = function (photoId) {
+            $scope.DisplayEditForm = true;
+            var items = $scope.photoItems;
+
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                if (item.ItemType == 1 && item.Id == photoId) {
+                    $scope.SelectedPhoto = { Title: item.Title, Description: item.Description, IsPublic: item.IsPublic, Id: item.Id, Url: item.Url };
+                }
+            }
         }
 
         $scope.AddAlbum = function () {
@@ -86,7 +98,23 @@
         }
 
         $scope.AddPhoto = function () {
+            if ($scope.currentFolder > 0) {
+                if ($scope.SelectedPhoto.Id != null) {
+                    GalleryServiceFactory.UpdatePhoto($scope.SelectedPhoto.Id, $scope.SelectedPhoto.Title, $scope.SelectedPhoto.Description, $scope.SelectedPhoto.IsPublic, onPhotoUpdated, onError);
+                } else {
+                    GalleryServiceFactory.AddPhoto($scope.SelectedPhoto.Title, $scope.SelectedPhoto.Description, $scope.SelectedPhoto.IsPublic, $scope.SelectedPhoto.Url, $scope.currentFolder, onPhotoCreated, onError);
+                }
+            } else {
 
+            }
+
+            return false;
+        }
+
+        $scope.DeletePhoto = function (id, title) {
+            if (confirm("Вы действительно хотите удалить фотографию '" + title + "'?")) {
+                GalleryServiceFactory.DeletePhoto(id, onPhotoDeleted, onError);
+            }
         }
 
         function onItemsLoaded(data) {
@@ -103,6 +131,7 @@
                 alert(data.d.ErrorMessage);
             else {
                 $scope.GetItems($scope.currentFolder);
+                $scope.ToggleCreateAlbumForm();
                 alert('Альбом создан!');
             }
         }
@@ -112,6 +141,7 @@
                 alert(data.d.ErrorMessage);
             else {
                 $scope.GetItems($scope.currentFolder);
+                $scope.ToggleCreateAlbumForm();
                 alert('Альбом обновлен!');
             }
         }
@@ -125,17 +155,52 @@
             }
         }
 
+        function onPhotoCreated(data) {
+            if (data.d.ErrorMessage)
+                alert(data.d.ErrorMessage);
+            else {
+                $scope.GetItems($scope.currentFolder);
+                $scope.ToggleCreatePhotoForm();
+                alert('Фотография добавлена!');
+            }
+        }
+
+        function onPhotoUpdated(data) {
+            if (data.d.ErrorMessage)
+                alert(data.d.ErrorMessage);
+            else {
+                $scope.GetItems($scope.currentFolder);
+                $scope.ToggleCreatePhotoForm();
+                alert('Фотография изменена!');
+            }
+        }
+
+        function onPhotoDeleted(data) {
+            if (data.d.ErrorMessage)
+                alert(data.d.ErrorMessage);
+            else {
+                $scope.GetItems($scope.currentFolder);
+                alert('Фотография удалена!');
+            }
+        }
+
         function GetEmptyAlbum() {
             return {
                 Id: null,
-                IsPublic: true
+                IsPublic: true,
+                Title: '',
+                Description: ''
             };
         }
 
         function GetEmptyPhoto() {
             return {
                 Id: null,
-                IsPublic: true
+                IsPublic: true,
+                Url: '',
+                Title: '',
+                Description: '',
+                File: null
             };
         }
 

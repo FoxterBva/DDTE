@@ -168,38 +168,51 @@ namespace DDTE.BL.Providers
 		/// </summary>
 		public void AddPhoto(PhotoDTO photo, Stream photoStream, string photoPath)
 		{
-			var maxImageHeight = 150;
-
-			// TODO: 
-			// 1. add to DB
-
-
-			// 2. Save file
-			Image img = Image.FromStream(photoStream);
-			if (File.Exists(photoPath))
-				throw new FileExistsException("File '" + photoPath + "' already exists.");
-
-			img.Save(photoPath);
-
-			// 3. Create tumbnail file
-			double scale = (double)maxImageHeight / img.Height;
-			int tmbWidth = (int)(img.Width * scale);
-			int tmbHeight = (int)(img.Height * scale);
-
-			using (Bitmap tmb = new Bitmap(tmbWidth, tmbHeight))
+			using (var db = GetObjectContext())
 			{
-				using (Graphics g = Graphics.FromImage(tmb))
+				Photo p = new Photo() 
 				{
-					g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-					g.SmoothingMode = SmoothingMode.HighQuality;
-					g.CompositingQuality = CompositingQuality.HighQuality;
-					g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+					AlbumId = photo.AlbumId,
+					Description = photo.Description,
+					FileName = photo.Path,
+					Title = photo.Name
+				};
 
-					g.DrawImage(img, 0, 0, tmbWidth, tmbHeight);
-
-					tmb.Save(String.Format("{0}{1}{2}", Path.GetFileNameWithoutExtension(photoPath), TmbSuffix, "png"), ImageFormat.Png);
-				}
+				db.Photos.Add(p);
+				db.SaveChanges();
 			}
+			//var maxImageHeight = 150;
+
+			//// TODO: 
+			//// 1. add to DB
+
+
+			//// 2. Save file
+			//Image img = Image.FromStream(photoStream);
+			//if (File.Exists(photoPath))
+			//	throw new FileExistsException("File '" + photoPath + "' already exists.");
+
+			//img.Save(photoPath);
+
+			//// 3. Create tumbnail file
+			//double scale = (double)maxImageHeight / img.Height;
+			//int tmbWidth = (int)(img.Width * scale);
+			//int tmbHeight = (int)(img.Height * scale);
+
+			//using (Bitmap tmb = new Bitmap(tmbWidth, tmbHeight))
+			//{
+			//	using (Graphics g = Graphics.FromImage(tmb))
+			//	{
+			//		g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+			//		g.SmoothingMode = SmoothingMode.HighQuality;
+			//		g.CompositingQuality = CompositingQuality.HighQuality;
+			//		g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+			//		g.DrawImage(img, 0, 0, tmbWidth, tmbHeight);
+
+			//		tmb.Save(String.Format("{0}{1}{2}", Path.GetFileNameWithoutExtension(photoPath), TmbSuffix, "png"), ImageFormat.Png);
+			//	}
+			//}
 		}
 
 		/// <summary>
@@ -207,10 +220,20 @@ namespace DDTE.BL.Providers
 		/// </summary>
 		public void UpdatePhoto(PhotoDTO photo)
 		{
-			throw new NotImplementedException();
-			// TODO: update photo fields (title, descr)
+			using (var db = GetObjectContext()) 
+			{
+				var q = (from p in db.Photos
+						 where p.PhotoId == photo.Id
+						 select p).FirstOrDefault();
 
-			// TODO: do we need a possibility to reassign photo and albums?
+				if (q == null)
+					throw new KeyNotFoundException("Выбранная фотография не найдена.");
+
+				q.Title = photo.Name;
+				q.Description = photo.Description;
+
+				db.SaveChanges();
+			}
 		}
 
 		/// <summary>
@@ -278,9 +301,35 @@ namespace DDTE.BL.Providers
 		/// <summary>
 		/// Deletes photo
 		/// </summary>
-		public void DeletePhoto(int photoId)
+		public void DeletePhoto(int photoId, string path)
 		{
-			throw new NotImplementedException();
+			using (var db = GetObjectContext())
+			{
+				var q = (from p in db.Photos.Include("Album")
+						 where p.PhotoId == photoId
+						 select p).FirstOrDefault();
+
+				if (q == null)
+					throw new KeyNotFoundException("Выбранная фотография не найдена.");
+
+				if (q.FileName.StartsWith("http"))
+				{
+					db.Photos.Remove(q);
+					db.SaveChanges();
+				}
+				else
+				{
+					using (var ts = new TransactionScope())
+					{
+						db.Photos.Remove(q);
+						db.SaveChanges();
+
+						File.Delete(Path.Combine(path, q.FileName));
+
+						ts.Complete();
+					}
+				}
+			}
 
 			// 1. Delete photo file
 			// 2. Delete record

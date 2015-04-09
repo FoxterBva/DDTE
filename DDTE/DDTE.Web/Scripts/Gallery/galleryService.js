@@ -72,6 +72,57 @@
             });
         }
 
+        factory.AddPhoto = function (title, descr, isPublic, url, albumId, onCompleted, onError) {
+            var httpParams = {
+                url: '/DataActionService.asmx/AddPhoto',
+                dataType: 'json',
+                method: 'POST',
+                data: "{ 'title': '" + title + "', 'description': '" + descr + "', 'isPublic': '" + isPublic + "', 'url': '" + url + "', 'albumId': '" + albumId + "' }"
+            };
+
+            $http(httpParams)
+            .success(function (data, status, headers, config) {
+                onCompleted(data)
+            })
+            .error(function (data, status, headers, config) {
+                onError(data, status, headers, config);
+            });
+        }
+
+        factory.UpdatePhoto = function (photoId, title, descr, isPublic, onCompleted, onError) {
+            var httpParams = {
+                url: '/DataActionService.asmx/UpdatePhoto',
+                dataType: 'json',
+                method: 'POST',
+                data: "{ 'photoId': '" + photoId + "', 'title': '" + title + "', 'description': '" + descr + "', 'isPublic': '" + isPublic + "' }"
+            };
+
+            $http(httpParams)
+            .success(function (data, status, headers, config) {
+                onCompleted(data)
+            })
+            .error(function (data, status, headers, config) {
+                onError(data, status, headers, config);
+            });
+        }
+
+        factory.DeletePhoto = function (photoId, onCompleted, onError) {
+            var httpParams = {
+                url: '/DataActionService.asmx/DeletePhoto',
+                dataType: 'json',
+                method: 'POST',
+                data: "{ 'photoId': '" + photoId + "' }"
+            };
+
+            $http(httpParams)
+            .success(function (data, status, headers, config) {
+                onCompleted(data)
+            })
+            .error(function (data, status, headers, config) {
+                onError(data, status, headers, config);
+            });
+        }
+
         return factory;
     }
 

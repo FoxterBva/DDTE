@@ -22,6 +22,7 @@ namespace DDTE.Web.Pages
 			pnlAddAlbum.Visible = SecurityHelper.CanEditAlbum();
 			pnlAddPhoto.Visible = SecurityHelper.CanEditPhoto();
 			ltlAlbumActions.Visible = SecurityHelper.CanEditAlbum();
+			ltlAlbumActions.Visible = SecurityHelper.CanEditPhoto();
 		}
 	}
 }
