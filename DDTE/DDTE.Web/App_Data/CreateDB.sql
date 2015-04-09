@@ -8,6 +8,8 @@ BEGIN
 		[Title] NVARCHAR (200) NULL,
 		[Description] NVARCHAR(max) NULL,
 		[IsPublic] BIT NOT NULL CONSTRAINT DF_Album_IsPublic DEFAULT(0),
+		[CreatedDate] DATETIME NOT NULL,
+		[ModifiedDate] DATETIME NOT NULL,
 		CONSTRAINT [PK_Album] PRIMARY KEY CLUSTERED 
 		(
 			[AlbumId]
@@ -27,6 +29,9 @@ BEGIN
 		[FileName] NVARCHAR (1000) NULL,
 		[Title] NVARCHAR (200) NULL,
 		[Description] NVARCHAR(max) NULL,
+		[IsPublic] BIT NOT NULL CONSTRAINT DF_Photo_IsPublic DEFAULT(0),
+		[CreatedDate] DATETIME NOT NULL,
+		[ModifiedDate] DATETIME NOT NULL,
 		CONSTRAINT [PK_Photo] PRIMARY KEY CLUSTERED 
 		(
 			[PhotoId]

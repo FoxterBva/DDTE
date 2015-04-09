@@ -23,6 +23,8 @@ namespace DDTE.Model
         public string Title { get; set; }
         public string Description { get; set; }
         public bool IsPublic { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public System.DateTime ModifiedDate { get; set; }
     
         public virtual ICollection<Photo> Photos { get; set; }
     }
