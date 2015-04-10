@@ -298,14 +298,52 @@ ul.nav-main > li ul {
     background-color: #90f7f5;
 }
 
-.album-edit-form,
-.photo-edit-form
+.edit-form
 {
     position: absolute;
     z-index: 10;
     border: 1px solid;
     background-color: #D5E8EA;
     padding: 5px;
+    box-shadow: #0A6F6E 2px 2px 3px 0px;
+    width: 300px;
+}
+
+.edit-form legend
+{
+    margin-bottom: 3px;
+}
+
+.photo-edit-row,
+.album-edit-row
+{
+    margin-bottom: 5px;
+}
+
+.photo-edit-row label,
+.album-edit-row label
+{
+    display: block;
+}
+
+.photo-edit-row.public label,
+.album-edit-row.public label
+{
+    display: inline
+}
+
+.photo-edit-row input[type="text"],
+.photo-edit-row textarea,
+.album-edit-row input[type="text"],
+.album-edit-row textarea
+{
+    width: 95%;
+}
+
+.photo-edit-row textarea,
+.album-edit-row textarea
+{
+    height: 55px;
 }
 
 
@@ -395,7 +433,7 @@ ul.nav-main > li ul {
 {
     display: inline-block;
     width: 176px;
-    height: 210px;
+    height: 218px;
     margin-left: 15px;
     margin-top: 15px;
     border: 1px solid #51CFDD;
@@ -413,12 +451,30 @@ ul.nav-main > li ul {
     margin-bottom: 10px;
     text-align: center;
     cursor: pointer;
+    display: block;
 }
 
 .photo-item .photo-album .descr
 {
     text-align: center;
+    color: #887F7F;
+    display: block;
+}
+
+.photo-item .photo-album .created
+{
+    text-align: center;
     color: #ABABAB;
+    display: block;
+    font-size: 10px;
+    width: 100%;
+    margin-top: 4px;
+}
+
+.photo-item .img-title
+{
+    text-align: center;
+    padding: 3px 0px 3px 0px;
 }
 
 .photo-image-container

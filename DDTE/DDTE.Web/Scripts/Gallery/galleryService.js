@@ -21,12 +21,13 @@
             });
         }
 
-        factory.AddAlbum = function (title, descr, isPublic, onCompleted, onError) {
+        factory.AddAlbum = function (data, onCompleted, onError) {
             var httpParams = {
                 url: '/DataActionService.asmx/CreateAlbum',
                 dataType: 'json',
                 method: 'POST',
-                data: "{ 'title': '" + title + "', 'description': '" + descr + "', 'isPublic': '" + isPublic + "' }"
+                //data: "{ 'title': '" + title + "', 'description': '" + descr + "', 'isPublic': '" + isPublic + "' }"
+                data: { albumData: data }
             };
 
             $http(httpParams)
@@ -38,12 +39,12 @@
             });
         }
 
-        factory.UpdateAlbum = function (id, title, descr, isPublic, onCompleted, onError) {
+        factory.UpdateAlbum = function (data, onCompleted, onError) {
             var httpParams = {
                 url: '/DataActionService.asmx/UpdateAlbum',
                 dataType: 'json',
                 method: 'POST',
-                data: "{ 'albumId': '" + id + "', 'title': '" + title + "', 'description': '" + descr + "', 'isPublic': '" + isPublic + "' }"
+                data: { albumData: data }
             };
 
             $http(httpParams)
@@ -72,12 +73,12 @@
             });
         }
 
-        factory.AddPhoto = function (title, descr, isPublic, url, albumId, onCompleted, onError) {
+        factory.AddPhoto = function (data, onCompleted, onError) {
             var httpParams = {
                 url: '/DataActionService.asmx/AddPhoto',
                 dataType: 'json',
                 method: 'POST',
-                data: "{ 'title': '" + title + "', 'description': '" + descr + "', 'isPublic': '" + isPublic + "', 'url': '" + url + "', 'albumId': '" + albumId + "' }"
+                data: { photoData: data }
             };
 
             $http(httpParams)
@@ -89,12 +90,12 @@
             });
         }
 
-        factory.UpdatePhoto = function (photoId, title, descr, isPublic, onCompleted, onError) {
+        factory.UpdatePhoto = function (data, onCompleted, onError) {
             var httpParams = {
                 url: '/DataActionService.asmx/UpdatePhoto',
                 dataType: 'json',
                 method: 'POST',
-                data: "{ 'photoId': '" + photoId + "', 'title': '" + title + "', 'description': '" + descr + "', 'isPublic': '" + isPublic + "' }"
+                data: { photoData: data }
             };
 
             $http(httpParams)

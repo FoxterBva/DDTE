@@ -13,5 +13,6 @@ namespace DDTE.Model.DTO
 		public string Folder { get; set; }
 		public bool IsPublic { get; set; }
 		public string Description { get; set; }
+		public DateTime CreatedDate { get; set; }
 	}
 }

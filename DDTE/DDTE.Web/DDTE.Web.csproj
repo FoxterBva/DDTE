@@ -264,6 +264,7 @@
     <Content Include="FileDownload.ashx" />
     <Content Include="MainRight.master" />
     <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\Local publish 2.pubxml" />
     <None Include="Properties\PublishProfiles\LocalPackage.pubxml" />
     <None Include="Properties\PublishProfiles\LocalPublish.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
@@ -382,6 +383,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\HttpFileContainer.cs" />
     <Compile Include="Helpers\SecurityHelper.cs" />
     <Compile Include="Main.Master.cs">
       <DependentUpon>Main.Master</DependentUpon>

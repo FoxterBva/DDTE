@@ -13,5 +13,6 @@ namespace DDTE.Model.DTO
 		public string Description { get; set; }
 		public string Path { get; set; }
 		public int AlbumId { get; set; }
+		public bool IsPublic { get; set; }
 	}
 }

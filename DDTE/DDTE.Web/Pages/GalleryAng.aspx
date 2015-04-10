@@ -12,43 +12,47 @@
                 <span  data-ng-click="SelectFolder(-1)" style="cursor: pointer">Все Альбомы</span>
                 <span data-ng-show="currentFolder > 0" >&nbsp;/&nbsp;{{ CurrentFolderTitle }}</span>
             </div>
+            
             <asp:Panel ID="pnlAddAlbum" runat="server">
                 <div class="button" data-ng-show="currentFolder <= 0" data-ng-click="ToggleCreateAlbumForm()">Добавить альбом</div>
-                <div data-ng-show="DisplayEditForm  && currentFolder <= 0" class="album-edit-form">
+                <div data-ng-show="DisplayEditForm  && currentFolder <= 0" class="edit-form album">
                     <fieldset>
-                        <legend>Редактирование альбома:</legend>
-                        <div class="album-edit-title">Название: <input type="text" data-ng-model="SelectedAlbum.Title" /></div>
-                        <div class="album-edit-descr">Описание: <input type="text" data-ng-model="SelectedAlbum.Description" /></div>
-                        <div class="album-edit-public">Публичный?: <input type="checkbox" data-ng-model="SelectedAlbum.IsPublic" /></div>
+                        <legend>Редактирование альбома</legend>
+                        <div class="album-edit-row title"><label>Название: </label><input type="text" data-ng-model="SelectedAlbum.Title" /></div>
+                        <div class="album-edit-row descr"><label>Описание: </label><textarea data-ng-model="SelectedAlbum.Description" ></textarea></div>
+                        <div class="album-edit-row public"><input type="checkbox" data-ng-model="SelectedAlbum.IsPublic" /><label>публичный</label></div>
                     </fieldset>
                     
                     <div class="button" id="btnAddPhotoItem" data-ng-click="AddAlbum()" >Подтвердить</div>
                     <div class="button" id="btnCloseAlbumEditForm" data-ng-click="ToggleCreateAlbumForm()" >Закрыть</div>
                 </div>
             </asp:Panel>
+            
             <asp:Panel ID="pnlAddPhoto" runat="server">
                 <div class="button" data-ng-show="currentFolder > 0" data-ng-click="ToggleCreatePhotoForm()">Добавить фото</div>
-                <div data-ng-show="DisplayEditForm  && currentFolder > 0" class="photo-edit-form">
+                <div data-ng-show="DisplayEditForm  && currentFolder > 0" class="edit-form photo">
                     <fieldset>
-                        <legend>Редактирование фотографии:</legend>
-                        <div class="photo-edit-title">Название: <input type="text" data-ng-model="SelectedPhoto.Title" /></div>
-                        <div class="photo-edit-descr">Описание: <input type="text" data-ng-model="SelectedPhoto.Description" /></div>
-                        <div class="photo-edit-public">Публичная?: <input type="checkbox" data-ng-model="SelectedPhoto.IsPublic" /></div>
-                        <div class="photo-edit-url">URL-адрес: <input type="text" data-ng-model="SelectedPhoto.Url" /></div>
-                        <div class="photo-edit-file">либо <input type="file" data-ng-model="SelectedPhoto.File" /></div>
+                        <legend>Редактирование фотографии</legend>
+                        <div class="photo-edit-row title"><label>Название:</label><input type="text" data-ng-model="SelectedPhoto.Title" /></div>
+                        <div class="photo-edit-row descr"><label>Описание:</label> <textarea data-ng-model="SelectedPhoto.Description" ></textarea></div>
+                        <div class="photo-edit-row public"><input type="checkbox" data-ng-model="SelectedPhoto.IsPublic" /> <label>публичная</label></div>
+                        <div class="photo-edit-row url"><label>URL-адрес: </label><input type="text" data-ng-model="SelectedPhoto.Url" /></div>
+                        <div class="photo-edit-row file"><label>либо </label><input id="photoFileSelector" type="file" data-ng-model="SelectedPhoto.File" /></div>
                     </fieldset>
                     
                     <div class="button" id="btnAddPhoto" data-ng-click="AddPhoto()" >Подтвердить</div>
                     <div class="button" id="btnClosePhotoEditForm" data-ng-click="ToggleCreatePhotoForm()" >Закрыть</div>
                 </div>
             </asp:Panel>
+
             <div class="photo-items">
                 <div class="data-load-overlay" data-ng-show="DisplayLoading">Загрузка...</div>
                 <div data-ng-repeat="pi in photoItems" class="photo-item" style="position: relative">
                     <div data-ng-if="pi.ItemType == 0">
                         <div class="photo-album" >
-                            <div class="title" data-ng-click="SelectFolder(pi.Id, pi.Title)" title="Смотреть">{{ pi.Title }}</div>
-                            <div class="descr">{{ pi.Description }}</div>
+                            <span class="title" data-ng-click="SelectFolder(pi.Id, pi.Title)" title="Смотреть">{{ pi.Title }}</span>
+                            <span class="descr">{{ pi.Description }}</span>
+                            <span class="created">Добавлено: {{ pi.CreatedDate | jsDate | date:'yyyy-MM-dd' }}</span>
                             <%--<div class="count">x Фотографий</div>--%>
                             <asp:Literal ID="ltlAlbumActions" runat="server">
                                 <div class="actions" style="position: absolute; bottom: 0px; left: 0px; right: 0px; height: 20px; border: 1px solid #EFEFEF; display: block;">

@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Facade\IDocumentProvider.cs" />
+    <Compile Include="Facade\IFileContainer.cs" />
     <Compile Include="Facade\INewsProvider.cs" />
     <Compile Include="Facade\IPhotoProvider.cs" />
     <Compile Include="PermissionHelper.cs" />

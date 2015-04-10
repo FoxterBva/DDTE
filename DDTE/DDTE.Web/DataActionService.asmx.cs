@@ -6,6 +6,7 @@ using System.Web.Services;
 using DDTE.BL.Facade;
 using DDTE.Common;
 using DDTE.Model.DTO;
+using DDTE.Web.Helpers;
 using NLog;
 
 namespace DDTE.Web
@@ -64,7 +65,7 @@ namespace DDTE.Web
 		}
 
 		[WebMethod]
-		public ServiceResultBase CreateAlbum(string title, string description, bool isPublic)
+		public ServiceResultBase CreateAlbum(CreateAlbumData albumData)
 		{
 			var res = new ServiceResultBase();
 
@@ -78,9 +79,9 @@ namespace DDTE.Web
 
 				AlbumDTO album = new AlbumDTO()
 				{
-					Description = description,
-					IsPublic = isPublic,
-					Title = title
+					Description = albumData.Description,
+					IsPublic = albumData.IsPublic,
+					Title = albumData.Title
 				};
 
 				photoProvider.CreateAlbum(album, HttpRuntime.AppDomainAppPath + "\\Photos");
@@ -95,7 +96,7 @@ namespace DDTE.Web
 		}
 
 		[WebMethod]
-		public ServiceResultBase UpdateAlbum(int albumId, string title, string description, bool isPublic)
+		public ServiceResultBase UpdateAlbum(UpdateAlbumData albumData)
 		{
 			var res = new ServiceResultBase();
 
@@ -109,10 +110,10 @@ namespace DDTE.Web
 
 				AlbumDTO album = new AlbumDTO()
 				{
-					Id = albumId,
-					Description = description,
-					IsPublic = isPublic,
-					Title = title
+					Id = albumData.AlbumId,
+					Description = albumData.Description,
+					IsPublic = albumData.IsPublic,
+					Title = albumData.Title
 				};
 
 				photoProvider.UpdateAlbum(album);
@@ -151,7 +152,7 @@ namespace DDTE.Web
 		}
 
 		[WebMethod]
-		public ServiceResultBase AddPhoto(string title, string description, bool isPublic, string url, int albumId)
+		public ServiceResultBase AddPhoto(CreatePhotoData photoData)
 		{
 			var res = new ServiceResultBase();
 
@@ -165,13 +166,14 @@ namespace DDTE.Web
 
 				PhotoDTO photo = new PhotoDTO()
 				{
-					Name = title,
-					Path = url,
-					Description = description,
-					AlbumId = albumId
+					Name = photoData.Title,
+					Description = photoData.Description,
+					IsPublic = photoData.IsPublic,
+					Path = photoData.Url,
+					AlbumId = photoData.AlbumId
 				};
 
-				photoProvider.AddPhoto(photo, null, HttpRuntime.AppDomainAppPath + "\\Photos");
+				photoProvider.AddPhoto(photo, new HttpFileContainer(photoData.File as HttpPostedFile), HttpRuntime.AppDomainAppPath + "\\Photos");
 			}
 			catch (Exception ex)
 			{
@@ -183,7 +185,7 @@ namespace DDTE.Web
 		}
 
 		[WebMethod]
-		public ServiceResultBase UpdatePhoto(int photoId, string title, string description, bool isPublic)
+		public ServiceResultBase UpdatePhoto(UpdatePhotoData photoData)
 		{
 			var res = new ServiceResultBase();
 
@@ -197,9 +199,10 @@ namespace DDTE.Web
 
 				PhotoDTO photo = new PhotoDTO()
 				{
-					Id = photoId,
-					Name = title,
-					Description = description,
+					Id = photoData.PhotoId,
+					Name = photoData.Title,
+					Description = photoData.Description,
+					IsPublic = photoData.IsPublic
 				};
 
 				photoProvider.UpdatePhoto(photo);
@@ -305,5 +308,38 @@ namespace DDTE.Web
 		}
 
 		public List<PhotoViewerItem> PhotoItems { get; set; }
+	}
+
+	public class CreateAlbumData
+	{
+		public string Title { get; set; }
+		public string Description { get; set; }
+		public bool IsPublic { get; set; }
+	}
+
+	public class UpdateAlbumData
+	{
+		public int AlbumId { get; set; }
+		public string Title { get; set; }
+		public string Description { get; set; }
+		public bool IsPublic { get; set; }
+	}
+
+	public class CreatePhotoData
+	{
+		public string Title { get; set; }
+		public string Description { get; set; }
+		public bool IsPublic { get; set; }
+		public string Url { get; set; }
+		public int AlbumId { get; set; }
+		public object File { get; set; }
+	}
+
+	public class UpdatePhotoData
+	{
+		public int PhotoId { get; set; }
+		public string Title { get; set; }
+		public string Description { get; set; }
+		public bool IsPublic { get; set; }
 	}
 }

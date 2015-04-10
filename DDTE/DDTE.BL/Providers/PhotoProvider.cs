@@ -20,6 +20,8 @@ namespace DDTE.BL.Providers
 		public static readonly string TmbSuffix = "_tmb";
 		public static readonly string AlbumFolderPrefix = "Album";
 
+		#region Album
+
 		/// <summary>
 		/// Creates album
 		/// </summary>
@@ -32,7 +34,9 @@ namespace DDTE.BL.Providers
 					var a = new Album() { 
 						Description = album.Description,
 						IsPublic = album.IsPublic,
-						Title = album.Title
+						Title = album.Title,
+						CreatedDate = DateTime.UtcNow,
+						ModifiedDate = DateTime.UtcNow
 					};
 
 					db.Albums.Add(a);
@@ -73,6 +77,7 @@ namespace DDTE.BL.Providers
 					q.Title = album.Title;
 					q.Description = album.Description;
 					q.IsPublic = album.IsPublic;
+					q.ModifiedDate = DateTime.UtcNow;
 
 					db.SaveChanges();
 				}
@@ -113,7 +118,8 @@ namespace DDTE.BL.Providers
 							//Folder = AlbumFolderPrefix + a.AlbumId,
 							IsPublic = a.IsPublic,
 							Title = a.Title,
-							Description = a.Description
+							Description = a.Description,
+							CreatedDate = a.CreatedDate
 						};
 
 				albums.AddRange(q.ToList());
@@ -163,10 +169,14 @@ namespace DDTE.BL.Providers
 			// 4. Delete db record
 		}
 
+		#endregion
+
+		#region Photo
+
 		/// <summary>
 		/// Adds photo
 		/// </summary>
-		public void AddPhoto(PhotoDTO photo, Stream photoStream, string photoPath)
+		public void AddPhoto(PhotoDTO photo, IFileContainer fileContainer, string photoPath)
 		{
 			using (var db = GetObjectContext())
 			{
@@ -175,11 +185,22 @@ namespace DDTE.BL.Providers
 					AlbumId = photo.AlbumId,
 					Description = photo.Description,
 					FileName = photo.Path,
-					Title = photo.Name
+					Title = photo.Name,
+					IsPublic = photo.IsPublic,
+					CreatedDate = DateTime.UtcNow,
+					ModifiedDate = DateTime.UtcNow
 				};
 
-				db.Photos.Add(p);
-				db.SaveChanges();
+				using (var ts = new TransactionScope())
+				{
+
+					db.Photos.Add(p);
+					db.SaveChanges();
+
+					fileContainer.Save(Path.Combine(photoPath, AlbumFolderPrefix + p.AlbumId.ToString()));
+
+					ts.Complete();
+				}
 			}
 			//var maxImageHeight = 150;
 
@@ -231,6 +252,8 @@ namespace DDTE.BL.Providers
 
 				q.Title = photo.Name;
 				q.Description = photo.Description;
+				q.IsPublic = photo.IsPublic;
+				q.ModifiedDate = DateTime.UtcNow;
 
 				db.SaveChanges();
 			}
@@ -255,7 +278,8 @@ namespace DDTE.BL.Providers
 						ItemType = PhotoViewerItemType.Album,
 						Title = album.Title,
 						ImagePath = String.Empty,
-						IsPublic = album.IsPublic
+						IsPublic = album.IsPublic,
+						CreatedDate = album.CreatedDate
 					});
 				}
 			}
@@ -270,7 +294,8 @@ namespace DDTE.BL.Providers
 						Title = p.Title,
 						ItemType = PhotoViewerItemType.Photo,
 						ImagePath = p.FileName,
-						IsPublic = true// p.IsPublic
+						IsPublic = p.IsPublic,
+						CreatedDate = p.CreatedDate
 					});
 				}
 			}
@@ -334,6 +359,8 @@ namespace DDTE.BL.Providers
 			// 1. Delete photo file
 			// 2. Delete record
 		}
+
+		#endregion Photo
 
 		List<Photo> tempPhoto = new List<Photo>() {
 			new Photo() { PhotoId = 1, Title = "Photo 1", Description = "First Photo", AlbumId = 1, FileName = "/Album0/WoWScrnShot_011315_210108.jpg" },

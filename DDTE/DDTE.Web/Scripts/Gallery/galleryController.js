@@ -80,9 +80,11 @@
         $scope.AddAlbum = function () {
             if ($scope.currentFolder == -1) {
                 if ($scope.SelectedAlbum.Id != null) {
-                    GalleryServiceFactory.UpdateAlbum($scope.SelectedAlbum.Id, $scope.SelectedAlbum.Title, $scope.SelectedAlbum.Description, $scope.SelectedAlbum.IsPublic, onAlbumUpdated, onError);
+                    var data = { AlbumId: $scope.SelectedAlbum.Id, Title: $scope.SelectedAlbum.Title, Description: $scope.SelectedAlbum.Description, IsPublic: $scope.SelectedAlbum.IsPublic }
+                    GalleryServiceFactory.UpdateAlbum(data, onAlbumUpdated, onError);
                 } else {
-                    GalleryServiceFactory.AddAlbum($scope.SelectedAlbum.Title, $scope.SelectedAlbum.Description, $scope.SelectedAlbum.IsPublic, onAlbumCreated, onError);
+                    var data = { Title: $scope.SelectedAlbum.Title, Description: $scope.SelectedAlbum.Description, IsPublic: $scope.SelectedAlbum.IsPublic }
+                    GalleryServiceFactory.AddAlbum(data, onAlbumCreated, onError);
                 }
             } else {
                 
@@ -100,9 +102,17 @@
         $scope.AddPhoto = function () {
             if ($scope.currentFolder > 0) {
                 if ($scope.SelectedPhoto.Id != null) {
-                    GalleryServiceFactory.UpdatePhoto($scope.SelectedPhoto.Id, $scope.SelectedPhoto.Title, $scope.SelectedPhoto.Description, $scope.SelectedPhoto.IsPublic, onPhotoUpdated, onError);
+                    var data = { PhotoId: $scope.SelectedPhoto.Id, Title: $scope.SelectedPhoto.Title, Description: $scope.SelectedPhoto.Description, isPublic: $scope.SelectedPhoto.IsPublic }
+                    GalleryServiceFactory.UpdatePhoto(data, onPhotoUpdated, onError);
                 } else {
-                    GalleryServiceFactory.AddPhoto($scope.SelectedPhoto.Title, $scope.SelectedPhoto.Description, $scope.SelectedPhoto.IsPublic, $scope.SelectedPhoto.Url, $scope.currentFolder, onPhotoCreated, onError);
+                    var f = document.getElementById('photoFileSelector').files[0];
+                    var r = new FileReader();
+                    r.onloadend = function (e) {
+                        var file = e.target.result;
+                        var data = { Title: $scope.SelectedPhoto.Title, Description: $scope.SelectedPhoto.Description, isPublic: $scope.SelectedPhoto.IsPublic, Url: $scope.SelectedPhoto.Url, AlbumId: $scope.currentFolder, FileStream: file };
+                        GalleryServiceFactory.AddPhoto(data, onPhotoCreated, onError);
+                    }
+                    r.readAsArrayBuffer(f);
                 }
             } else {
 
