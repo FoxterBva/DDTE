@@ -105,14 +105,20 @@
                     var data = { PhotoId: $scope.SelectedPhoto.Id, Title: $scope.SelectedPhoto.Title, Description: $scope.SelectedPhoto.Description, isPublic: $scope.SelectedPhoto.IsPublic }
                     GalleryServiceFactory.UpdatePhoto(data, onPhotoUpdated, onError);
                 } else {
+                    // TODO: 
                     var f = document.getElementById('photoFileSelector').files[0];
                     var r = new FileReader();
+                    var fileName;
+                    r.onload = (function (theFile) {
+                        fileName = theFile.name;
+                    })(f);
                     r.onloadend = function (e) {
-                        var file = e.target.result;
-                        var data = { Title: $scope.SelectedPhoto.Title, Description: $scope.SelectedPhoto.Description, isPublic: $scope.SelectedPhoto.IsPublic, Url: $scope.SelectedPhoto.Url, AlbumId: $scope.currentFolder, FileStream: file };
+                        var q = this.file;
+                        var fileStr = e.target.result.split(',')[1];
+                        var data = { Title: $scope.SelectedPhoto.Title, Description: $scope.SelectedPhoto.Description, isPublic: $scope.SelectedPhoto.IsPublic, Url: $scope.SelectedPhoto.Url, AlbumId: $scope.currentFolder, File: fileStr, FileName: fileName };
                         GalleryServiceFactory.AddPhoto(data, onPhotoCreated, onError);
                     }
-                    r.readAsArrayBuffer(f);
+                    r.readAsDataURL(f);
                 }
             } else {
 
