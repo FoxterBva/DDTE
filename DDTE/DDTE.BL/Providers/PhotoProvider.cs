@@ -177,8 +177,8 @@ namespace DDTE.BL.Providers
 		/// Adds photo
 		/// </summary>
 		public void AddPhoto(PhotoDTO photo, IFileContainer fileContainer, string photoPath)
-		{
-			using (var db = GetObjectContext())
+		{																																		 Ф
+			using (var db = GetObjectContext())																											F
 			{
 				Photo p = new Photo() 
 				{
@@ -193,11 +193,17 @@ namespace DDTE.BL.Providers
 
 				using (var ts = new TransactionScope())
 				{
+					if (String.IsNullOrEmpty(photo.Path))
+					{
+						var fileRelPath = ("\\" + AlbumFolderPrefix + p.AlbumId.ToString() + "\\" + fileContainer.FileName).Replace("\\", "/");
+						p.FileName = fileRelPath;
+					}
 
 					db.Photos.Add(p);
 					db.SaveChanges();
 
-					fileContainer.Save(Path.Combine(photoPath, AlbumFolderPrefix + p.AlbumId.ToString()));
+					if (fileContainer != null)
+						fileContainer.Save(Path.Combine(photoPath, AlbumFolderPrefix + p.AlbumId.ToString()));
 
 					ts.Complete();
 				}
@@ -349,7 +355,9 @@ namespace DDTE.BL.Providers
 						db.Photos.Remove(q);
 						db.SaveChanges();
 
-						File.Delete(Path.Combine(path, q.FileName));
+						var filePath = Path.Combine(path, q.FileName);
+						if (File.Exists(filePath))
+							File.Delete(filePath);
 
 						ts.Complete();
 					}

@@ -83,6 +83,7 @@
         
                 </asp:ContentPlaceHolder>
             </section>
+            <footer class="footer-main"></footer>
         </form>
     </div>
 </body>

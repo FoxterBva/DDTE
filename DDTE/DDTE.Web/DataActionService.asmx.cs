@@ -173,12 +173,22 @@ namespace DDTE.Web
 					AlbumId = photoData.AlbumId
 				};
 
-				photoProvider.AddPhoto(photo, new HttpFileContainer(photoData.File as HttpPostedFile), HttpRuntime.AppDomainAppPath + "\\Photos");
+				IFileContainer container = null;
+
+				if (String.IsNullOrWhiteSpace(photoData.Url))
+				{
+					var dataStr = (string)photoData.File;
+					byte[] bytes = Convert.FromBase64String(dataStr);
+
+					container = new ByteFileContainer(bytes, photoData.FileName);
+				}
+
+				photoProvider.AddPhoto(photo, container, HttpRuntime.AppDomainAppPath + "Photos");
 			}
 			catch (Exception ex)
 			{
-				res.ErrorMessage = "Не удалось удалить фотографию";
-				LogError("DeletePhoto", "Unexpected error", ex);
+				res.ErrorMessage = "Не удалось добавить фотографию";
+				LogError("AddPhoto", "Unexpected error", ex);
 			}
 
 			return res;
@@ -209,8 +219,8 @@ namespace DDTE.Web
 			}
 			catch (Exception ex)
 			{
-				res.ErrorMessage = "Не удалось удалить фотографию";
-				LogError("DeletePhoto", "Unexpected error", ex);
+				res.ErrorMessage = "Не удалось обновить фотографию";
+				LogError("UpdatePhoto", "Unexpected error", ex);
 			}
 
 			return res;
@@ -331,6 +341,7 @@ namespace DDTE.Web
 		public string Description { get; set; }
 		public bool IsPublic { get; set; }
 		public string Url { get; set; }
+		public string FileName { get; set; }
 		public int AlbumId { get; set; }
 		public object File { get; set; }
 	}

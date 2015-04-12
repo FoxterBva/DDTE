@@ -171,6 +171,7 @@ ul.nav-main > li ul {
     /*border-left: 1px solid #DEDEDE;
     border-right: 1px solid #DEDEDE;*/
     margin: auto;
+    min-height: 620px;
 }
 
 .breadcrumb
@@ -193,6 +194,12 @@ ul.nav-main > li ul {
 .content
 {
     margin-right: 290px;
+}
+
+.footer-main {
+    height: 70px;
+    /*border-top: 1px solid;
+    background-color:#6BDDE2;*/
 }
 
 .search-panel {
