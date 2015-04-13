@@ -264,6 +264,7 @@
     <Content Include="FileDownload.ashx" />
     <Content Include="MainRight.master" />
     <Content Include="packages.config" />
+    <None Include="connectionString.config" />
     <None Include="Properties\PublishProfiles\Local publish 2.pubxml" />
     <None Include="Properties\PublishProfiles\LocalPackage.pubxml" />
     <None Include="Properties\PublishProfiles\LocalPublish.pubxml" />

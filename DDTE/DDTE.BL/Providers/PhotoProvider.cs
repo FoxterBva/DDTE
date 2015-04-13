@@ -177,8 +177,8 @@ namespace DDTE.BL.Providers
 		/// Adds photo
 		/// </summary>
 		public void AddPhoto(PhotoDTO photo, IFileContainer fileContainer, string photoPath)
-		{																																		 Ф
-			using (var db = GetObjectContext())																											F
+		{
+			using (var db = GetObjectContext())
 			{
 				Photo p = new Photo() 
 				{

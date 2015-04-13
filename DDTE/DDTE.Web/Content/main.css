@@ -373,6 +373,7 @@ ul.nav-main > li ul {
 {
     position: fixed;
     max-height: 80%;
+    max-width: 80%;
     top: 10%;
     display: table;
     z-index: 503;

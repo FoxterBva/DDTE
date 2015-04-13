@@ -36,8 +36,8 @@
                         <div class="photo-edit-row title"><label>Название:</label><input type="text" data-ng-model="SelectedPhoto.Title" /></div>
                         <div class="photo-edit-row descr"><label>Описание:</label> <textarea data-ng-model="SelectedPhoto.Description" ></textarea></div>
                         <div class="photo-edit-row public"><input type="checkbox" data-ng-model="SelectedPhoto.IsPublic" /> <label>публичная</label></div>
-                        <div class="photo-edit-row url"><label>URL-адрес: </label><input type="text" data-ng-model="SelectedPhoto.Url" /></div>
-                        <div class="photo-edit-row file"><label>либо </label><input id="photoFileSelector" type="file" data-ng-model="SelectedPhoto.File" /></div>
+                        <div class="photo-edit-row url" data-ng-show="SelectedPhoto.Id == null"><label>URL-адрес: </label><input type="text" data-ng-model="SelectedPhoto.Url" /></div>
+                        <div class="photo-edit-row file" data-ng-show="SelectedPhoto.Id == null"><label>либо </label><input id="photoFileSelector" type="file" data-ng-model="SelectedPhoto.File" /></div>
                     </fieldset>
                     
                     <div class="button" id="btnAddPhoto" data-ng-click="AddPhoto()" >Подтвердить</div>
