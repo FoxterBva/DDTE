@@ -2,7 +2,7 @@
 {
     height: 25px;
     width: 25px;
-    border: 1px solid #DEDEDE;
+    border: 1px solid;
     right: 15px;
     top: 0px;
     position: absolute;
@@ -24,9 +24,10 @@
     top: 25px;
     right: 15px;
     padding: 10px;
-    border: 1px solid #CDCDCD;
+    border: 1px solid;
     background-color: white;
-    box-shadow: #CDCDCD 0px 0px 5px 5px;
+    box-shadow: #454545 0px 0px 5px 5px;
+    z-index: 499;
 }
 
 .login-form .input

@@ -350,77 +350,7 @@ ul.nav-main > li ul {
 .photo-edit-row textarea,
 .album-edit-row textarea
 {
-    height: 55px;
-}
-
-
-.photo-overaly
-{
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    left: 0px;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-
-    background-color: black;
-    opacity: 0.5;
-    z-index: 502;
-}
-
-.photo-big
-{
-    position: fixed;
-    max-height: 80%;
-    max-width: 80%;
-    top: 10%;
-    display: table;
-    z-index: 503;
-    margin: auto;
-    padding: 15px;
-    border: 1px solid red;
-    border-radius: 10px;
-    box-shadow: red 0px 0px 6px 2px;
-    background-color: black;
-}
-
-.photo-big .btn-close
-{
-    border: 1px solid Red;
-    padding: 3px;
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    cursor: pointer;
-    color: red;
-    font-weight: bold;
-}
-
-.photo-big .btn-close:hover
-{
-    background-color: red;
-    color: black;
-}
-
-.photo-big-title
-{
-    text-align: center;
-    margin-bottom: 15px;
-    font-weight: bold;
-}
-
-
-.photo-big-descr
-{
-    text-align: center;
-    margin-top: 15px;
-}
-
-.img-big
-{
-    max-height: 950px;
-    max-width: 1150px;
+    height: 75px;
 }
 
 .photo-placeholder
@@ -441,16 +371,29 @@ ul.nav-main > li ul {
 {
     display: inline-block;
     width: 176px;
-    height: 218px;
     margin-left: 15px;
     margin-top: 15px;
     border: 1px solid #51CFDD;
+    vertical-align: top; /* fix for multiline text issue */
+    box-shadow: #0A6F6E 0px 0px 2px 2px;
+}
+
+.photo-item.album
+{
+    width: 270px;   
 }
 
 .photo-item .photo-album
 {
     padding: 10px;
     text-decoration: none;
+    height: 200px;
+}
+
+.photo-item .photo
+{
+    text-decoration: none;
+    height: 200px;
 }
 
 .photo-item .photo-album .title
@@ -467,6 +410,9 @@ ul.nav-main > li ul {
     text-align: center;
     color: #887F7F;
     display: block;
+    max-height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .photo-item .photo-album .created
@@ -482,7 +428,21 @@ ul.nav-main > li ul {
 .photo-item .img-title
 {
     text-align: center;
-    padding: 3px 0px 3px 0px;
+    padding: 3px 3px 3px 3px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.photo-item .actions
+{
+    /*position: absolute; 
+    bottom: 0px; 
+    left: 0px; 
+    right: 0px; */
+    height: 22px; 
+    display: block;
+    text-align: center;
 }
 
 .photo-image-container
@@ -512,6 +472,93 @@ ul.nav-main > li ul {
     left: 50%;
     position: relative;
     transform: translateX(-50%);
+}
+
+.photo-overaly
+{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+
+    background-color: black;
+    opacity: 0.5;
+    z-index: 502;
+}
+
+.photo-big-container
+{
+    text-align: center;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 503;
+}
+
+.photo-big
+{
+    position: relative;
+    /*max-height: 80%;
+    max-width: 80%;*/
+    top: 10%;
+    display: table;
+    z-index: 503;
+    margin: auto;
+    padding: 15px;
+    border: 1px solid;
+    border-radius: 10px;
+    box-shadow: #0A6F6E 0px 0px 6px 2px;
+    background-color: black;
+}
+
+.photo-big .btn-close
+{
+    border: 1px solid;
+    padding: 3px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    color: #0A6F6E;
+    font-weight: bold;
+}
+
+.photo-big .btn-close:hover
+{
+    background-color: #0A6F6E;
+    color: black;
+}
+
+.photo-big-title
+{
+    margin-bottom: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+
+.photo-big-descr
+{
+    margin-top: 15px;
+}
+
+img.img-big
+{
+    /*max-height: 950px;
+    max-width: 1150px;*/
+    max-height: 100%;
+    max-width: 100%;
 }
 
 /**** Special Section ****/
@@ -786,5 +833,10 @@ details[open] summary:after {
 .ui-datepicker td span, .ui-datepicker td a
 {
     text-align: center;
+}
+
+/* Angular */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], .ng-cloak {
+    display: none !important;
 }
 

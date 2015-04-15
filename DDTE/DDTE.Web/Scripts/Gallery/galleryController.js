@@ -28,6 +28,7 @@
         $scope.ViewImage = function (img) {
             $scope.currentImage = img;
             $scope.displayImage = true;
+            
             return false;
         }
 

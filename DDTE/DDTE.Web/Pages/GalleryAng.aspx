@@ -2,7 +2,72 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cphHeader" runat="server">
     <%--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular.min.js"></script>--%>
-    <script src="/Scripts/angular-1.3.6.min.js"></script>
+    <script src="/Scripts/angular.min.js"></script>
+
+    <script type="text/javascript">
+        function adjustResizerSize(ignoreVisibility) {
+            var resizer = $('#bigImageResizer');
+            if (!resizer.is(":visible") && !ignoreVisibility)
+                return;
+
+            var viewportWidth = $(window).width();
+            var viewportHeight = $(window).height();
+
+            var maxWidth = viewportWidth * 0.8;
+            var maxHeight = viewportHeight * 0.8 - 100;
+
+            var image = $('#bigImage', resizer);
+            var imgHeight = image[0].naturalHeight;
+            var imgWidth = image[0].naturalWidth;
+
+            // another approach to determine image size
+            //var tempImg = new Image();
+            //tempImg.onload = function () {
+            //    imgHeight = this.width;
+            //    imgWidth = this.height;
+            //}
+            //tempImg.src = image.attr('src');
+
+            if (imgHeight > maxHeight && imgWidth > maxWidth)
+            {
+                var hRatio = imgHeight / maxHeight;
+                var wRatio = imgWidth / maxWidth;
+                if (hRatio > wRatio) {
+                    resizer.height = maxHeight;
+                    resizer.width(maxHeight * imgWidth / imgHeight + 'px');
+                }
+                else {
+                    resizer.width(maxWidth + 'px');
+                    resizer.height(maxWidth * imgHeight / imgWidth + 'px');
+                }
+            }
+            else if (imgHeight > maxHeight)
+            {
+                resizer.height(maxHeight + 'px');
+                resizer.width(maxHeight * imgWidth / imgHeight + 'px');
+            }
+            else if (imgWidth > maxWidth) {
+                resizer.width(maxWidth + 'px');
+                resizer.height(maxWidth * imgHeight / imgWidth + 'px');
+            }
+            else
+            {
+                resizer.width(imgWidth + 'px');
+                resizer.height(imgHeight + 'px');
+            }
+        }
+
+        $(window).resize(function () {
+            adjustResizerSize(false);
+        });
+
+        $(document).ready(function () {
+            //var resizer = $('#bigImageResizer');
+            // call on visibility changed
+            //resizer..visible(function () {  });
+            $('#bigImage').load(function () { adjustResizerSize(true); });
+        });
+    </script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="server">
@@ -37,7 +102,7 @@
                         <div class="photo-edit-row descr"><label>Описание:</label> <textarea data-ng-model="SelectedPhoto.Description" ></textarea></div>
                         <div class="photo-edit-row public"><input type="checkbox" data-ng-model="SelectedPhoto.IsPublic" /> <label>публичная</label></div>
                         <div class="photo-edit-row url" data-ng-show="SelectedPhoto.Id == null"><label>URL-адрес: </label><input type="text" data-ng-model="SelectedPhoto.Url" /></div>
-                        <div class="photo-edit-row file" data-ng-show="SelectedPhoto.Id == null"><label>либо </label><input id="photoFileSelector" type="file" data-ng-model="SelectedPhoto.File" /></div>
+                        <div class="photo-edit-row file" data-ng-show="SelectedPhoto.Id == null"><label>либо выберите файл </label><input id="photoFileSelector" type="file" data-ng-model="SelectedPhoto.File" /></div>
                     </fieldset>
                     
                     <div class="button" id="btnAddPhoto" data-ng-click="AddPhoto()" >Подтвердить</div>
@@ -47,31 +112,33 @@
 
             <div class="photo-items">
                 <div class="data-load-overlay" data-ng-show="DisplayLoading">Загрузка...</div>
-                <div data-ng-repeat="pi in photoItems" class="photo-item" style="position: relative">
+                <div data-ng-repeat="pi in photoItems" data-ng-class="{ 'photo-item album' : pi.ItemType == 0, 'photo-item' : pi.ItemType == 1 } " >
                     <div data-ng-if="pi.ItemType == 0">
                         <div class="photo-album" >
                             <span class="title" data-ng-click="SelectFolder(pi.Id, pi.Title)" title="Смотреть">{{ pi.Title }}</span>
                             <span class="descr">{{ pi.Description }}</span>
                             <span class="created">Добавлено: {{ pi.CreatedDate | jsDate | date:'yyyy-MM-dd' }}</span>
                             <%--<div class="count">x Фотографий</div>--%>
-                            <asp:Literal ID="ltlAlbumActions" runat="server">
-                                <div class="actions" style="position: absolute; bottom: 0px; left: 0px; right: 0px; height: 20px; border: 1px solid #EFEFEF; display: block;">
-                                    <div class="button" data-ng-click="ToggleEditAlbumForm(pi.Id)" title="Редактировать альбом" >Изменить</div>
-                                    <div class="button" data-ng-click="DeleteAlbum(pi.Id, pi.Title)" title="Удалить альбом" >Удалить</div>
-                                </div>
-                            </asp:Literal>
                         </div>
+                        <asp:Literal ID="ltlAlbumActions" runat="server">
+                            <div class="actions">
+                                <div class="button" data-ng-click="ToggleEditAlbumForm(pi.Id)" title="Редактировать альбом" >Изменить</div>
+                                <div class="button" data-ng-click="DeleteAlbum(pi.Id, pi.Title)" title="Удалить альбом" >Удалить</div>
+                            </div>
+                        </asp:Literal>
                     </div>
                     <div data-ng-if="pi.ItemType == 1">
-                        <div class="photo-image-container">
-                            <a class="img-link" href="#" data-ng-click="ViewImage(pi)" >
-                                <!-- onclick="$('#overlay').toggle();$('#bigImage').attr('src', $(this).children().first().attr('src')); return false;" -->
-                                <img id="imgPhoto" runat="server" src="#" data-ng-src="{{ pi.ImagePath }}" class="photo-image"  />
-                            </a>
+                        <div class="photo">
+                            <div class="photo-image-container">
+                                <a class="img-link" href="#" data-ng-click="ViewImage(pi)" >
+                                    <!-- onclick="$('#overlay').toggle();$('#bigImage').attr('src', $(this).children().first().attr('src')); return false;" -->
+                                    <img id="imgPhoto" runat="server" src="#" data-ng-src="{{ pi.ImagePath }}" class="photo-image"  />
+                                </a>
+                            </div>
+                            <div class="img-title">{{ pi.Title }}</div>
                         </div>
-                        <div class="img-title">{{ pi.Title }}</div>
                         <asp:Literal ID="ltlPhotoActions" runat="server">
-                            <div class="actions" style="position: absolute; bottom: 0px; left: 0px; right: 0px; height: 20px; border: 1px solid #EFEFEF; display: block;">
+                            <div class="actions">
                                 <div class="button" data-ng-click="ToggleEditPhotoForm(pi.Id)" title="Редактировать фотографию" >Изменить</div>
                                 <div class="button" data-ng-click="DeletePhoto(pi.Id, pi.Title)" title="Удалить фотографию" >Удалить</div>
                             </div>
@@ -80,13 +147,23 @@
                 </div>
             </div>
 
-            <div id="overlay" class="photo-overaly" data-ng-click="CloseImage();" data-ng-show="displayImage" ></div>
-            <div class="photo-big" data-ng-show="displayImage">
-                <div class="btn-close" data-ng-click="CloseImage()">x</div>
-                <div class="photo-big-title">{{ currentImage.Title }}</div>
-                <img id="bigImage" src="#" data-ng-src="{{ currentImage.ImagePath }}" class="img-big" />
-                <div class="photo-big-descr">{{ currentImage.Description }}</div>
+            <div id="overlay" class="photo-overaly" data-ng-click="CloseImage();" data-ng-show="displayImage" data-ng-cloak ></div>
+            <div class="photo-big-container" data-ng-show="displayImage" data-ng-cloak>
+                <div class="photo-big" >
+                    <div class="btn-close" data-ng-click="CloseImage()">x</div>
+                    <div class="photo-big-title">{{ currentImage.Title }}</div>
+                    <div class="img-big" id="bigImageResizer">
+                        <img id="bigImage" src="#" data-ng-src="{{ currentImage.ImagePath }}" class="img-big" />
+                    </div>
+                    <div class="photo-big-descr">{{ currentImage.Description }}</div>
+                </div>
             </div>
+<%--            <div id="overlay" class="photo-overaly" data-ng-click="CloseImage();" data-ng-show="displayImage" data-ng-cloak ></div>
+            <div class="photo-big-container" data-ng-show="displayImage" data-ng-cloak>
+                <div style="max-height: 500px; max-width: 100%; display: table;">
+                    <img id="bigImage" src="#" data-ng-src="{{ currentImage.ImagePath }}" style="max-height: 100%; max-width: 100%;"  />
+                </div>
+            </div>--%>
         </div>
     </div>
 
