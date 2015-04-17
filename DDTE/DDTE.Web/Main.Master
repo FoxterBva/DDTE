@@ -47,11 +47,6 @@
                 <nav>
                     <ul class="nav-main">
                         <li><a href="/Default.aspx">Главная</a></li>
-                        <li><a href="/Pages/Welcome.aspx">Добро пожаловать</a></li>
-                        <li><a href="/Pages/Schedule.aspx">Расписание</a></li>
-                        <li><a href="/Pages/Contests.aspx">Конкурсы</a></li>
-                        <li><a href="/Pages/GalleryAng.aspx">Галерея</a></li>
-                        <li><a href="/Pages/Contacts.aspx">Контакты</a></li>
                         <li><a href="/Pages/SpecialSection/BasicInformation.aspx" title="Сведения об образовательной организации">Информация</a>
                             <ul style="display: none">
                                 <li><a href="/Pages/SpecialSection/BasicInformation.aspx">Основные сведения</a></li>
@@ -67,6 +62,11 @@
                                 <li><a href="/Pages/SpecialSection/Vacancies.aspx">Вакантные места для приема (перевода)</a></li>
                             </ul>
                         </li>
+                        <li><a href="/Pages/Contacts.aspx">Контакты</a></li>
+                        <li><a href="/Pages/Welcome.aspx">Добро пожаловать!</a></li>
+                        <li><a href="/Pages/Schedule.aspx">Расписание</a></li>
+                        <li><a href="/Pages/Contests.aspx">Конкурсы</a></li>
+                        <li><a href="/Pages/GalleryAng.aspx">Галерея</a></li>
                     </ul>
                 </nav>
                     </div>
