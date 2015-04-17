@@ -27,5 +27,6 @@ namespace DDTE.Model
     
         public DbSet<Album> Albums { get; set; }
         public DbSet<Photo> Photos { get; set; }
+        public DbSet<News> News { get; set; }
     }
 }

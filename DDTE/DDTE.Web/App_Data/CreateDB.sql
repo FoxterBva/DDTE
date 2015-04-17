@@ -52,3 +52,24 @@ ALTER TABLE dbo.Photo ADD
 		AlbumId
 	)
 GO
+
+PRINT '-> dbo.News'
+GO
+IF OBJECT_ID('News') IS NULL
+BEGIN
+	CREATE TABLE dbo.[News] 
+	(
+		[NewsId] INT NOT NULL identity(1,1),
+		[Title] NVARCHAR(200) NULL,
+		[Content] NVARCHAR(max) NULL,
+		[IsPublic] BIT NOT NULL CONSTRAINT DF_News_IsPublic DEFAULT(0),
+		[CreatedDate] DATETIME NOT NULL,
+		[ModifiedDate] DATETIME NOT NULL,
+		[Author] NVARCHAR(100) NULL,
+		CONSTRAINT [PK_News] PRIMARY KEY CLUSTERED 
+		(
+			[NewsId]
+		)
+	)
+END
+GO

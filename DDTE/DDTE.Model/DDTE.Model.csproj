@@ -68,6 +68,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DdteDbEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="News.cs">
+      <DependentUpon>DdteDbEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Partial\Album.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="DataMapper.cs" />

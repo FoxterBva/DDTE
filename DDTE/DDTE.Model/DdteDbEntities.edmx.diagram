@@ -8,6 +8,7 @@
         <EntityTypeShape EntityType="DdteDBModel.Album" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="DdteDBModel.Photo" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
         <AssociationConnector Association="DdteDBModel.FK_Pghoto_AlbumId" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DdteDBModel.News" Width="1.5" PointX="5.5" PointY="0.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

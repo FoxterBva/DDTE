@@ -100,5 +100,10 @@ namespace DDTE.Web.Helpers
 		{
 			return HttpContext.Current.Request.IsAuthenticated;
 		}
+
+		public static bool CanEditNews()
+		{
+			return HttpContext.Current.Request.IsAuthenticated;
+		}
 	}
 }
