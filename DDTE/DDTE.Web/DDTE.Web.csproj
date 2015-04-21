@@ -386,6 +386,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HttpFileContainer.cs" />
+    <Compile Include="Helpers\MessageFormatter.cs" />
     <Compile Include="Helpers\SecurityHelper.cs" />
     <Compile Include="Main.Master.cs">
       <DependentUpon>Main.Master</DependentUpon>

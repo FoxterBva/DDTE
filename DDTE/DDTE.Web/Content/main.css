@@ -17,6 +17,7 @@
     background-position: top;
 
     border-color: #0A6F6E;
+    line-height: 1.5;
 }
 
 a, a:visited
@@ -84,6 +85,27 @@ h3
     background-position-x: center;
     
 }*/
+
+.error, .notice, .success
+{
+    padding: .8em;
+    margin-bottom: 1em;
+    border: 2px solid #ddd;
+}
+
+.error
+{
+    background: #FBE3E4;
+    color: #8a1f11;
+    border-color: #FBC2C4;
+}
+
+.success
+{
+    background: #E6EFC2;
+    color: #264409;
+    border-color: #C6D880;
+}
 
 ul.nav-main
 {
@@ -216,17 +238,46 @@ ul.nav-main > li ul {
     margin: 5px 10px 5px 10px;
 }
 
+.news-edit-form
+{
+    margin-bottom: 30px;
+}
+
+.news-edit-form input[type="text"],
+.news-edit-form textarea
+{
+    width: 95%;
+}
+
+.news-edit-form
+{
+    display: none;
+}
 
 .news-list
 {
     list-style: none;
-    
+    margin-top: 10px;
 }
 
 .news-list li.news
 {
     padding-bottom: 35px;
     line-height: 1.5;
+}
+
+.news-list li.news.preview
+{
+    display: none;
+    border: 1px solid Red;
+    margin-bottom: 25px;
+    margin-top: 10px;
+}
+
+.news-list li.news span.preview
+{
+    font-weight: bold;
+    color: red;
 }
 
 .news-list li.news header

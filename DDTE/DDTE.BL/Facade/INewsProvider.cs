@@ -5,16 +5,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DDTE.Model.DTO;
 
 namespace DDTE.BL.Facade
 {
 	public interface INewsProvider
 	{
-		int Add(News news);
-		void Delete(News news);
-		void Delete(int id);
-		void Update(News news);
+		int Add(NewsDTO news);
+		NewsDTO Delete(int id);
+		void Update(NewsDTO news);
 
-		List<News> ListBySearch(NewsSearchParameters seachParameters);
+		List<NewsDTO> ListBySearch(Model.Classes.Search.NewsSearchParameters searchParameters);
 	}
 }

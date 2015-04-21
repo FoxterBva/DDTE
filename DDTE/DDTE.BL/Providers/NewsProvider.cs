@@ -4,72 +4,111 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DDTE.Common.Exceptions;
+using DDTE.Model.DTO;
+using DDTE.Model;
 
 namespace DDTE.BL.Providers
 {
-	public class NewsProvider : INewsProvider
+	public class NewsProvider : DbProviderBase, INewsProvider
 	{
-		public int Add(Model.News news)
+		public int Add(NewsDTO news)
 		{
-			throw new NotImplementedException();
+			using (var db = GetObjectContext())
+			{
+				var n = new News()
+				{
+					Author = news.Author,
+					CreatedDate = DateTime.UtcNow,
+					IsPublic = news.IsPublic,
+					Title = news.Title,
+					Content = news.Content,
+				};
+
+				db.News.Add(n);
+				db.SaveChanges();
+
+				return n.NewsId;
+			}
 		}
 
-		public void Delete(Model.News news)
+		public NewsDTO Delete(int id)
 		{
-			throw new NotImplementedException();
+			using (var db = GetObjectContext())
+			{
+				var q = (from n in db.News
+						 where n.NewsId == id
+						select n).FirstOrDefault();
+
+				if (q != null)
+				{
+					var res = new NewsDTO() 
+					{
+						NewsId = q.NewsId,
+						Title = q.Title,
+						Content = q.Content,
+						Author = q.Author,
+						CreatedDate = q.CreatedDate,
+						IsPublic = q.IsPublic
+					};
+
+					db.News.Remove(q);
+					db.SaveChanges();
+
+					return res;
+				}
+				else
+				{
+					throw new EntityNotFoundException("Новость не найдена.");
+				}
+			}
 		}
 
-		public void Delete(int id)
+		public void Update(NewsDTO news)
 		{
-			throw new NotImplementedException();
+			using (var db = GetObjectContext())
+			{
+				var q = (from n in db.News
+						 where n.NewsId == news.NewsId
+						 select n).FirstOrDefault();
+
+				if (q == null)
+				{
+					throw new EntityNotFoundException("Новость не найдена.");
+				}
+				else
+				{
+					q.Title = news.Title;
+					q.Content = news.Content;
+					q.Author = news.Author;
+					q.IsPublic = news.IsPublic;
+					q.ModifiedDate = DateTime.UtcNow;
+					db.SaveChanges();	
+				}
+			}
 		}
 
-		public void Update(Model.News news)
+		public List<NewsDTO> ListBySearch(Model.Classes.Search.NewsSearchParameters searchParameters)
 		{
-			throw new NotImplementedException();
-		}
+			List<NewsDTO> res = new List<NewsDTO>();
 
-		public List<Model.News> ListBySearch(Model.Classes.Search.NewsSearchParameters seachParameters)
-		{
-			List<Model.News> res = new List<Model.News>();
-
-			res.Add(new Model.News()
+			using (var db = GetObjectContext())
 			{
-				NewsId = 1,
-				Title = "Первая новость!",
-				Author = "Foxter",
-				Content = "Контент новости. Он, конечно, меньше чем хотелось бы, но придумывать очень лениво :)",
-				CreatedDate = new DateTime(2015, 03, 24, 19, 19, 20),
-			});
+				var q = (from n in db.News
+						 where searchParameters.IsPublic == null || n.IsPublic == searchParameters.IsPublic
+						 orderby n.CreatedDate descending
+						 select n).ToList();
 
-			res.Add(new Model.News()
-			{
-				NewsId = 2,
-				Title = "Вторая новость!",
-				Author = "Аноним",
-				Content = "Вторая новость почему-то тоже размером не блещет...",
-				CreatedDate = new DateTime(2015, 03, 24, 19, 21, 20),
-			});
-
-			res.Add(new Model.News()
-			{
-				NewsId = 3,
-				Title = "Новость про квадратик",
-				Author = "Квадратик",
-				Content = "<p>Жил был квадратик</p><div style='border: 1px solid Black;height: 100px;width: 100px; background-color: yellow'></div><p>Жил и <strong>не тужил</strong></p><p>На этой радостной ноте мы заканчиваем нашу новость!</p>",
-				CreatedDate = DateTime.Now,
-			});
-
-			res.Add(new Model.News()
-			{
-				NewsId = 3,
-				Title = "Длинная новость из будущего",
-				Author = "Кто-то",
-				Content = "Очень странная и длинная новость пришедшая к нам, видимо, из будущего! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ",
-				CreatedDate = new DateTime(2016, 03, 24, 19, 21, 20),
-			});
-
-			res = res.OrderByDescending(n => n.CreatedDate).ToList();
+				if (q != null)
+					res.AddRange(q.Select(n => new NewsDTO() { 
+						NewsId = n.NewsId,
+						Title = n.Title,
+						Content = n.Content,
+						Author = n.Author,
+						CreatedDate = n.CreatedDate,
+						IsPublic = n.IsPublic
+					}));
+			}
 
 			return res;
 		}

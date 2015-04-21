@@ -68,6 +68,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DdteDbEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DTO\NewsDTO.cs" />
     <Compile Include="News.cs">
       <DependentUpon>DdteDbEntities.tt</DependentUpon>
     </Compile>

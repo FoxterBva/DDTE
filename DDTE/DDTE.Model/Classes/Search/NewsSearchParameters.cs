@@ -9,6 +9,7 @@ namespace DDTE.Model.Classes.Search
 	public class NewsSearchParameters : SearchParametersBase
 	{
 		public int NewsId { get; set; }
+		public bool? IsPublic { get; set; }
 		public string[] TextParts { get; set; }
 	}
 }
