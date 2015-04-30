@@ -1,25 +1,48 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MainRight.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="DDTE.Web.Default" ValidateRequest="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cphHeader" runat="server">
-    <link rel="stylesheet" href="Scripts/SCEditor/default.css" type="text/css" media="all" />
-    <script type="text/javascript" src="Scripts/SCEditor/jquery.sceditor.xhtml.js"></script>
+<%--    <link rel="stylesheet" href="Scripts/YellowText/stylesheets/style.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="Scripts/YellowText/stylesheets/yellow-text-default.css" type="text/css" media="all" />
+    
+    <script type="text/javascript" src="Scripts/YellowText/yellow-text.js"></script>--%>
+    <script type="text/javascript" src="Scripts/TinyMCE/tinymce.min.js"></script>
 
     <script type="text/javascript">
-        var editContext = {};
+        var newsContext = { isNew: true };
 
         function ShowEditForm(newsId) {
-            var form = $('#editForm').show();
-            editContext.title = newsId == '0' ? '' : $('span[data-title="' + newsId + '"]').html().trim();
-            editContext.content = newsId == '0' ? '' : $('article[data-content="' + newsId + '"]').html().trim();
+            newsContext.isNew = newsId == '0';
 
-            $('.tbContent', form).val(editContext.content);
-            $('.tbTitle', form).val(editContext.title);
+            //$('#editForm').css('position', 'fixed');
+            var form = $('#editForm').show(100);
+            var title = newsContext.isNew ? '' : $('span[data-title="' + newsId + '"]').html().trim();
+            var content = newsContext.isNew ? '' : $('article[data-content="' + newsId + '"]').html().trim();
+            var author = newsContext.isNew ? '' : $('span[data-author="' + newsId + '"]').html().trim();
+
+            $('.tbContent', form).val(content);
+            $('.tbTitle', form).val(title);
+            $('.tbAuthor', form).val(author);
+            tinyMCE.activeEditor.setContent(content);
+
+            if (newsContext.isNew) {
+                $('.lbSubmit', form).show();
+                $('.lbUpdate', form).hide();
+            } else
+            {
+                $('.lbSubmit', form).hide();
+                $('.lbUpdate', form).show();
+            }
         }
 
         function CloseEditForm()
         {
             $('#editForm').hide();
-            editContext = {};
+            $('.preview').hide();
+            //$('#editForm').css('position', 'absolute');
+
+            $('span[data-title="0"]').html('');
+            $('article[data-content="0"]').html('');
+            $('span[data-author="0"]').html('');
         }
 
         function ShowPreview() {
@@ -27,10 +50,25 @@
             var form = $('#editForm');
 
             $('span[data-title="0"]').html($('.tbTitle', form).val().trim());
-            $('article[data-content="0"]').html($('.tbContent', form).val().trim());
+            $('article[data-content="0"]').html(tinyMCE.activeEditor.getContent());
+            $('span[data-author="0"]').html($('.tbAuthor', form).val().trim());
         }
 
-        //$(function () { $(".tbContent").sceditor({ plugins: "xhtml", style: "jquery.sceditor.default.css" }); });
+        function PublishNews() {
+            var form = $('#editForm');
+            $('input[type=hidden]', form).val(newsContext.isNew);
+            $('.tbContent').html(tinyMCE.activeEditor.getContent());
+        }
+
+        tinymce.init({
+            selector: "textarea",
+            plugins: [
+                "advlist autolink lists link image charmap print preview anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table contextmenu paste"
+            ],
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+        });
     </script>
 </asp:Content>
 
@@ -51,8 +89,10 @@
                 <div>Автор:</div><div> <asp:TextBox ID="tbAuthor" runat="server" CssClass="tbAuthor" /></div>
                 <div>Текст новости:</div><div> <asp:TextBox ID="tbContent" runat="server" TextMode="MultiLine" Rows="15" CssClass="tbContent" /></div>
             </fieldset>
-            <a class="button" onclick="ShowPreview();return false;" ToolTip="Предпросмотр новости">Предпросмотр</a>
-            <asp:LinkButton ID="lbSubmit" runat="server" Text="Опубликовать" CssClass="button" OnClick="lbSubmit_Click" ToolTip="Опубликовать новость" />
+            <asp:HiddenField ID="hfMode" runat="server" />
+            <a class="button" onclick="ShowPreview();return false;" title="Предпросмотр новости">Предпросмотр</a>
+            <asp:LinkButton ID="lbSubmit" runat="server" Text="Опубликовать" CssClass="button lbSubmit" OnClientClick="PublichNews()" OnClick="lbSubmit_Click" ToolTip="Опубликовать новость" />
+            <asp:LinkButton ID="lbUpdate" runat="server" Text="Обновить" CssClass="button lbUpdate" OnClientClick="PublichNews()" OnClick="lbSubmit_Click" ToolTip="Обновить новость" />
             <a class="button" onclick="CloseEditForm();return false;" title="Отменить добавление/изменение новости">Закрыть</a>
         </div>
     </asp:Panel>
@@ -79,9 +119,10 @@
                     <%# Eval("Content") %>
                 </article>
                 <footer class="news-footer">
-                    Добавлено: <span class="author"><%# Eval("Author") %></span><span class="time"><%# Eval("CreatedDate","{0:yyyy-MM-dd HH:mm:ss}") %></span>
+                    Добавлено: <span data-author='<%# Eval("NewsId") %>' class="author"><%# Eval("Author") %></span><span class="time"><%# Eval("CreatedDate","{0:yyyy-MM-dd HH:mm:ss}") %></span>
                 </footer>
             </li>
+            <hr />
         </ItemTemplate>
         <FooterTemplate>
             </ul>

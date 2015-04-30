@@ -269,7 +269,6 @@ ul.nav-main > li ul {
 .news-list li.news.preview
 {
     display: none;
-    border: 1px solid Red;
     margin-bottom: 25px;
     margin-top: 10px;
 }
@@ -368,8 +367,8 @@ ul.nav-main > li ul {
 {
     border-radius: 5px;
     border: 1px solid #0A6F6E;
-    padding-top: 3px;
-    padding-bottom: 3px;
+    padding-top: 2px;
+    padding-bottom: 2px;
     padding-left: 6px;
     padding-right: 6px;
     cursor: pointer;
@@ -590,10 +589,11 @@ ul.nav-main > li ul {
     z-index: 503;
     margin: auto;
     padding: 15px;
-    border: 1px solid;
     border-radius: 10px;
-    box-shadow: #0A6F6E 0px 0px 6px 2px;
+    box-shadow: Black 0px 0px 15px 10px;
     background-color: black;
+    line-height: 1;
+    color: #6BE2E0;
 }
 
 .photo-big .btn-close
@@ -604,14 +604,13 @@ ul.nav-main > li ul {
     top: 5px;
     right: 5px;
     cursor: pointer;
-    color: #0A6F6E;
     font-weight: bold;
+    color: #0A6F6E;
 }
 
 .photo-big .btn-close:hover
 {
-    background-color: #0A6F6E;
-    color: black;
+    color: #6BE2E0;
 }
 
 .photo-big-title

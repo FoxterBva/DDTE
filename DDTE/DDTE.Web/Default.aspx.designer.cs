@@ -76,6 +76,15 @@ namespace DDTE.Web {
         protected global::System.Web.UI.WebControls.TextBox tbContent;
         
         /// <summary>
+        /// hfMode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfMode;
+        
+        /// <summary>
         /// lbSubmit control.
         /// </summary>
         /// <remarks>
@@ -83,6 +92,15 @@ namespace DDTE.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbSubmit;
+        
+        /// <summary>
+        /// lbUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbUpdate;
         
         /// <summary>
         /// rptrNews control.

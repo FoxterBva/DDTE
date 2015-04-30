@@ -5,7 +5,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta charset="utf-8" />
-    <title></title>
+    <meta name="robots" content="noindex" />
+    <meta name="description" content="ДДТ - Эврика" />
+    <title>ДДТ Эврика</title>
     <link href="/Content/reset.css" rel="stylesheet" />
     <link href="/Content/login.css" rel="stylesheet" />
     <link href="/Content/themes/base/jquery.ui.datepicker.css" rel="stylesheet" />

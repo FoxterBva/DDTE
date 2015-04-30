@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using DDTE.BL.Facade;
 using DDTE.Common;
 using DDTE.Common.Exceptions;
+using DDTE.Model.DTO;
 using DDTE.Web.Helpers;
 
 namespace DDTE.Web
@@ -20,17 +21,22 @@ namespace DDTE.Web
 		{
 			if (!IsPostBack)
 			{
-				var nsp = new Model.Classes.Search.NewsSearchParameters() { };
-				if (!SecurityHelper.CanEditNews())
-					nsp.IsPublic = true;
-
-				var news = newsProvider.ListBySearch(nsp);
-
-				news.Insert(0, new Model.DTO.NewsDTO() { NewsId = 0 });
-
-				rptrNews.DataSource = news;
-				rptrNews.DataBind();
+				BindNews();
 			}
+		}
+
+		void BindNews()
+		{
+			var nsp = new Model.Classes.Search.NewsSearchParameters() { };
+			if (!SecurityHelper.CanEditNews())
+				nsp.IsPublic = true;
+
+			var news = newsProvider.ListBySearch(nsp);
+
+			news.Insert(0, new Model.DTO.NewsDTO() { NewsId = 0 });
+
+			rptrNews.DataSource = news;
+			rptrNews.DataBind();
 		}
 
 		protected override void OnPreRender(EventArgs e)
@@ -49,6 +55,7 @@ namespace DDTE.Web
 				{
 					var news = newsProvider.Delete(Int32.Parse((string)e.CommandArgument));
 					DisplaySuccess(String.Format("Новость '{0}' удалена.", HttpUtility.HtmlEncode(news.Title)));
+					BindNews();
 				}
 				catch (EntityNotFoundException ex)
 				{
@@ -56,13 +63,9 @@ namespace DDTE.Web
 				}
 				catch (Exception ex)
 				{
-					logger.Error("Не удалось удалить новость.", ex);
+					logger.ErrorException("Не удалось удалить новость.", ex);
 					DisplayError("Не удалось удалить новость.");
 				}
-			}
-			else if ("Submit".Equals(e.CommandName, StringComparison.InvariantCultureIgnoreCase))
-			{ 
-
 			}
 		}
 
@@ -78,7 +81,60 @@ namespace DDTE.Web
 
 		protected void lbSubmit_Click(object sender, EventArgs e)
 		{
-			DisplaySuccess("Новость добавлена");
+			var news = new NewsDTO()
+			{
+				Author = tbAuthor.Text, 
+				Content = tbContent.Text,
+				Title = tbTitle.Text,
+				IsPublic = true					// TODO:
+			};
+
+			bool isUpdate = false;
+
+			try
+			{
+				if (!isUpdate)
+				{
+					var res = newsProvider.Add(news);
+					DisplaySuccess("Новость добавлена.");
+				}
+				else
+				{
+					newsProvider.Update(news);
+					DisplaySuccess("Новость обновлена.");
+				}
+				BindNews();
+			}
+			catch (Exception ex)
+			{
+				var action = isUpdate ? "обновить" : "добавить";
+
+				logger.ErrorException("Не удалось " + action + " новость.", ex);
+				DisplayError("Не удалось " + action + " новость.");
+			}
+		}
+
+		protected void lbUpdate_Click(object sender, EventArgs e)
+		{
+			var news = new NewsDTO()
+			{
+				Author = tbAuthor.Text,
+				Content = tbContent.Text,
+				Title = tbTitle.Text,
+				IsPublic = true					// TODO:
+			};
+
+			try
+			{
+				newsProvider.Update(news);
+				DisplaySuccess("Новость обновлена.");
+				BindNews();
+			}
+			catch (Exception ex)
+			{
+				logger.ErrorException("Не удалось обновить новость.", ex);
+				DisplayError("Не удалось обновить новость.");
+			}
 		}
 	}
 }

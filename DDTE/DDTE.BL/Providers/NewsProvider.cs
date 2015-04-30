@@ -20,6 +20,7 @@ namespace DDTE.BL.Providers
 				{
 					Author = news.Author,
 					CreatedDate = DateTime.UtcNow,
+					ModifiedDate = DateTime.UtcNow,
 					IsPublic = news.IsPublic,
 					Title = news.Title,
 					Content = news.Content,
@@ -94,20 +95,35 @@ namespace DDTE.BL.Providers
 
 			using (var db = GetObjectContext())
 			{
-				var q = (from n in db.News
-						 where searchParameters.IsPublic == null || n.IsPublic == searchParameters.IsPublic
-						 orderby n.CreatedDate descending
-						 select n).ToList();
+				var q = from n in db.News
+						where 
+							(searchParameters.IsPublic == null || n.IsPublic == searchParameters.IsPublic)
+						select n;
 
-				if (q != null)
-					res.AddRange(q.Select(n => new NewsDTO() { 
-						NewsId = n.NewsId,
-						Title = n.Title,
-						Content = n.Content,
-						Author = n.Author,
-						CreatedDate = n.CreatedDate,
-						IsPublic = n.IsPublic
-					}));
+				if (searchParameters.TextParts != null && searchParameters.TextParts.Length > 0)
+				{
+					foreach (var part in searchParameters.TextParts)
+					{
+						q = q.Where(n => n.Content.Contains(part));
+					}
+				}
+
+				q = q.OrderByDescending(n => n.CreatedDate);
+
+				if (searchParameters.StartIndex > 0 && searchParameters.PageSize > 0)
+				{
+					q = q.Skip(searchParameters.StartIndex).Take(searchParameters.PageSize);
+				}
+
+
+				res.AddRange(q.Select(n => new NewsDTO() { 
+					NewsId = n.NewsId,
+					Title = n.Title,
+					Content = n.Content,
+					Author = n.Author,
+					CreatedDate = n.CreatedDate,
+					IsPublic = n.IsPublic
+				}));
 			}
 
 			return res;
