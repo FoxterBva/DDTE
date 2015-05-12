@@ -116,6 +116,7 @@ ul.nav-main
     margin-left: -585px;
     width: 1170px;
     display: table;
+    line-height: 1;
 }
 
 ul.nav-main > li
@@ -796,6 +797,29 @@ ul.documents .documents-item
     width: 21px;
     line-height: 21px;
     background:transparent url(/Images/download.png) no-repeat;*/
+}
+
+/*  education */
+.education-docs
+{
+    margin-top: 25px;
+}
+
+.education-docs h4
+{
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+
+.education-docs .documents-list
+{
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+.education-docs .education-parts-docs
+{
+    margin-left: 25px;
 }
 
 

@@ -261,6 +261,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Images\polosa.png" />
+    <Content Include="index.html" />
     <Content Include="Main.Master" />
     <Content Include="FileDownload.ashx" />
     <Content Include="MainRight.master" />

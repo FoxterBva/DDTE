@@ -20,5 +20,50 @@ namespace DDTE.Web.Pages.SpecialSection {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DDTE.Web.Controls.DocumentsList documentList;
+        
+        /// <summary>
+        /// dlDecorativeCrafts control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DDTE.Web.Controls.DocumentsList dlDecorativeCrafts;
+        
+        /// <summary>
+        /// dlFineArts control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DDTE.Web.Controls.DocumentsList dlFineArts;
+        
+        /// <summary>
+        /// dlChoreography control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DDTE.Web.Controls.DocumentsList dlChoreography;
+        
+        /// <summary>
+        /// dlVocals control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DDTE.Web.Controls.DocumentsList dlVocals;
+        
+        /// <summary>
+        /// dlTheater control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DDTE.Web.Controls.DocumentsList dlTheater;
     }
 }

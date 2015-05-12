@@ -13,5 +13,23 @@
     </ul>
     <p>Образование осуществляется на русском языке.</p>
 
-    <ctr:DocumentList ID="documentList" runat="server" Category="Education" />
+    <section class="education-docs">
+        <p>Образовательная программа МБОУ ДОД «Дом детского творчества «Эврика»</p>
+        <ctr:DocumentList ID="documentList" runat="server" Category="Education" />
+        <div class="education-parts">
+            <p>Общеобразовательные программы, информационные карты к образовательным программам </p>
+            <div class="education-parts-docs">
+                <h4>Декоративно-прикладное творчество</h4>
+                <ctr:DocumentList ID="dlDecorativeCrafts" runat="server" Category="Education\DecorativeCrafts" />
+                <h4>Изобразительное искусство</h4>
+                <ctr:DocumentList ID="dlFineArts" runat="server" Category="Education\FineArts" />
+                <h4>Хореография</h4>
+                <ctr:DocumentList ID="dlChoreography" runat="server" Category="Education\Choreography" />
+                <h4>Вокал</h4>
+                <ctr:DocumentList ID="dlVocals" runat="server" Category="Education\Vocals" />
+                <h4>Театр</h4>
+                <ctr:DocumentList ID="dlTheater" runat="server" Category="Education\Theater" />
+            </div>
+        </div>
+    </section>
 </asp:Content>

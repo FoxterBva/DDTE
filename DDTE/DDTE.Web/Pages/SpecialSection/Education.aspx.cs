@@ -14,6 +14,11 @@ namespace DDTE.Web.Pages.SpecialSection
 			if (!IsPostBack)
 			{
 				documentList.RefreshList();
+				dlChoreography.RefreshList();
+				dlDecorativeCrafts.RefreshList();
+				dlFineArts.RefreshList();
+				dlTheater.RefreshList();
+				dlVocals.RefreshList();
 			}
 		}
 	}
