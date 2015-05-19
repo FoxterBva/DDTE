@@ -73,3 +73,33 @@ BEGIN
 	)
 END
 GO
+
+PRINT '-> dbo.Staff'
+GO
+IF OBJECT_ID('Staff') IS NULL
+BEGIN
+	CREATE TABLE dbo.[Staff] 
+	(
+		[StaffId] INT NOT NULL identity(1,1),
+		[Name] NVARCHAR(200) NULL,
+		[PhotoUrl] NVARCHAR(300) NULL,
+		[Position] NVARCHAR(200) NULL,
+		[Qualification] NVARCHAR(200) NULL,
+		[Degree] NVARCHAR(1000) NULL,
+		[Education] NVARCHAR(1000) NULL,
+		[Speciality] NVARCHAR(1000) NULL,
+		[QualificationCourses] NVARCHAR(1000) NULL,
+		[GeneralExperience] NVARCHAR(1000) NULL,
+		[EducationExperience] NVARCHAR(1000) NULL,
+		[Phone] NVARCHAR(100) NULL,
+		[Email] NVARCHAR(100) NULL,
+		[IsActive] BIT NOT NULL CONSTRAINT DF_Staff_IsActive DEFAULT(0),
+		[CreatedDate] DATETIME NOT NULL,
+		[ModifiedDate] DATETIME NOT NULL,
+		CONSTRAINT [PK_Staff] PRIMARY KEY CLUSTERED 
+		(
+			[StaffId]
+		)
+	)
+END
+GO

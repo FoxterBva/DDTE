@@ -69,6 +69,7 @@
       <DependentUpon>DdteDbEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="DTO\NewsDTO.cs" />
+    <Compile Include="DTO\StaffDTO.cs" />
     <Compile Include="News.cs">
       <DependentUpon>DdteDbEntities.tt</DependentUpon>
     </Compile>
@@ -82,12 +83,16 @@
     <Compile Include="DTO\PhotoResultDTO.cs" />
     <Compile Include="DTO\PhotoViewerItem.cs" />
     <Compile Include="Partial\DdteDbEntities.cs" />
+    <Compile Include="Partial\Staff.cs" />
     <Compile Include="Partial\News.cs" />
     <Compile Include="Partial\Photo.cs" />
     <Compile Include="Photo.cs">
       <DependentUpon>DdteDbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Staff.cs">
+      <DependentUpon>DdteDbEntities.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />

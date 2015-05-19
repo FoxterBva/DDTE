@@ -9,6 +9,7 @@
           <EntitySet Name="Album" EntityType="Хранилище DdteDBModel.Album" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="News" EntityType="Хранилище DdteDBModel.News" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Photo" EntityType="Хранилище DdteDBModel.Photo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Staff" EntityType="Хранилище DdteDBModel.Staff" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_Pghoto_AlbumId" Association="Хранилище DdteDBModel.FK_Pghoto_AlbumId">
             <End Role="Album" EntitySet="Album" />
             <End Role="Photo" EntitySet="Photo" />
@@ -47,6 +48,27 @@
           <Property Name="Title" Type="nvarchar" MaxLength="200" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="IsPublic" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="StaffId" />
+          </Key>
+          <Property Name="StaffId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="PhotoUrl" Type="nvarchar" MaxLength="300" />
+          <Property Name="Position" Type="nvarchar" MaxLength="200" />
+          <Property Name="Qualification" Type="nvarchar" MaxLength="200" />
+          <Property Name="Degree" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Education" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Speciality" Type="nvarchar" MaxLength="1000" />
+          <Property Name="QualificationCourses" Type="nvarchar" MaxLength="1000" />
+          <Property Name="GeneralExperience" Type="nvarchar" MaxLength="1000" />
+          <Property Name="EducationExperience" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="100" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
         </EntityType>
@@ -112,6 +134,7 @@
             <End Role="Photo" EntitySet="Photos" />
           </AssociationSet>
           <EntitySet Name="News" EntityType="DdteDBModel.News" />
+          <EntitySet Name="Staffs" EntityType="DdteDBModel.Staff" />
         </EntityContainer>
         <EntityType Name="News">
           <Key>
@@ -124,6 +147,27 @@
           <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
           <Property Type="DateTime" Name="ModifiedDate" Nullable="false" Precision="3" />
           <Property Type="String" Name="Author" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="StaffId" />
+          </Key>
+          <Property Type="Int32" Name="StaffId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PhotoUrl" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Position" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Qualification" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Degree" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Education" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Speciality" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="QualificationCourses" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="GeneralExperience" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EducationExperience" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Phone" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="false" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -167,6 +211,28 @@
                 <ScalarProperty Name="Content" ColumnName="Content" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="NewsId" ColumnName="NewsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staffs">
+            <EntityTypeMapping TypeName="DdteDBModel.Staff">
+              <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="EducationExperience" ColumnName="EducationExperience" />
+                <ScalarProperty Name="GeneralExperience" ColumnName="GeneralExperience" />
+                <ScalarProperty Name="QualificationCourses" ColumnName="QualificationCourses" />
+                <ScalarProperty Name="Speciality" ColumnName="Speciality" />
+                <ScalarProperty Name="Education" ColumnName="Education" />
+                <ScalarProperty Name="Degree" ColumnName="Degree" />
+                <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="PhotoUrl" ColumnName="PhotoUrl" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StaffId" ColumnName="StaffId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

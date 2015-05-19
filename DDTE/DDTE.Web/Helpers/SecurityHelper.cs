@@ -105,5 +105,10 @@ namespace DDTE.Web.Helpers
 		{
 			return HttpContext.Current.Request.IsAuthenticated;
 		}
+
+		public static bool CanEditStaff()
+		{
+			return HttpContext.Current.Request.IsAuthenticated;
+		}
 	}
 }

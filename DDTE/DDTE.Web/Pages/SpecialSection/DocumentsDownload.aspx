@@ -4,29 +4,41 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cphContent" runat="server">
     <h2>Документы</h2>
-    <%--<asp:Panel ID="pnlAddDocument" runat="server" CssClass="add-document-main">
-        <a href="#" onclick="$(this).next().toggle()">Добавить</a>
-        <section class="add-document">
-            <div class="add-document-prompt">Выберите файл:</div>
-            <asp:FileUpload CssClass="controls" ID="fuDocuments" runat="server" multiple="true" />
-            <asp:Button ID="btnUpload" runat="server" Text="Добавить выбранные файлы" OnClick="btnUpload_Click" />
-        </section>
-    </asp:Panel>
-    <section class="document-list">
-        <asp:Repeater ID="rptrFiles" runat="server">
-            <HeaderTemplate>
-                <ul class="documents">
-            </HeaderTemplate>
-            <ItemTemplate>
-                    <li class="documents-item">
-                        <a href="#" class="document-link-download" title="загрузить"></a>
-                        <a href='<%# Page.ResolveUrl("~/Documents/" + Eval("FileName")) %>' class="document-link" title="Нажмите для просмотра"><%# Eval("FileName") %></a>
-                    </li>
-            </ItemTemplate>
-            <FooterTemplate>
-                </ul>
-            </FooterTemplate>
-        </asp:Repeater>
-    </section>--%>
-    <ctr:DocumentList ID="documentList" runat="server" Category="Documents" />
+    
+    <ul class="documents-main">
+        <li>
+            <span>Документы на осуществление образовательной деятельности:</span>
+            <ctr:DocumentList ID="dlEducation" runat="server" Category="Documents" />
+        </li>
+        <li>
+            <span>Локальные нормативные акты:</span>
+            <ctr:DocumentList ID="DocumentList1" runat="server" Category="Documents\LocalActs" />
+            <ul class="documents-inner">
+                <li><span>Планы:</span>
+                    <ctr:DocumentList ID="dlPlans" runat="server" Category="Documents\LocalActs\Plans" />
+                </li>
+                <li><span>Правила:</span>
+                    <ctr:DocumentList ID="dlRules" runat="server" Category="Documents\LocalActs\Rules" />
+                </li>
+                <li><span>Инструкции:</span>
+                    <ctr:DocumentList ID="dlInstructions" runat="server" Category="Documents\LocalActs\Instructions" />
+                </li>
+                <li><span>Положения:</span>
+                    <ctr:DocumentList ID="dlThesises" runat="server" Category="Documents\LocalActs\Thesises" />
+                </li>
+            </ul>
+        </li>
+        <li>
+            <span>Отчёты, доклады, показатели, результаты самообследования:</span>
+            <ctr:DocumentList ID="dlReports" runat="server" Category="Documents\Reports" />
+        </li>
+        <li>
+            <span>Документы о порядке оказания платных образовательных услуг:</span>
+            <ctr:DocumentList ID="dlPaidServices" runat="server" Category="Documents\PaidServices" />
+        </li>
+        <li>
+            <span>Материалы проверок:</span>
+            <ctr:DocumentList ID="dlRevisions" runat="server" Category="Documents\Revisions" />
+        </li>
+    </ul>
 </asp:Content>

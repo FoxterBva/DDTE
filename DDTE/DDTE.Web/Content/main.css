@@ -790,6 +790,21 @@ ul.documents .documents-item
     padding: 5px 5px 5px 0px;
 }
 
+ul.documents-main .documents-list
+{
+    margin-left: 30px;
+}
+
+ul.documents-main > li > span
+{
+    text-decoration: underline;
+}
+
+ul.documents-main ul.documents-inner > li > span
+{
+    font-style: italic; 
+}
+
 .document-link-download
 {
     /*display: inline-block;

@@ -19,7 +19,14 @@ namespace DDTE.Web.Pages.SpecialSection
 		{
 			if (!IsPostBack)
 			{
-				documentList.RefreshList();
+				dlEducation.RefreshList();
+				dlInstructions.RefreshList();
+				dlPaidServices.RefreshList();
+				dlPlans.RefreshList();
+				dlReports.RefreshList();
+				dlRevisions.RefreshList();
+				dlRules.RefreshList();
+				dlThesises.RefreshList();
 			}
 		}
 	}

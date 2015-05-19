@@ -51,6 +51,7 @@
     <Compile Include="Facade\IFileContainer.cs" />
     <Compile Include="Facade\INewsProvider.cs" />
     <Compile Include="Facade\IPhotoProvider.cs" />
+    <Compile Include="Facade\IStaffProvider.cs" />
     <Compile Include="PermissionHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\DbProviderBase.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Providers\FileProvider.cs" />
     <Compile Include="Providers\NewsProvider.cs" />
     <Compile Include="Providers\PhotoProvider.cs" />
+    <Compile Include="Providers\StaffProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DDTE.Common\DDTE.Common.csproj">

@@ -50,11 +50,25 @@ namespace DDTE.Web.Controls
 
 			if (fuDocuments.HasFile)
 			{
+				// vb: if there are multiple fileUplaod controls on the page Request.Files will have records from all of them
 				HttpFileCollection hfc = Request.Files;
 
-				for (int i = 0; i <= hfc.Count - 1; i++)
+				// vb: i hope that keys order is the same as related index order. We will store indexes of the files that associated with our file upload control.
+				var id = fuDocuments.UniqueID;
+				List<int> fileIndexes = new List<int>();
+				int index = 0;
+				foreach (var key in hfc.Keys)
 				{
-					HttpPostedFile hpf = hfc[i];
+					if ((string)key == id)
+					{
+						fileIndexes.Add(index);
+					}
+					index++;
+				}
+
+				for (int i = 0; i <= fileIndexes.Count - 1; i++)
+				{
+					HttpPostedFile hpf = hfc[fileIndexes[i]];
 					try
 					{
 						var fileName = hpf.FileName;
