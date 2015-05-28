@@ -29,5 +29,9 @@ namespace DDTE.Model
         public DbSet<Photo> Photos { get; set; }
         public DbSet<News> News { get; set; }
         public DbSet<Staff> Staffs { get; set; }
+        public DbSet<Union> Unions { get; set; }
+        public DbSet<UnionAchievement> UnionAchievements { get; set; }
+        public DbSet<UnionProgram> UnionPrograms { get; set; }
+        public DbSet<UnionSchedule> UnionSchedules { get; set; }
     }
 }

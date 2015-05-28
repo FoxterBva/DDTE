@@ -10,7 +10,14 @@
         <AssociationConnector Association="DdteDBModel.FK_Pghoto_AlbumId" ManuallyRouted="false" />
         <EntityTypeShape EntityType="DdteDBModel.News" Width="1.5" PointX="5.5" PointY="0.875" />
         <EntityTypeShape EntityType="DdteDBModel.Staff" Width="1.5" PointX="8.125" PointY="0.875" />
-      </Diagram>
+        <EntityTypeShape EntityType="DdteDBModel.Union" Width="1.5" PointX="0.625" PointY="4.75" />
+        <EntityTypeShape EntityType="DdteDBModel.UnionAchievement" Width="1.5" PointX="5" PointY="3.875" />
+        <EntityTypeShape EntityType="DdteDBModel.UnionProgram" Width="1.5" PointX="2.625" PointY="4.625" />
+        <EntityTypeShape EntityType="DdteDBModel.UnionSchedule" Width="1.5" PointX="5" PointY="7" />
+        <AssociationConnector Association="DdteDBModel.FK_UnionProgram_UnionId" />
+        <AssociationConnector Association="DdteDBModel.FK_UnionAchievement_UnionProgramId" />
+        <AssociationConnector Association="DdteDBModel.FK_UnionSchedule_UnionProgramId" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

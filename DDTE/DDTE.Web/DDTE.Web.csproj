@@ -374,6 +374,9 @@
     <Content Include="Scripts\TinyMCE\skins\lightgray\skin.min.css" />
     <Content Include="Scripts\TinyMCE\themes\modern\theme.min.js" />
     <Content Include="Scripts\TinyMCE\tinymce.min.js" />
+    <Content Include="Scripts\Unions\app.js" />
+    <Content Include="Scripts\Unions\unionController.js" />
+    <Content Include="Scripts\Unions\unionService.js" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

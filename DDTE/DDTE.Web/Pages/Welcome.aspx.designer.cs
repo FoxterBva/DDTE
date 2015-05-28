@@ -11,5 +11,32 @@ namespace DDTE.Web.Pages {
     
     
     public partial class Welcome {
+        
+        /// <summary>
+        /// ltlMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltlMessage;
+        
+        /// <summary>
+        /// btnAddUnion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputButton btnAddUnion;
+        
+        /// <summary>
+        /// rptrUnions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptrUnions;
     }
 }

@@ -110,5 +110,10 @@ namespace DDTE.Web.Helpers
 		{
 			return HttpContext.Current.Request.IsAuthenticated;
 		}
+
+		public static bool CanEditUnions()
+		{
+			return HttpContext.Current.Request.IsAuthenticated;
+		}
 	}
 }

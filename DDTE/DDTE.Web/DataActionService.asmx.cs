@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Services;
 using DDTE.BL.Facade;
 using DDTE.Common;
+using DDTE.Common.Exceptions;
 using DDTE.Model.DTO;
 using DDTE.Web.Helpers;
 using NLog;
@@ -22,6 +23,7 @@ namespace DDTE.Web
 	{
 		Logger logger = LogHelper.GetLogger("DataService");
 		IPhotoProvider photoProvider = new DDTE.BL.Providers.PhotoProvider();
+		IUnionProvider unionProvider = new DDTE.BL.Providers.UnionProvider();
 
 		public ListPhotosResult ListPhotos(int albumId)
 		{
@@ -250,6 +252,71 @@ namespace DDTE.Web
 			return res;
 		}
 
+		[WebMethod]
+		public GetUnionResult GetUnion(int unionId)
+		{
+			var res = new GetUnionResult();
+			
+			try
+			{
+				if (!CanEditUnion())
+				{
+					res.ErrorMessage = "Недостаточно прав";
+					return res;
+				}
+
+				res.Union = unionProvider.GetFullById(unionId);
+			}
+			catch (EntityNotFoundException ex)
+			{
+				res.ErrorMessage = "Выбранное объединение не найдено.";
+				LogError("GetUnion", "Union '" + unionId.ToString() + "' not found", ex);
+			}
+			catch (Exception ex)
+			{
+				res.ErrorMessage = "Не удалось получить объединение.";
+				LogError("GetUnion", "Unexpected error", ex);
+			}
+
+			return res;
+		}
+
+		[WebMethod]
+		public ServiceResultBase SaveUnion(UnionDTO union)
+		{
+			var res = new ServiceResultBase();
+
+			try
+			{
+				unionProvider.SaveUnion(union);
+			}
+			catch (Exception ex)
+			{
+				res.ErrorMessage = "Не удалось сохранить объединение.";
+				LogError("SaveUnion", "Unexpected error", ex);
+			}
+
+			return res;
+		}
+
+		[WebMethod]
+		public ServiceResultBase DeleteUnion(int unionId)
+		{
+			var res = new ServiceResultBase();
+
+			try
+			{
+				unionProvider.Delete(unionId);
+			}
+			catch (Exception ex)
+			{
+				res.ErrorMessage = "Не удалось удалить объединение.";
+				LogError("DeleteUnion", "Unexpected error", ex);
+			}
+
+			return res;
+		}
+
 		//public CreateUpdateAlbumResult CreateUpdateAlbum(int? albumId, string albumName, string albumDescription, bool isPublic)
 		//{
 		//	var res = new CreateUpdateAlbumResult();
@@ -279,6 +346,11 @@ namespace DDTE.Web
 		//}
 
 		bool CanEditAlbums()
+		{
+			return HttpContext.Current.Request.IsAuthenticated;
+		}
+
+		bool CanEditUnion()
 		{
 			return HttpContext.Current.Request.IsAuthenticated;
 		}
@@ -352,5 +424,10 @@ namespace DDTE.Web
 		public string Title { get; set; }
 		public string Description { get; set; }
 		public bool IsPublic { get; set; }
+	}
+
+	public class GetUnionResult : ServiceResultBase
+	{
+		public UnionDTO Union { get; set; }
 	}
 }

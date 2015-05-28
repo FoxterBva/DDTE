@@ -69,7 +69,12 @@
       <DependentUpon>DdteDbEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="DTO\NewsDTO.cs" />
+    <Compile Include="DTO\SimpleUnionDTO.cs" />
     <Compile Include="DTO\StaffDTO.cs" />
+    <Compile Include="DTO\UnionAchievementDTO.cs" />
+    <Compile Include="DTO\UnionDTO.cs" />
+    <Compile Include="DTO\UnionProgramDTO.cs" />
+    <Compile Include="DTO\UnionScheduleDTO.cs" />
     <Compile Include="News.cs">
       <DependentUpon>DdteDbEntities.tt</DependentUpon>
     </Compile>
@@ -91,6 +96,18 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Staff.cs">
+      <DependentUpon>DdteDbEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Union.cs">
+      <DependentUpon>DdteDbEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UnionAchievement.cs">
+      <DependentUpon>DdteDbEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UnionProgram.cs">
+      <DependentUpon>DdteDbEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UnionSchedule.cs">
       <DependentUpon>DdteDbEntities.tt</DependentUpon>
     </Compile>
   </ItemGroup>

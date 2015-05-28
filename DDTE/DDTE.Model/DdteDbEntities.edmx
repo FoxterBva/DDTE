@@ -10,9 +10,25 @@
           <EntitySet Name="News" EntityType="Хранилище DdteDBModel.News" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Photo" EntityType="Хранилище DdteDBModel.Photo" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Staff" EntityType="Хранилище DdteDBModel.Staff" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Union" EntityType="Хранилище DdteDBModel.Union" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UnionAchievement" EntityType="Хранилище DdteDBModel.UnionAchievement" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UnionProgram" EntityType="Хранилище DdteDBModel.UnionProgram" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UnionSchedule" EntityType="Хранилище DdteDBModel.UnionSchedule" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_Pghoto_AlbumId" Association="Хранилище DdteDBModel.FK_Pghoto_AlbumId">
             <End Role="Album" EntitySet="Album" />
             <End Role="Photo" EntitySet="Photo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UnionAchievement_UnionProgramId" Association="Хранилище DdteDBModel.FK_UnionAchievement_UnionProgramId">
+            <End Role="UnionProgram" EntitySet="UnionProgram" />
+            <End Role="UnionAchievement" EntitySet="UnionAchievement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UnionProgram_UnionId" Association="Хранилище DdteDBModel.FK_UnionProgram_UnionId">
+            <End Role="Union" EntitySet="Union" />
+            <End Role="UnionProgram" EntitySet="UnionProgram" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UnionSchedule_UnionProgramId" Association="Хранилище DdteDBModel.FK_UnionSchedule_UnionProgramId">
+            <End Role="UnionProgram" EntitySet="UnionProgram" />
+            <End Role="UnionSchedule" EntitySet="UnionSchedule" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Album">
@@ -72,6 +88,69 @@
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="Union">
+          <Key>
+            <PropertyRef Name="UnionId" />
+          </Key>
+          <Property Name="UnionId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UnionAchievement">
+          <Key>
+            <PropertyRef Name="UnionAchievementId" />
+          </Key>
+          <Property Name="UnionAchievementId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UnionProgramId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Date" Type="nvarchar" MaxLength="200" />
+          <Property Name="Participant" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Result" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UnionProgram">
+          <Key>
+            <PropertyRef Name="UnionProgramId" />
+          </Key>
+          <Property Name="UnionProgramId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UnionId" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="Direction" Type="nvarchar(max)" />
+          <Property Name="EducationDirection" Type="nvarchar(max)" />
+          <Property Name="Goal" Type="nvarchar" MaxLength="200" />
+          <Property Name="EducationTasks" Type="nvarchar(max)" />
+          <Property Name="DevelopingTasks" Type="nvarchar(max)" />
+          <Property Name="EducativeTasks" Type="nvarchar(max)" />
+          <Property Name="Education" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Duration" Type="nvarchar" MaxLength="50" />
+          <Property Name="Age" Type="nvarchar" MaxLength="50" />
+          <Property Name="AcceptConditions" Type="nvarchar" MaxLength="1000" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UnionSchedule">
+          <Key>
+            <PropertyRef Name="UnionScheduleId" />
+          </Key>
+          <Property Name="UnionScheduleId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UnionProgramId" Type="int" Nullable="false" />
+          <Property Name="Year" Type="nvarchar" MaxLength="20" />
+          <Property Name="LessonDuration" Type="nvarchar" MaxLength="20" />
+          <Property Name="HoursDay" Type="nvarchar" MaxLength="20" />
+          <Property Name="HoursWeek" Type="nvarchar" MaxLength="20" />
+          <Property Name="HoursYear" Type="nvarchar" MaxLength="20" />
+          <Property Name="LessonsPerWeek" Type="nvarchar" MaxLength="20" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Pghoto_AlbumId">
           <End Role="Album" Type="Хранилище DdteDBModel.Album" Multiplicity="1" />
           <End Role="Photo" Type="Хранилище DdteDBModel.Photo" Multiplicity="*" />
@@ -81,6 +160,48 @@
             </Principal>
             <Dependent Role="Photo">
               <PropertyRef Name="AlbumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UnionAchievement_UnionProgramId">
+          <End Role="UnionProgram" Type="Хранилище DdteDBModel.UnionProgram" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UnionAchievement" Type="Хранилище DdteDBModel.UnionAchievement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnionProgram">
+              <PropertyRef Name="UnionProgramId" />
+            </Principal>
+            <Dependent Role="UnionAchievement">
+              <PropertyRef Name="UnionProgramId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UnionProgram_UnionId">
+          <End Role="Union" Type="Хранилище DdteDBModel.Union" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UnionProgram" Type="Хранилище DdteDBModel.UnionProgram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Union">
+              <PropertyRef Name="UnionId" />
+            </Principal>
+            <Dependent Role="UnionProgram">
+              <PropertyRef Name="UnionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UnionSchedule_UnionProgramId">
+          <End Role="UnionProgram" Type="Хранилище DdteDBModel.UnionProgram" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UnionSchedule" Type="Хранилище DdteDBModel.UnionSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnionProgram">
+              <PropertyRef Name="UnionProgramId" />
+            </Principal>
+            <Dependent Role="UnionSchedule">
+              <PropertyRef Name="UnionProgramId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -135,7 +256,23 @@
           </AssociationSet>
           <EntitySet Name="News" EntityType="DdteDBModel.News" />
           <EntitySet Name="Staffs" EntityType="DdteDBModel.Staff" />
-        </EntityContainer>
+          <EntitySet Name="Unions" EntityType="DdteDBModel.Union" />
+          <EntitySet Name="UnionAchievements" EntityType="DdteDBModel.UnionAchievement" />
+          <EntitySet Name="UnionPrograms" EntityType="DdteDBModel.UnionProgram" />
+          <EntitySet Name="UnionSchedules" EntityType="DdteDBModel.UnionSchedule" />
+          <AssociationSet Name="FK_UnionProgram_UnionId" Association="DdteDBModel.FK_UnionProgram_UnionId">
+            <End Role="Union" EntitySet="Unions" />
+            <End Role="UnionProgram" EntitySet="UnionPrograms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UnionAchievement_UnionProgramId" Association="DdteDBModel.FK_UnionAchievement_UnionProgramId">
+            <End Role="UnionProgram" EntitySet="UnionPrograms" />
+            <End Role="UnionAchievement" EntitySet="UnionAchievements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UnionSchedule_UnionProgramId" Association="DdteDBModel.FK_UnionSchedule_UnionProgramId">
+            <End Role="UnionProgram" EntitySet="UnionPrograms" />
+            <End Role="UnionSchedule" EntitySet="UnionSchedules" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="News">
           <Key>
             <PropertyRef Name="NewsId" />
@@ -169,7 +306,118 @@
           <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
           <Property Type="DateTime" Name="ModifiedDate" Nullable="false" Precision="3" />
         </EntityType>
-      </Schema>
+        <EntityType Name="Union">
+          <Key>
+            <PropertyRef Name="UnionId" />
+          </Key>
+          <Property Type="Int32" Name="UnionId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="false" Precision="3" />
+          <NavigationProperty Name="UnionPrograms" Relationship="DdteDBModel.FK_UnionProgram_UnionId" FromRole="Union" ToRole="UnionProgram" />
+        </EntityType>
+        <EntityType Name="UnionAchievement">
+          <Key>
+            <PropertyRef Name="UnionAchievementId" />
+          </Key>
+          <Property Type="Int32" Name="UnionAchievementId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UnionProgramId" Nullable="false" />
+          <Property Type="String" Name="Name" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Date" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Participant" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Result" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="false" Precision="3" />
+          <NavigationProperty Name="UnionProgram" Relationship="DdteDBModel.FK_UnionAchievement_UnionProgramId" FromRole="UnionAchievement" ToRole="UnionProgram" />
+        </EntityType>
+        <EntityType Name="UnionProgram">
+          <Key>
+            <PropertyRef Name="UnionProgramId" />
+          </Key>
+          <Property Type="Int32" Name="UnionProgramId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UnionId" Nullable="false" />
+          <Property Type="String" Name="Title" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Name" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Direction" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EducationDirection" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Goal" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EducationTasks" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DevelopingTasks" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EducativeTasks" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Education" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Duration" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Age" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AcceptConditions" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Union" Relationship="DdteDBModel.FK_UnionProgram_UnionId" FromRole="UnionProgram" ToRole="Union" />
+          <NavigationProperty Name="UnionAchievements" Relationship="DdteDBModel.FK_UnionAchievement_UnionProgramId" FromRole="UnionProgram" ToRole="UnionAchievement" />
+          <NavigationProperty Name="UnionSchedules" Relationship="DdteDBModel.FK_UnionSchedule_UnionProgramId" FromRole="UnionProgram" ToRole="UnionSchedule" />
+        </EntityType>
+        <EntityType Name="UnionSchedule">
+          <Key>
+            <PropertyRef Name="UnionScheduleId" />
+          </Key>
+          <Property Type="Int32" Name="UnionScheduleId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UnionProgramId" Nullable="false" />
+          <Property Type="String" Name="Year" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LessonDuration" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="HoursDay" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="HoursWeek" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="HoursYear" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LessonsPerWeek" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="false" Precision="3" />
+          <NavigationProperty Name="UnionProgram" Relationship="DdteDBModel.FK_UnionSchedule_UnionProgramId" FromRole="UnionSchedule" ToRole="UnionProgram" />
+        </EntityType>
+        <Association Name="FK_UnionProgram_UnionId">
+          <End Type="DdteDBModel.Union" Role="Union" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DdteDBModel.UnionProgram" Role="UnionProgram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Union">
+              <PropertyRef Name="UnionId" />
+            </Principal>
+            <Dependent Role="UnionProgram">
+              <PropertyRef Name="UnionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UnionAchievement_UnionProgramId">
+          <End Type="DdteDBModel.UnionProgram" Role="UnionProgram" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DdteDBModel.UnionAchievement" Role="UnionAchievement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnionProgram">
+              <PropertyRef Name="UnionProgramId" />
+            </Principal>
+            <Dependent Role="UnionAchievement">
+              <PropertyRef Name="UnionProgramId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UnionSchedule_UnionProgramId">
+          <End Type="DdteDBModel.UnionProgram" Role="UnionProgram" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DdteDBModel.UnionSchedule" Role="UnionSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnionProgram">
+              <PropertyRef Name="UnionProgramId" />
+            </Principal>
+            <Dependent Role="UnionSchedule">
+              <PropertyRef Name="UnionProgramId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -236,7 +484,74 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="Unions">
+            <EntityTypeMapping TypeName="DdteDBModel.Union">
+              <MappingFragment StoreEntitySet="Union">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UnionId" ColumnName="UnionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnionAchievements">
+            <EntityTypeMapping TypeName="DdteDBModel.UnionAchievement">
+              <MappingFragment StoreEntitySet="UnionAchievement">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="Participant" ColumnName="Participant" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UnionProgramId" ColumnName="UnionProgramId" />
+                <ScalarProperty Name="UnionAchievementId" ColumnName="UnionAchievementId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnionPrograms">
+            <EntityTypeMapping TypeName="DdteDBModel.UnionProgram">
+              <MappingFragment StoreEntitySet="UnionProgram">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="AcceptConditions" ColumnName="AcceptConditions" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Education" ColumnName="Education" />
+                <ScalarProperty Name="EducativeTasks" ColumnName="EducativeTasks" />
+                <ScalarProperty Name="DevelopingTasks" ColumnName="DevelopingTasks" />
+                <ScalarProperty Name="EducationTasks" ColumnName="EducationTasks" />
+                <ScalarProperty Name="Goal" ColumnName="Goal" />
+                <ScalarProperty Name="EducationDirection" ColumnName="EducationDirection" />
+                <ScalarProperty Name="Direction" ColumnName="Direction" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="UnionId" ColumnName="UnionId" />
+                <ScalarProperty Name="UnionProgramId" ColumnName="UnionProgramId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnionSchedules">
+            <EntityTypeMapping TypeName="DdteDBModel.UnionSchedule">
+              <MappingFragment StoreEntitySet="UnionSchedule">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="LessonsPerWeek" ColumnName="LessonsPerWeek" />
+                <ScalarProperty Name="HoursYear" ColumnName="HoursYear" />
+                <ScalarProperty Name="HoursWeek" ColumnName="HoursWeek" />
+                <ScalarProperty Name="HoursDay" ColumnName="HoursDay" />
+                <ScalarProperty Name="LessonDuration" ColumnName="LessonDuration" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="UnionProgramId" ColumnName="UnionProgramId" />
+                <ScalarProperty Name="UnionScheduleId" ColumnName="UnionScheduleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
