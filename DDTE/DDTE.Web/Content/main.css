@@ -288,6 +288,19 @@ ul.nav-main > li ul {
 .news-list li.news .news-content
 {
     padding-left: 10px;
+    position: relative;
+}
+
+.news-list li.news .news-content .news-short
+{
+    height: 150px;
+    overflow: hidden;
+}
+
+.news-list li.news .news-content .news-long
+{
+    height: 100%;
+    overflow: auto;
 }
 
 .news-list li.news .actions

@@ -368,6 +368,22 @@ namespace DDTE.BL.Providers
 			// 2. Delete record
 		}
 
+		public string GetRandomPublicPhotoUrl()
+		{
+			using (var db = GetObjectContext())
+			{
+				var q = (from p in db.Photos
+						 where p.IsPublic
+						 orderby p.CreatedDate
+						 select p.FileName);
+				
+				int count = q.Count();
+				int index = new Random((int)DateTime.UtcNow.Ticks).Next(count);
+
+				return q.Skip(index).FirstOrDefault();
+			}
+		}
+
 		#endregion Photo
 
 		List<Photo> tempPhoto = new List<Photo>() {

@@ -69,6 +69,18 @@
             ],
             toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
         });
+
+        function ToggleNews(newsId, btn) {
+            var article = $('article[data-content="' + newsId + '"]');
+            if (article.hasClass('news-short')) {
+                article.switchClass('news-short', 'news-long', 400, 'easeOutCubic');
+                $(btn).html('Свернуть...');
+            }
+            else {
+                article.switchClass('news-long', 'news-short', 400, 'easeOutCubic');
+                $(btn).html('Подробнее...');
+            }
+        }
     </script>
 </asp:Content>
 
@@ -115,9 +127,12 @@
                         <asp:LinkButton ID="lbDelete" runat="server" Text="Удалить" OnClientClick="return confirm('Действительно удалить?');" CssClass="button" CommandArgument='<%# Eval("NewsId") %>' CommandName="Delete" />
                     </asp:Panel>
                 </header>
-                <article data-content='<%# Eval("NewsId") %>'>
-                    <%# Eval("Content") %>
-                </article>
+                <div class="news-content">
+                    <article data-content='<%# Eval("NewsId") %>' class='<%# (int)Eval("NewsId") == 0 ? "" : "news-short" %>'>
+                        <%# Eval("Content") %>
+                    </article>
+                    <span style="position: absolute; right: 10px; bottom: -22px; display: block;cursor: pointer" onclick="ToggleNews(<%# Eval("NewsId") %>, this)">Подробнее...</span>
+                </div>
                 <footer class="news-footer">
                     Добавлено: <span data-author='<%# Eval("NewsId") %>' class="author"><%# Eval("Author") %></span><span class="time"><%# Eval("CreatedDate","{0:yyyy-MM-dd HH:mm:ss}") %></span>
                 </footer>

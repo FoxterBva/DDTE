@@ -11,7 +11,8 @@ namespace DDTE.Web
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
-
+			var photoName = (new DDTE.BL.Providers.PhotoProvider()).GetRandomPublicPhotoUrl() ?? String.Empty;
+			imgRandom.ImageUrl = photoName.StartsWith("http") ? photoName : "/Photos" + photoName;
 		}
 	}
 }

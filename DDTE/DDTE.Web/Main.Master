@@ -43,7 +43,7 @@
                     </asp:Panel>
                 </asp:Panel>
                 <div class="logo-main">
-                    <img src="/Images/logo1.png" class="logo1" />
+                    <a href="/Default.aspx"><img src="/Images/logo1.png" class="logo1" /></a>
                     <img src="/Images/logo2.png" class="logo2" />
                 
                 <nav>

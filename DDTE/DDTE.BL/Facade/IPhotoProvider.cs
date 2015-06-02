@@ -27,5 +27,7 @@ namespace DDTE.BL.Facade
 		/// <param name="albumId"></param>
 		/// <returns></returns>
 		List<PhotoViewerItem> ListPhotoItems(int? albumId);
+
+		string GetRandomPublicPhotoUrl();
 	}
 }
