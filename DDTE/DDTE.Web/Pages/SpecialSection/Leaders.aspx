@@ -106,21 +106,6 @@
 
     <h2>Руководство. Педагогический (научно-педагогический) состав</h2>
 
-    <%--<ul style="list-style: none">
-        <li style="margin-bottom: 10px;">
-            <div>Директор МБОУ ДОД «ДДТ «Эврика»</div> 
-            <div>Божко Марина Васильевна</div>
-        </li>
-        <li style="margin-bottom: 10px;">
-            <div>Методист МБОУ ДОД «ДДТ «Эврика»</div> 
-            <div>Жилина Елена Юрьевна</div>
-        </li>
-        <li style="margin-bottom: 10px;">
-            <div>Педагогический состав МБОУ ДОД «ДДТ «Эврика»</div> 
-            <div>Белоус Лариса Львовна</div>
-        </li>
-    </ul>--%>
-
     <asp:Literal ID="ltlMessage" runat="server" EnableViewState="false" />
 
     <asp:Panel ID="pnlEditForm" runat="server" Visible="false">
@@ -143,8 +128,12 @@
                 <div class="field-value"><asp:TextBox ID="tbPosition" runat="server" /></div>
             </div>
             <div class="field-row">
-                <div class="field-title">Квалификация</div>
+                <div class="field-title">Квалификационная категория</div>
                 <div class="field-value"><asp:TextBox ID="tbQualification" runat="server" /></div>
+            </div>
+            <div class="field-row">
+                <div class="field-title">Руководитель объединения</div>
+                <div class="field-value"><asp:TextBox ID="tbLeaderOf" runat="server" /></div>
             </div>
             <div class="field-row">
                 <div class="field-title">Образование</div>
@@ -231,11 +220,14 @@
             </tr>
             <tr>
                 <!-- Photo -->
-                <td colspan="2" rowspan="5" class="photo">
+                <td colspan="2" rowspan="6" class="photo">
                     <asp:Image ID="ImgStaffPhoto" runat="server" ImageUrl='<%# Eval("PhotoUrl") %>' ToolTip='<%# Eval("Name") %>' />
                 </td>
                 <td class="row-title">Должность</td>
                 <td class="row-value"><span><%# ((string)Eval("Position")).Replace(Environment.NewLine, "</span><span>") %></span></td>
+            </tr>
+            <tr id="trLeader" runat="server">
+                <td class="row-title">Руководитель объединения</td><td class="row-value"><span><%# ((string)Eval("LeaderOf") ?? String.Empty).Replace(Environment.NewLine, "</span><span>") %></span></td>
             </tr>
             <tr>
                 <td class="row-title">Общий стаж работы</td><td class="row-value"><span><%# ((string)Eval("GeneralExperience")).Replace(Environment.NewLine, "</span><span>") %></span></td>

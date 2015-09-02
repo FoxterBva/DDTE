@@ -15,7 +15,7 @@ namespace DDTE.BL.Providers
 		{
 			using (var db = GetObjectContext())
 			{
-				var q = GetFullQueryById(unionId, db);
+				var q = GetFullUnionById(unionId, db);
 
 				if (q == null)
 					return null;
@@ -33,7 +33,7 @@ namespace DDTE.BL.Providers
 			}
 		}
 
-		Union GetFullQueryById(int unionId, DdteDBEntities db)
+		Union GetFullUnionById(int unionId, DdteDBEntities db)
 		{
 			var q = (from u in db.Unions.Include("UnionPrograms.UnionAchievements").Include("UnionPrograms.UnionSchedules")
 						where u.UnionId == unionId
@@ -89,7 +89,7 @@ namespace DDTE.BL.Providers
 			{
 				Union baseUnion = null;
 				if (union.UnionId > 0)
-					baseUnion = GetFullQueryById(union.UnionId, db);
+					baseUnion = GetFullUnionById(union.UnionId, db);
 				else
 				{
 					baseUnion = new Union() { CreatedDate = DateTime.UtcNow };
@@ -127,13 +127,14 @@ namespace DDTE.BL.Providers
 					baseUp.Title = unp.Title;
 
 					// UnionSchedule
+                    var newSchedules = new List<UnionSchedule>();
 					foreach (var unps in unp.Schedule)
 					{
 						var baseUnps = baseUp.UnionSchedules.FirstOrDefault(ups => ups.UnionScheduleId == unps.UnionScheduleId);
 						if (baseUnps == null)
 						{
 							baseUnps = new UnionSchedule() { CreatedDate = DateTime.UtcNow };
-							baseUp.UnionSchedules.Add(baseUnps);
+							newSchedules.Add(baseUnps);
 						}
 
 						baseUnps.HoursDay = unps.HoursDay;
@@ -145,19 +146,22 @@ namespace DDTE.BL.Providers
 						baseUnps.ModifiedDate = DateTime.UtcNow;
 						baseUnps.Year = unps.Year;
 					}
+                    newSchedules.ForEach(s => baseUp.UnionSchedules.Add(s));
 					// Delete excess Schedules
 					baseUp.UnionSchedules.Where(ups => !unp.Schedule.Any(unps => unps.UnionScheduleId == ups.UnionScheduleId))
 						.ToList()
 						.ForEach(ups => db.UnionSchedules.Remove(ups));
+                    
 
 					// UnionAchievements
+                    var newAchievements = new List<UnionAchievement>();
 					foreach (var unpa in unp.Achievements)
 					{
 						var baseUnpa = baseUp.UnionAchievements.FirstOrDefault(ups => ups.UnionAchievementId == unpa.UnionAchievementId);
 						if (baseUnpa == null)
 						{
 							baseUnpa = new UnionAchievement() { CreatedDate = DateTime.UtcNow };
-							baseUp.UnionAchievements.Add(baseUnpa);
+							newAchievements.Add(baseUnpa);
 						}
 
 						baseUnpa.Date = unpa.Date;
@@ -167,6 +171,8 @@ namespace DDTE.BL.Providers
 						baseUnpa.Result = unpa.Result;
 						baseUnpa.ModifiedDate = DateTime.UtcNow;
 					}
+                    newAchievements.ForEach(a => baseUp.UnionAchievements.Add(a));
+
 					// Delete excess Achievements
 					baseUp.UnionAchievements.Where(ups => !unp.Achievements.Any(unpa => unpa.UnionAchievementId == ups.UnionAchievementId))
 						.ToList()

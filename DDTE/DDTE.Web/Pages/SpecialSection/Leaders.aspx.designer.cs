@@ -94,6 +94,15 @@ namespace DDTE.Web.Pages.SpecialSection {
         protected global::System.Web.UI.WebControls.TextBox tbQualification;
         
         /// <summary>
+        /// tbLeaderOf control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbLeaderOf;
+        
+        /// <summary>
         /// tbEducation control.
         /// </summary>
         /// <remarks>

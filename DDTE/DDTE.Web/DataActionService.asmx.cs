@@ -286,15 +286,15 @@ namespace DDTE.Web
 		{
 			var res = new ServiceResultBase();
 
-			try
-			{
-				unionProvider.SaveUnion(union);
-			}
-			catch (Exception ex)
-			{
-				res.ErrorMessage = "Не удалось сохранить объединение.";
-				LogError("SaveUnion", "Unexpected error", ex);
-			}
+            try
+            {
+                unionProvider.SaveUnion(union);
+            }
+            catch (Exception ex)
+            {
+                res.ErrorMessage = "Не удалось сохранить объединение.";
+                LogError("SaveUnion", "Unexpected error", ex);
+            }
 
 			return res;
 		}

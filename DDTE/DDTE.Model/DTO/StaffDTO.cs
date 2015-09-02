@@ -25,5 +25,6 @@ namespace DDTE.Model.DTO
 		public string EducationExperience { get; set; }
 		public string Phone { get; set; }
 		public string Email { get; set; }
+        public string LeaderOf { get; set; }
 	}
 }

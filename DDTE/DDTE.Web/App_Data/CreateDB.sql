@@ -96,6 +96,7 @@ BEGIN
 		[IsActive] BIT NOT NULL CONSTRAINT DF_Staff_IsActive DEFAULT(0),
 		[CreatedDate] DATETIME NOT NULL,
 		[ModifiedDate] DATETIME NOT NULL,
+		[LeaderOf] NVARCHAR(150) NULL,
 		CONSTRAINT [PK_Staff] PRIMARY KEY CLUSTERED 
 		(
 			[StaffId]

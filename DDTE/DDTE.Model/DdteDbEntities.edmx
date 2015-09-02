@@ -87,6 +87,7 @@
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="LeaderOf" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="Union">
           <Key>
@@ -305,6 +306,7 @@
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
           <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
           <Property Type="DateTime" Name="ModifiedDate" Nullable="false" Precision="3" />
+          <Property Type="String" Name="LeaderOf" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Union">
           <Key>
@@ -465,6 +467,7 @@
           <EntitySetMapping Name="Staffs">
             <EntityTypeMapping TypeName="DdteDBModel.Staff">
               <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="LeaderOf" ColumnName="LeaderOf" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />

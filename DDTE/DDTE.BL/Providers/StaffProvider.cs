@@ -36,7 +36,8 @@ namespace DDTE.BL.Providers
 					Qualification = q.Qualification,
 					QualificationCourses = q.QualificationCourses,
 					Speciality = q.Speciality,
-					StaffId = q.StaffId
+					StaffId = q.StaffId,
+                    LeaderOf = q.LeaderOf
 				};
 			}
 		}
@@ -61,7 +62,8 @@ namespace DDTE.BL.Providers
 					Position = staff.Position,
 					Qualification = staff.Qualification,
 					QualificationCourses = staff.QualificationCourses,
-					Speciality = staff.Speciality
+					Speciality = staff.Speciality,
+                    LeaderOf = staff.LeaderOf
 				};
 
 				db.Staffs.Add(st);
@@ -97,6 +99,7 @@ namespace DDTE.BL.Providers
 				st.Qualification = staff.Qualification;
 				st.QualificationCourses = staff.QualificationCourses;
 				st.Speciality = staff.Speciality;
+                st.LeaderOf = staff.LeaderOf;
 
 				db.SaveChanges();
 
@@ -142,7 +145,8 @@ namespace DDTE.BL.Providers
 							 Qualification = s.Qualification,
 							 QualificationCourses = s.QualificationCourses,
 							 Speciality = s.Speciality,
-							 StaffId = s.StaffId
+							 StaffId = s.StaffId,
+                             LeaderOf = s.LeaderOf
 						 };
 
 				res.AddRange(q.ToList());

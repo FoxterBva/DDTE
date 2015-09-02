@@ -263,7 +263,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="label">Условия приема детей</div>
-                                    <div class="field"><textarea rows="2" data-ng-model="up.AcceptCondition" ></textarea></div>
+                                    <div class="field"><textarea rows="2" data-ng-model="up.AcceptConditions" ></textarea></div>
                                 </div>
                                 <div>Расписание: </div>
                                 <table class="up-schedule-edit">
@@ -354,11 +354,11 @@
                                             <ul class="up-tasks">
                                                 <li>
                                                     <span class="up-task-title">образовательные:</span>
-                                                    <div><%# ((string)Eval("EducationTasks") ?? String.Empty).Replace(Environment.NewLine, "</div></div>") %></div>
+                                                    <div><%# ((string)Eval("EducationTasks") ?? String.Empty).Replace(Environment.NewLine, "</div><div>") %></div>
                                                     <span class="up-task-title">развивающие:</span>
-                                                    <div><%# ((string)Eval("DevelopingTasks") ?? String.Empty).Replace(Environment.NewLine, "</div></div>") %></div>
+                                                    <div><%# ((string)Eval("DevelopingTasks") ?? String.Empty).Replace(Environment.NewLine, "</div><div>") %></div>
                                                     <span class="up-task-title">воспитательные:</span>
-                                                    <div><%# ((string)Eval("EducativeTasks") ?? String.Empty).Replace(Environment.NewLine, "</div></div>") %></div>
+                                                    <div><%# ((string)Eval("EducativeTasks") ?? String.Empty).Replace(Environment.NewLine, "</div><div>") %></div>
                                                 </li>
                                             </ul>
                                         </li>

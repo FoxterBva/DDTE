@@ -30,5 +30,6 @@ namespace DDTE.Model
         public bool IsActive { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime ModifiedDate { get; set; }
+        public string LeaderOf { get; set; }
     }
 }

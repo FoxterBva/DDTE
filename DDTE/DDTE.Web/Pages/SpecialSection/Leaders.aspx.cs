@@ -83,6 +83,13 @@ namespace DDTE.Web.Pages.SpecialSection
 					var pnlActions = e.Item.FindControl("pnlActions") as Panel;
 					if (pnlActions != null)
 						pnlActions.Visible = SecurityHelper.CanEditStaff();
+
+                    var trLeader = e.Item.FindControl("trLeader") as System.Web.UI.HtmlControls.HtmlTableRow;
+                    if (trLeader != null)
+                    {
+                        if (String.IsNullOrWhiteSpace(s.LeaderOf))
+                            trLeader.Style.Add("display", "none");
+                    }
 				}
 			}
 		}
@@ -114,6 +121,7 @@ namespace DDTE.Web.Pages.SpecialSection
 		{
 			tbDegree.Text = staff.Degree;
 			tbEducation.Text = staff.Education;
+            tbLeaderOf.Text = staff.LeaderOf;
 			tbEducationExperience.Text = staff.EducationExperience;
 			tbEmail.Text = staff.Email;
 			tbGeneralExperience.Text = staff.GeneralExperience;
@@ -134,6 +142,7 @@ namespace DDTE.Web.Pages.SpecialSection
 
 			res.Degree = tbDegree.Text;
 			res.Education = tbEducation.Text;
+            res.LeaderOf = tbLeaderOf.Text;
 			res.EducationExperience = tbEducationExperience.Text;
 			res.Email = tbEmail.Text;
 			res.GeneralExperience = tbGeneralExperience.Text;
