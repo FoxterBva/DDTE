@@ -24,6 +24,7 @@ namespace DDTE.Web
 		Logger logger = LogHelper.GetLogger("DataService");
 		IPhotoProvider photoProvider = new DDTE.BL.Providers.PhotoProvider();
 		IUnionProvider unionProvider = new DDTE.BL.Providers.UnionProvider();
+        IStaffProvider staffProvider = new DDTE.BL.Providers.StaffProvider();
 
 		public ListPhotosResult ListPhotos(int albumId)
 		{
@@ -252,7 +253,9 @@ namespace DDTE.Web
 			return res;
 		}
 
-		[WebMethod]
+        #region Unions
+
+        [WebMethod]
 		public GetUnionResult GetUnion(int unionId)
 		{
 			var res = new GetUnionResult();
@@ -343,9 +346,118 @@ namespace DDTE.Web
 
 		//		return res;
 		//	}
-		//}
+        //}
 
-		bool CanEditAlbums()
+        #endregion
+
+        #region staff (employees)
+
+        [WebMethod]
+        public GetEmployeesResult GetEmployees()
+        {
+            var res = new GetEmployeesResult();
+
+            try
+            {
+                var empls = staffProvider.List();
+                res.Employees = empls;
+            }
+            catch (Exception ex)
+            {
+                res.ErrorMessage = "Непредвиденная ошибка.";
+                LogError("GetEmployees", "Unexpected error", ex);
+            }
+
+            return res;
+        }
+
+        [WebMethod]
+        public GetEmployeesResult GetEmployee(int emplId)
+        {
+            var res = new GetEmployeesResult();
+
+            try
+            {
+                var empl = staffProvider.GetById(emplId);
+                if (empl == null)
+                {
+                    res.ErrorMessage = "Сотрудник не найден";
+                    return res;
+                }
+
+                res.Employees = new List<StaffDTO>() { empl };
+            }
+            catch (Exception ex)
+            {
+                res.ErrorMessage = "Непредвиденная ошибка.";
+                LogError("GetEmployee", "Unexpected error", ex);
+            }
+
+            return res;
+        }
+
+        [WebMethod]
+        public ServiceResultBase DeleteEmployee(int emplId)
+        {
+            var res = new ServiceResultBase();
+
+            try
+            {
+                staffProvider.DeleteStuff(emplId);
+            }
+            catch (Exception ex)
+            {
+                res.ErrorMessage = "Непредвиденная ошибка.";
+                LogError("DeleteEmployee", "Unexpected error", ex);
+            }
+
+            return res;
+        }
+
+        [WebMethod]
+        public ServiceResultBase UpdateEmployee(StaffDTO employee)
+        {
+            var res = new ServiceResultBase();
+
+            try
+            {
+                staffProvider.UpdateStuff(employee);
+            }
+            catch (Exception ex)
+            {
+                res.ErrorMessage = "Непредвиденная ошибка.";
+                LogError("UpdateEmployee", "Unexpected error", ex);
+            }
+
+            return res;
+        }
+
+        [WebMethod]
+        public ServiceResultBase AddEmployee(StaffDTO employee)
+        {
+            var res = new ServiceResultBase();
+
+            try
+            {
+                staffProvider.AddStuff(employee);
+            }
+            catch (Exception ex)
+            {
+                res.ErrorMessage = "Непредвиденная ошибка.";
+                LogError("AddEmployee", "Unexpected error", ex);
+            }
+
+            return res;
+        }
+
+        #endregion
+
+        bool CanEditStaff()
+        {
+            return HttpContext.Current.Request.IsAuthenticated;
+        }
+
+        bool CanEditAlbums()
 		{
 			return HttpContext.Current.Request.IsAuthenticated;
 		}
@@ -380,6 +492,17 @@ namespace DDTE.Web
 	{
 
 	}
+
+    public class GetEmployeesResult : ServiceResultBase
+    {
+        public GetEmployeesResult()
+            : base()
+        {
+            Employees = new List<StaffDTO>();
+        }
+
+        public List<StaffDTO> Employees { get; set; }
+    }
 
 	public class ListPhotoItemResult : ServiceResultBase
 	{

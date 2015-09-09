@@ -117,7 +117,7 @@
             <li class="news <%# (int)Eval("NewsId") == 0 ? "preview" : "" %>">
                 <header>
                     <h3>
-                        [<%# (int)Eval("NewsId") == 0 ? "<span class='preview'> ПРЕДПРОСМОТР </span>" : Eval("CreatedDate", "{0:yyyy-MM-dd}") %>] 
+                        <%# (int)Eval("NewsId") == 0 ? "[ <span class='preview'> ПРЕДПРОСМОТР </span> ]" : "" %>
                         <span data-title='<%# Eval("NewsId") %>'>
                             <%# HttpUtility.HtmlEncode((string)Eval("Title")) %>
                         </span>
@@ -134,7 +134,7 @@
                     <span style="position: absolute; right: 10px; bottom: -22px; display: block;cursor: pointer" onclick="ToggleNews(<%# Eval("NewsId") %>, this)">Подробнее...</span>
                 </div>
                 <footer class="news-footer">
-                    Добавлено: <span data-author='<%# Eval("NewsId") %>' class="author"><%# Eval("Author") %></span><span class="time"><%# Eval("CreatedDate","{0:yyyy-MM-dd HH:mm:ss}") %></span>
+                    Добавлено: <span data-author='<%# Eval("NewsId") %>' class="author"><%# Eval("Author") %></span><span class="time"><%# Eval("CreatedDate","{0:dd.MM.yyyy HH:mm:ss}") %></span>
                 </footer>
             </li>
             <hr />

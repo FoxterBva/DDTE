@@ -22,6 +22,15 @@ namespace DDTE.Web.Pages.SpecialSection {
         protected global::System.Web.UI.WebControls.Literal ltlMessage;
         
         /// <summary>
+        /// pnlOld control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlOld;
+        
+        /// <summary>
         /// pnlEditForm control.
         /// </summary>
         /// <remarks>
@@ -227,5 +236,23 @@ namespace DDTE.Web.Pages.SpecialSection {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptrStaff;
+        
+        /// <summary>
+        /// trLeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trLeader;
+        
+        /// <summary>
+        /// tr1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow tr1;
     }
 }

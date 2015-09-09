@@ -300,6 +300,9 @@
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\Staff\app_staff.js" />
+    <Content Include="Scripts\Staff\StaffController.js" />
+    <Content Include="Scripts\Staff\StaffService.js" />
     <Content Include="Scripts\TinyMCE\license.txt" />
     <Content Include="Scripts\TinyMCE\plugins\advlist\plugin.min.js" />
     <Content Include="Scripts\TinyMCE\plugins\anchor\plugin.min.js" />

@@ -124,7 +124,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="200" />
           <Property Name="Direction" Type="nvarchar(max)" />
           <Property Name="EducationDirection" Type="nvarchar(max)" />
-          <Property Name="Goal" Type="nvarchar" MaxLength="200" />
+          <Property Name="Goal" Type="nvarchar" MaxLength="1000" />
           <Property Name="EducationTasks" Type="nvarchar(max)" />
           <Property Name="DevelopingTasks" Type="nvarchar(max)" />
           <Property Name="EducativeTasks" Type="nvarchar(max)" />
@@ -345,7 +345,7 @@
           <Property Type="String" Name="Name" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Direction" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="EducationDirection" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Goal" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Goal" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="EducationTasks" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="DevelopingTasks" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="EducativeTasks" MaxLength="Max" FixedLength="false" Unicode="true" />
