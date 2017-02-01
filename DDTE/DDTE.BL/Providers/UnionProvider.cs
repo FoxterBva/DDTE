@@ -35,7 +35,7 @@ namespace DDTE.BL.Providers
 
 		Union GetFullUnionById(int unionId, DdteDBEntities db)
 		{
-			var q = (from u in db.Unions.Include("UnionPrograms.UnionAchievements").Include("UnionPrograms.UnionSchedules")
+			var q = (from u in db.Unions.Include("UnionPrograms.UnionSchedules").Include("UnionPrograms.UnionAchievements.UnionAchievementParticipants")
 						where u.UnionId == unionId
 						select u);
 
@@ -48,7 +48,7 @@ namespace DDTE.BL.Providers
 
 			using (var db = GetObjectContext())
 			{
-				var q = (from u in db.Unions.Include("UnionPrograms.UnionAchievements").Include("UnionPrograms.UnionSchedules")
+				var q = (from u in db.Unions.Include("UnionPrograms.UnionAchievements.UnionAchievementParticipants").Include("UnionPrograms.UnionSchedules")
 						select u).ToList();
 
 				res.AddRange(q.Select(u => new UnionDTO()
@@ -170,6 +170,28 @@ namespace DDTE.BL.Providers
 						baseUnpa.Participant = unpa.Participant;
 						baseUnpa.Result = unpa.Result;
 						baseUnpa.ModifiedDate = DateTime.UtcNow;
+
+                        // Participants
+                        var newParticipants = new List<UnionAchievementParticipant>();
+                        foreach (var part in unpa.Participants)
+                        {
+                            var basePart = baseUnpa.UnionAchievementParticipants.FirstOrDefault(p => p.UnionAchievementParticipantId == part.ParticipantId);
+                            if (basePart == null)
+                            {
+                                basePart = new UnionAchievementParticipant() { CreatedDate = DateTime.UtcNow };
+                                newParticipants.Add(basePart);
+                            }
+
+                            basePart.ModifiedDate = DateTime.UtcNow;
+                            basePart.ParticipantName = part.ParticipantName;
+                            basePart.Result = part.Result;
+                        }
+                        newParticipants.ForEach(np => baseUnpa.UnionAchievementParticipants.Add(np));
+
+                        // Delete excess participants
+                        baseUnpa.UnionAchievementParticipants.Where(ap => !unpa.Participants.Any(p => p.ParticipantId == ap.UnionAchievementParticipantId))
+                            .ToList()
+                            .ForEach(p => db.UnionAchievementParticipants.Remove(p));
 					}
                     newAchievements.ForEach(a => baseUp.UnionAchievements.Add(a));
 

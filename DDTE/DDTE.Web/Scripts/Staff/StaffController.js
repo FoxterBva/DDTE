@@ -132,6 +132,8 @@
             });
         }
 
+
+
         function GetEmployee(emplId) {
             return StaffService.GetEmployee(emplId).then(
                 function (res) {
@@ -166,6 +168,12 @@
         }
 
         function Init() {
+            StaffService.CanEditStaff().then(
+                function (res) {
+                    $scope.Data.CanEdit = res;
+                }
+            );
+
             ReloadEmployees();
         }
 

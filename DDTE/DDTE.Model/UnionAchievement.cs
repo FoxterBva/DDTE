@@ -14,6 +14,11 @@ namespace DDTE.Model
     
     public partial class UnionAchievement
     {
+        public UnionAchievement()
+        {
+            this.UnionAchievementParticipants = new HashSet<UnionAchievementParticipant>();
+        }
+    
         public int UnionAchievementId { get; set; }
         public int UnionProgramId { get; set; }
         public string Name { get; set; }
@@ -25,5 +30,6 @@ namespace DDTE.Model
         public System.DateTime ModifiedDate { get; set; }
     
         public virtual UnionProgram UnionProgram { get; set; }
+        public virtual ICollection<UnionAchievementParticipant> UnionAchievementParticipants { get; set; }
     }
 }

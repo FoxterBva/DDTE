@@ -52,6 +52,15 @@
             $scope.CurrentUnion.UnionPrograms[upIndex].Achievements.splice(achIndex, 1);
         }
 
+        $scope.AddParticipant = function (upIndex, achIndex) {
+            $scope.CurrentUnion.UnionPrograms[upIndex].Achievements[achIndex].Participants.push(GetEmptyParticipant());
+        }
+
+        $scope.DeleteParticipant = function (upIndex, achIndex, partIndex) {
+            $scope.CurrentUnion.UnionPrograms[upIndex].Achievements[achIndex].Participants.splice(partIndex, 1);
+        }
+
+
         $scope.EditUnion = function (id) {
             if (id == 0) {
                 SetCurrentUnion(GetEmptyUnion());
@@ -134,7 +143,14 @@
 
         function GetEmptyAchievement() {
             return {
-                UnionAchievementId: 0
+                UnionAchievementId: 0,
+                Participants: []
+            };
+        }
+
+        function GetEmptyParticipant() {
+            return {
+                UnionAchievementParticipantId: 0
             };
         }
 

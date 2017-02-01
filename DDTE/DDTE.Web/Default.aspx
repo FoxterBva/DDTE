@@ -91,6 +91,7 @@
 
     <asp:Panel ID="pnlAddNews" runat="server">
         <asp:LinkButton ID="lbAddNews" runat="server" Text="Добавить новость" CssClass="button" OnClientClick="ShowEditForm(0); return false;"></asp:LinkButton>
+        <a class="button" href="/Pages/AddMedia.aspx" target="_blank" >Добавить медиа-файл</a>
     </asp:Panel>
 
     <asp:Panel ID="pnlEditForm" runat="server" >

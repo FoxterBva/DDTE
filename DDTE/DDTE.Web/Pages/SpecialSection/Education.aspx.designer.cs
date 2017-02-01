@@ -22,6 +22,15 @@ namespace DDTE.Web.Pages.SpecialSection {
         protected global::DDTE.Web.Controls.DocumentsList documentList;
         
         /// <summary>
+        /// dlEducationReglament control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DDTE.Web.Controls.DocumentsList dlEducationReglament;
+        
+        /// <summary>
         /// dlDecorativeCrafts control.
         /// </summary>
         /// <remarks>
@@ -65,5 +74,23 @@ namespace DDTE.Web.Pages.SpecialSection {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DDTE.Web.Controls.DocumentsList dlTheater;
+        
+        /// <summary>
+        /// dlSocPed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DDTE.Web.Controls.DocumentsList dlSocPed;
+        
+        /// <summary>
+        /// dlMilitaryPatr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DDTE.Web.Controls.DocumentsList dlMilitaryPatr;
     }
 }

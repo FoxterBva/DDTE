@@ -242,7 +242,7 @@ namespace DDTE.Web
 					return res;
 				}
 
-				photoProvider.DeletePhoto(photoId, HttpRuntime.AppDomainAppPath + "\\Photos");
+				photoProvider.DeletePhoto(photoId, HttpRuntime.AppDomainAppPath + "Photos");
 			}
 			catch (Exception ex)
 			{
@@ -252,6 +252,43 @@ namespace DDTE.Web
 
 			return res;
 		}
+
+        [WebMethod]
+        public ServiceResultBase RecreateThumbnail(string path)
+        {
+            var res = new ServiceResultBase();
+
+            try
+            {
+                if (!CanEditPhotos())
+                {
+                    res.ErrorMessage = "Недостаточно прав";
+                    return res;
+                }
+
+                if (!GeneralHelper.IsLocalPath(path))
+                {
+                    res.ErrorMessage = "Создание превью не поддерживается для внешних файлов";
+                    return res;
+                }
+
+                path = System.IO.Path.Combine(HttpRuntime.AppDomainAppPath, path.Trim('/').Replace('/', '\\'));
+
+                photoProvider.CreateThumbnail(path, 176);
+            }
+            catch (System.IO.FileNotFoundException fnfex)
+            {
+                res.ErrorMessage = "Исходный файл не найден";
+                LogError("CreateThumbnail", "File '" + path + "'", fnfex);
+            }
+            catch (Exception ex)
+            {
+                res.ErrorMessage = "Операция завершена с ошибкой";
+                LogError("CreateThumbnail", "Unexpected error", ex);
+            }
+
+            return res;
+        }
 
         #region Unions
 
@@ -448,6 +485,12 @@ namespace DDTE.Web
             }
 
             return res;
+        }
+
+        [WebMethod]
+        public bool CanEditStaffDetails()
+        {
+            return CanEditStaff();
         }
 
         #endregion

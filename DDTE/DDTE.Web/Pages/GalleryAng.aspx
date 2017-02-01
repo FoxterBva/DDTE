@@ -114,11 +114,12 @@
                 <div class="data-load-overlay" data-ng-show="DisplayLoading">Загрузка...</div>
                 <div data-ng-repeat="pi in photoItems" data-ng-class="{ 'photo-item album' : pi.ItemType == 0, 'photo-item' : pi.ItemType == 1 } " >
                     <div data-ng-if="pi.ItemType == 0">
-                        <div class="photo-album" >
-                            <span class="title" data-ng-click="SelectFolder(pi.Id, pi.Title)" title="Смотреть">{{ pi.Title }}</span>
+                        <div class="photo-album" data-ng-click="SelectFolder(pi.Id, pi.Title)" title="Смотреть" >
+                            <span class="title" >{{ pi.Title }}</span>
+                            <div class="count">({{ pi.PhotoCount }} фотографи{{ pi.PhotoCount % 10 == 1 ? 'я' : pi.PhotoCount % 10 > 4 || pi.PhotoCount % 10 == 0 ? 'й' : 'и' }})</div>
                             <span class="descr">{{ pi.Description }}</span>
                             <span class="created">Добавлено: {{ pi.CreatedDate | jsDate | date:'yyyy-MM-dd' }}</span>
-                            <%--<div class="count">x Фотографий</div>--%>
+                            
                         </div>
                         <asp:Literal ID="ltlAlbumActions" runat="server">
                             <div class="actions">
@@ -132,7 +133,7 @@
                             <div class="photo-image-container">
                                 <a class="img-link" href="#" data-ng-click="ViewImage(pi)" >
                                     <!-- onclick="$('#overlay').toggle();$('#bigImage').attr('src', $(this).children().first().attr('src')); return false;" -->
-                                    <img id="imgPhoto" runat="server" src="#" data-ng-src="{{ pi.ImagePath }}" class="photo-image"  />
+                                    <img id="imgPhoto" runat="server" src="#" data-ng-src="{{ pi | tmbimage  }}" class="photo-image blind-visible"  />
                                 </a>
                             </div>
                             <div class="img-title">{{ pi.Title }}</div>
@@ -141,6 +142,7 @@
                             <div class="actions">
                                 <div class="button" data-ng-click="ToggleEditPhotoForm(pi.Id)" title="Редактировать фотографию" >Изменить</div>
                                 <div class="button" data-ng-click="DeletePhoto(pi.Id, pi.Title)" title="Удалить фотографию" >Удалить</div>
+                                <div class="button" data-ng-click="RecreateThumb(pi)" title="Пересоздать превью" >Пересоздать превью</div>
                             </div>
                         </asp:Literal>
                     </div>
@@ -152,8 +154,14 @@
                 <div class="photo-big" >
                     <div class="btn-close" data-ng-click="CloseImage()">x</div>
                     <div class="photo-big-title">{{ currentImage.Title }}</div>
-                    <div class="img-big" id="bigImageResizer">
-                        <img id="bigImage" src="#" data-ng-src="{{ currentImage.ImagePath }}" class="img-big" />
+                    <div class="img-big" id="bigImageResizer" style="position: relative">
+                        <img id="bigImage" src="#" data-ng-src="{{ currentImage.ImagePath }}" class="img-big blind-visible" />
+                        <div class="slider-cnt img-prev" style="">
+                            <div data-ng-click="PrevImage()" class="slider-btn"></div>
+                        </div>
+                        <div class="slider-cnt img-next" style="">
+                            <div data-ng-click="NextImage()" class="slider-btn"></div>
+                        </div>
                     </div>
                     <div class="photo-big-descr">{{ currentImage.Description }}</div>
                 </div>

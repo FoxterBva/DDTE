@@ -1,0 +1,137 @@
+﻿ .staff-list
+{
+            
+}
+
+.staff-list td
+{
+            
+}
+
+.staff-list .photo
+{
+    vertical-align: middle;
+    text-align: center;
+}
+
+.staff-list.details .photo img
+{
+    max-width: 320px;
+}
+
+.staff-list .row-name
+{
+    padding-left: 5px;
+    position: relative;
+    height: 30px;
+}
+
+.staff-list .row-name span
+{
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.staff-list .row-name .actions
+{
+    position: absolute;
+    right: 10px;
+    top: 0px;
+}
+
+.staff-list .row-title
+{
+    padding: 1px 2px 1px 2px;
+    font-weight: bold;
+    vertical-align: middle;
+    /*border: 1px solid #6BDDE2*/
+    line-height: 1.5;
+}
+
+.staff-list .row-value
+{
+    padding: 1px 2px 1px 2px;
+    vertical-align: middle;
+    /*border: 1px solid #6BDDE2*/
+    line-height: 1.5;
+}
+
+.staff-list .row-value span { white-space: pre-wrap; }
+
+.staff-list .row-value span
+{
+    display: block; 
+}
+
+.staff-list .divider td
+{
+    height: 35px;
+}
+.staff-edit-form
+{
+    width: 500px;
+    border: 1px solid;
+    padding: 10px;
+}
+
+.staff-edit-form .field-title
+{
+            
+    padding-right: 5px;
+}
+
+.staff-edit-form .field-value
+{
+    white-space:pre-wrap;
+}
+
+.staff-edit-form .field-value .photo-preview
+{
+    max-width: 150px;
+    max-height: 120px;
+}
+
+.staff-edit-form .field-title,
+.staff-edit-form .field-value
+{
+            
+}
+
+.staff-edit-form .field-value input[type='text'],
+.staff-edit-form .field-value textarea,
+.staff-list .row-value input[type='text'],
+.staff-list .row-value textarea
+{
+    width: 95%;
+}
+
+.ag-edit-form-overlay
+{
+    position: fixed; 
+    width: 100%; 
+    height: 100%; 
+    top: 0px; 
+    left: 0px; 
+    right: 0px; 
+    bottom: 0px;
+    background-color: rgba(150, 150, 150, .5);
+    z-index: 500;
+}
+
+.ag-edit-form
+{
+    position: fixed; 
+    top: 50px; 
+    z-index: 500; 
+    background-color: #D5E8EA; 
+    margin:auto; 
+    max-width: 1100px; 
+    left: 0px; 
+    right: 0px; 
+    border-radius: 5px;
+    top: 50%;
+    transform: translateY(-50%); 
+    box-shadow: #0A6F6E 2px 2px 1px 0px;
+    border: 1px solid;
+}

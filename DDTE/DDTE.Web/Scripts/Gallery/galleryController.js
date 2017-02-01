@@ -38,6 +38,32 @@
             return false;
         }
 
+        $scope.PrevImage = function () {
+            for (var i = 0; i < $scope.photoItems.length; i++) {
+                if ($scope.currentImage.Id == $scope.photoItems[i].Id) {
+                    if (i > 0)
+                        $scope.currentImage = $scope.photoItems[i - 1];
+                    else
+                        $scope.currentImage = $scope.photoItems[$scope.photoItems.length - 1];
+
+                    break;
+                }
+            }
+        }
+
+        $scope.NextImage = function () {
+            for (var i = 0; i < $scope.photoItems.length; i++) {
+                if ($scope.currentImage.Id == $scope.photoItems[i].Id) {
+                    if (i < $scope.photoItems.length - 1)
+                        $scope.currentImage = $scope.photoItems[i + 1];
+                    else
+                        $scope.currentImage = $scope.photoItems[0];
+
+                    break;
+                }
+            }
+        }
+
         $scope.ToggleCreateAlbumForm = function () {
             $scope.DisplayEditForm = !$scope.DisplayEditForm;
             if ($scope.DisplayEditForm)
@@ -143,6 +169,22 @@
             if (confirm("Вы действительно хотите удалить фотографию '" + title + "'?")) {
                 GalleryServiceFactory.DeletePhoto(id, onPhotoDeleted, onError);
             }
+        }
+
+        $scope.RecreateThumb = function (img) {
+            GalleryServiceFactory.RecreateThumb(img.ImagePath).then(
+                function (res) {
+                    if (!res.ErrorMessage) {
+                        alert('Превью создано. Для отображения перезагрузите страницу или откройте альбом заного.');
+                    }
+                    else {
+                        alert('Не удалось создать превью: ' + res.ErrorMessage);
+                    }
+                },
+                function (err) {
+                    alert('Не удалось создать превью');
+                }
+            );
         }
 
         function onItemsLoaded(data) {

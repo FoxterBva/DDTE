@@ -21,7 +21,7 @@ namespace DDTE.Web
 
 			try
 			{
-				if (!String.IsNullOrEmpty(path) && path.StartsWith("/" + DDTE.Web.Controls.DocumentsList.DocumentFolder))
+				if (!String.IsNullOrEmpty(path) && (path.StartsWith("/" + DDTE.Web.Controls.DocumentsList.DocumentFolder) || path.StartsWith("/Schedule")))
 				{
 
 					path = path.Remove(0, 1).Replace("/", "\\");
@@ -36,8 +36,12 @@ namespace DDTE.Web
 					
 					context.Response.TransmitFile(file.FullName);
 
-					context.Response.Flush();
-					context.Response.End();
+					//context.Response.Flush();
+					//context.Response.End();
+
+                    HttpContext.Current.Response.Flush();
+                    HttpContext.Current.Response.SuppressContent = true;
+                    HttpContext.Current.ApplicationInstance.CompleteRequest();
 				}
 				else
 				{
@@ -58,8 +62,12 @@ namespace DDTE.Web
 
 			context.Response.Write(errorMsg);
 
-			context.Response.Flush();
-			context.Response.End();
+			//context.Response.Flush();
+			//context.Response.End();
+
+            HttpContext.Current.Response.Flush();
+            HttpContext.Current.Response.SuppressContent = true;
+            HttpContext.Current.ApplicationInstance.CompleteRequest();
 		}
 
 		public bool IsReusable

@@ -21,5 +21,6 @@ namespace DDTE.Model.DTO
         public string ImagePath { get; set; }
 		public bool IsPublic { get; set; }
 		public DateTime CreatedDate { get; set; }
+        public int PhotoCount { get; set; }
     }
 }

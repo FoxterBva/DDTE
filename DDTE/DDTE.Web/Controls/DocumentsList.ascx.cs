@@ -24,7 +24,7 @@ namespace DDTE.Web.Controls
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
-
+            
 		}
 
 		protected override void OnPreRender(EventArgs e)
@@ -155,6 +155,17 @@ namespace DDTE.Web.Controls
 					{
 						lbDelete.Visible = PermissionHelper.CanDeleteDocuments(Request.IsAuthenticated);
 					}
+
+                    var tbLink = e.Item.FindControl("tbLink") as TextBox;
+                    if (tbLink != null)
+                        tbLink.Visible = DisplayGetLinkBtn;
+
+                    var hpLinkInfo = e.Item.FindControl("hpLinkInfo") as HyperLink;
+                    if (hpLinkInfo != null)
+                    {
+                        hpLinkInfo.Attributes.Add("onclick", String.Format("$('#{0}').toggle(); return false;", tbLink.ClientID));
+                        hpLinkInfo.Visible = DisplayGetLinkBtn;
+                    }
 				}
 			}
 		}
@@ -183,5 +194,18 @@ namespace DDTE.Web.Controls
 		}
 		// Page.ResolveUrl("~/Documents/" + Eval("FileName"))
 		public string Category { get; set; }
+
+        bool displayGetLinkBtn = false;
+        public bool DisplayGetLinkBtn 
+        { 
+            get 
+            { 
+                return displayGetLinkBtn; 
+            } 
+            set 
+            { 
+                displayGetLinkBtn = value; 
+            } 
+        }
 	}
 }

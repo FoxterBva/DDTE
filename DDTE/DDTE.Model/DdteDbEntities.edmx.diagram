@@ -17,6 +17,8 @@
         <AssociationConnector Association="DdteDBModel.FK_UnionProgram_UnionId" />
         <AssociationConnector Association="DdteDBModel.FK_UnionAchievement_UnionProgramId" />
         <AssociationConnector Association="DdteDBModel.FK_UnionSchedule_UnionProgramId" />
+        <EntityTypeShape EntityType="DdteDBModel.UnionAchievementParticipant" Width="1.5" PointX="8" PointY="6.25" />
+        <AssociationConnector Association="DdteDBModel.FK_UnionAchievementParticipant_UnionAchievementId" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

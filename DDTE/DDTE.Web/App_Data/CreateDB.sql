@@ -242,3 +242,36 @@ ALTER TABLE dbo.UnionAchievement ADD
 		UnionProgramId
 	) ON DELETE CASCADE
 GO
+
+PRINT '-> dbo.UnionAchievementParticipant'
+GO
+IF OBJECT_ID('UnionAchievementParticipant') IS NULL
+BEGIN
+	CREATE TABLE dbo.[UnionAchievementParticipant] 
+	(
+		[UnionAchievementParticipantId] INT NOT NULL identity(1,1),
+		[UnionAchievementId] INT NOT NULL,
+		[ParticipantName] NVARCHAR(1000) NULL,
+		[Result] NVARCHAR(200) NULL,
+		[CreatedDate] DATETIME NOT NULL,
+		[ModifiedDate] DATETIME NOT NULL,
+		CONSTRAINT [PK_UnionAchievementParticipant] PRIMARY KEY CLUSTERED 
+		(
+			[UnionAchievementParticipantId]
+		)
+	)
+END
+GO
+
+PRINT '-> Create FK UnionAchievementParticipant-UnionAchievement'
+GO
+ALTER TABLE dbo.UnionAchievementParticipant ADD 
+	CONSTRAINT FK_UnionAchievementParticipant_UnionAchievementId FOREIGN KEY
+	(
+		UnionAchievementId
+	) 
+	REFERENCES dbo.[UnionAchievement]
+	(
+		UnionAchievementId
+	) ON DELETE CASCADE
+GO

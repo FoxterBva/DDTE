@@ -33,5 +33,6 @@ namespace DDTE.Model
         public DbSet<UnionAchievement> UnionAchievements { get; set; }
         public DbSet<UnionProgram> UnionPrograms { get; set; }
         public DbSet<UnionSchedule> UnionSchedules { get; set; }
+        public DbSet<UnionAchievementParticipant> UnionAchievementParticipants { get; set; }
     }
 }

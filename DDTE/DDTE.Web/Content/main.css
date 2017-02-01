@@ -40,13 +40,16 @@ ul
 h2
 {
     margin-bottom: 15px;
-    font-size: 20px;
+    /*font-size: 20px;*/
+    font-size: 1.43em;
+    text-transform: uppercase;
 }
 
 h3
 {
     margin-bottom: 10px;
-    font-size: 16px;
+    /*font-size: 16px;*/
+    font-size: 1.14em;
 }
 
 .logo-main
@@ -117,6 +120,7 @@ ul.nav-main
     width: 1170px;
     display: table;
     line-height: 1;
+    font-size: 14px !important;
 }
 
 ul.nav-main > li
@@ -353,9 +357,23 @@ ul.nav-main > li ul {
 .news-footer .time
 {
     margin-left: 15px;
-    font-size: 11px;
+    /*font-size: 11px;*/
+    font-size: 0.78em;
     font-weight: bold;
     color: gray;
+}
+
+p.paragraph
+{
+    margin-bottom: 15px;
+    text-indent: 25px;
+}
+
+ul.paragraph
+{
+    margin-top: -15px;
+    margin-bottom: 15px;
+    margin-left: 25px;
 }
 
 /****  Gallery  ****/
@@ -390,10 +408,22 @@ ul.nav-main > li ul {
     background-color: #6BE2E0;
     text-decoration: none;
     line-height: 1;
+    font-size: 14px !important;
 }
 
 .button:hover {
     background-color: #90f7f5;
+}
+
+.link-button
+{
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.link-button:hover
+{
+    color: #61c3c1;
 }
 
 .edit-form
@@ -479,6 +509,7 @@ ul.nav-main > li ul {
     padding: 10px;
     text-decoration: none;
     height: 200px;
+    cursor: pointer;
 }
 
 .photo-item .photo
@@ -490,9 +521,8 @@ ul.nav-main > li ul {
 .photo-item .photo-album .title
 {
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     text-align: center;
-    cursor: pointer;
     display: block;
 }
 
@@ -511,7 +541,18 @@ ul.nav-main > li ul {
     text-align: center;
     color: #ABABAB;
     display: block;
-    font-size: 10px;
+    /*font-size: 10px;*/
+    font-size: 0.71em;
+    width: 100%;
+    margin-top: 4px;
+}
+
+.photo-item .photo-album .count
+{
+    text-align: center;
+    margin-bottom: 5px;
+    color: #ABABAB;
+    display: block;
     width: 100%;
     margin-top: 4px;
 }
@@ -652,6 +693,60 @@ img.img-big
     max-width: 100%;
 }
 
+.slider-cnt
+{
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    width: 30%;
+    opacity: 0;
+}
+
+.slider-cnt:hover
+{
+    opacity: 1;
+}
+
+.slider-cnt.img-next
+{
+    right: 0px;
+}
+
+.slider-cnt.img-prev
+{
+    left: 0px;
+}
+
+.slider-cnt .slider-btn
+{
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-size: cover;
+    opacity: 0.6;
+}
+
+.slider-cnt .slider-btn:hover
+{
+    opacity: 1;
+}
+
+.img-next .slider-btn
+{
+    right: 20px;
+    background-image: url('/images/arrow_right.png');
+    
+}
+
+.img-prev .slider-btn
+{
+    left: 20px;
+    background-image: url('/images/arrow_left.png');
+}
+
 /**** Special Section ****/
 
 .special-links-main
@@ -705,10 +800,11 @@ img.img-big
 
 .special-content-main
 {
-    padding: 10px;
+    padding-left: 10px;
+    padding-top: 10px;
     /*border: 1px solid #DEDEDE;*/
     display: block;
-    width: 820px;
+    /*width: 820px;*/
     min-height: 500px;
     margin-left: 270px;
 }
@@ -784,7 +880,7 @@ ul.documents a.extension-link[href$='.png'] { background:transparent url(/Images
 
 ul.documents a.extension-link
 {
-    margin-left: 10px;
+    margin-left: 5px;
     margin-right: 10px;
     padding-left: 21px; 
     display:inline-block; 
@@ -800,7 +896,16 @@ ul.documents .documents-item
 {
     list-style: none;
     display: block;
-    padding: 5px 5px 5px 0px;
+    margin-bottom: 3px;
+    border: 1px solid #51CFDD;
+    border-radius: 5px;
+    line-height: 1;
+    text-decoration: none;
+}
+
+ul.documents .documents-item:hover
+{
+    border-color: #0A6F6E;
 }
 
 ul.documents-main .documents-list
@@ -818,13 +923,55 @@ ul.documents-main ul.documents-inner > li > span
     font-style: italic; 
 }
 
-.document-link-download
+.document-link-add
 {
-    /*display: inline-block;
-    height: 21px;
-    width: 21px;
-    line-height: 21px;
-    background:transparent url(/Images/download.png) no-repeat;*/
+    background-image: url(/Images/ico-add.png);
+    background-repeat: no-repeat;
+    padding-left: 21px;
+    margin-bottom: 4px;
+}
+
+.document-link-btn
+{
+    cursor: pointer;
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    line-height: 20px;
+    vertical-align: middle;
+    float: right;
+    margin-right: 5px;
+    background-size: cover;
+    margin-top: 2px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.document-link-btn:hover
+{
+    border: 1px solid #FAFAFA;
+}
+
+.document-link-btn.download
+{
+    background-image: url(/Images/ico-load.png);
+}
+
+.document-link-btn.view
+{
+    background-image: url(/Images/ico-view.png);
+}
+
+.document-link-btn.delete
+{
+    background-image: url(/Images/ico-delete.png);
+}
+
+.document-link-btn.getlink
+{
+    /*background-image: url(/Images/ico-delete.png);*/
 }
 
 /*  education */
@@ -969,3 +1116,101 @@ details[open] summary:after {
     display: none !important;
 }
 
+
+/* blind-panel */
+.blind-panel
+{
+    position: fixed; 
+    top: 190px; 
+    right: 1px; 
+    z-index: 100;
+    box-shadow: #777777 2px 2px 2px 0px;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.blnd-pnl-toggler
+{
+    height: 50px; 
+    width: 50px; 
+    position: fixed; 
+    top: 140px; 
+    right: 1px; 
+    border: 1px solid Black; 
+    cursor: pointer;
+    background-color: white !important;
+}
+
+/*.blind-panel .controls
+{
+    background-color: #FDFDFD !important;
+    margin-top: 10px;
+}
+
+.blind-panel.collapsed
+{
+    height: 20px;
+}
+
+.blind-panel.collapsed .controls
+{
+    display: none;
+}
+
+.blind-panel .pnl-toggle
+{
+    height: 20px;
+    border-top: 1px solid #0A6F6E;
+    cursor: pointer;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: #FDFDFD !important;
+}
+
+.blind-panel.collapsed .pnl-toggle
+{
+
+}*/
+
+.blind-btn
+{
+    cursor: pointer;
+    margin-left: 45px;
+    margin-right: 45px;
+    margin-bottom: 5px;
+    height: 41px;
+    width: 41px;
+    display: block;
+}
+
+.blind-btn.blnd-small
+{
+    background-image: url(/images/blnd-small.png) !important;
+}
+
+.blind-btn.blnd-med
+{
+    background-image: url(/images/blnd-med.png) !important;
+}
+
+.blind-btn.blnd-large
+{
+    background-image: url(/images/blnd-large.png) !important;
+}
+
+.blind-btn.blnd-blackonwhite
+{
+    background-image: url(/images/blnd-blackonwhite.png) !important;
+}
+
+.blind-btn.blnd-whiteonblack
+{
+    background-image: url(/images/blnd-whiteonblack.png) !important;
+}
+
+.blind-btn.blnd-default
+{
+    background-image: url(/images/blnd-default.png) !important;
+}

@@ -169,6 +169,8 @@
       <DependentUpon>DdteDB.mdf</DependentUpon>
     </Content>
     <Content Include="App_Data\TestData.sql" />
+    <Content Include="Content\adjustments\black-white.css" />
+    <Content Include="Content\adjustments\white-black.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\main.css" />
     <Content Include="Content\reset.css" />
@@ -228,13 +230,25 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\staff.css" />
+    <Content Include="Content\themes\unions.css" />
+    <Content Include="Controls\BlindPanel.ascx" />
     <Content Include="Controls\DocumentsList.ascx" />
     <Content Include="Controls\PhotoViewer.ascx" />
     <Content Include="DataActionService.asmx" />
     <Content Include="Default.aspx" />
     <Content Include="Images\accent.png" />
+    <Content Include="Images\arrow_left.png" />
+    <Content Include="Images\arrow_right.png" />
     <Content Include="Images\Background.png" />
     <Content Include="Images\Background2.png" />
+    <Content Include="Images\blind-version.png" />
+    <Content Include="Images\blnd-default.png" />
+    <Content Include="Images\blnd-large.png" />
+    <Content Include="Images\blnd-med.png" />
+    <Content Include="Images\blnd-whiteonblack.png" />
+    <Content Include="Images\blnd-blackonwhite.png" />
+    <Content Include="Images\blnd-small.png" />
     <Content Include="Images\bullet.png" />
     <Content Include="Images\ddte_structure.png" />
     <Content Include="Images\download.png" />
@@ -242,6 +256,10 @@
     <Content Include="Images\ExtensionIcons.png" />
     <Content Include="Images\fon24.png" />
     <Content Include="Images\heroAccent.png" />
+    <Content Include="Images\ico-add.png" />
+    <Content Include="Images\ico-delete.png" />
+    <Content Include="Images\ico-load.png" />
+    <Content Include="Images\ico-view.png" />
     <Content Include="Images\in_dev.png" />
     <Content Include="Images\LineBackground.png" />
     <Content Include="Images\LineBackground2.png" />
@@ -270,6 +288,7 @@
     <None Include="Properties\PublishProfiles\Local publish 2.pubxml" />
     <None Include="Properties\PublishProfiles\LocalPackage.pubxml" />
     <None Include="Properties\PublishProfiles\LocalPublish.pubxml" />
+    <Content Include="Pages\AddMedia.aspx" />
     <Content Include="Scripts\angular.min.js.map" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Pages\Contacts.aspx" />
@@ -442,6 +461,13 @@
       <DependentUpon>RegisterExternalLogin.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controls\BlindPanel.ascx.cs">
+      <DependentUpon>BlindPanel.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\BlindPanel.ascx.designer.cs">
+      <DependentUpon>BlindPanel.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DocumentsList.ascx.cs">
       <DependentUpon>DocumentsList.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -459,6 +485,9 @@
     <Compile Include="DataActionService.asmx.cs">
       <DependentUpon>DataActionService.asmx</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DdteMasterPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -489,6 +518,13 @@
     </Compile>
     <Compile Include="MainRight.master.designer.cs">
       <DependentUpon>MainRight.master</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AddMedia.aspx.cs">
+      <DependentUpon>AddMedia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\AddMedia.aspx.designer.cs">
+      <DependentUpon>AddMedia.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Contacts.aspx.cs">
       <DependentUpon>Contacts.aspx</DependentUpon>
@@ -632,7 +668,35 @@
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>5</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Word">
+      <Guid>{00020905-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>8</VersionMajor>
+      <VersionMinor>5</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />
   </ItemGroup>
@@ -649,6 +713,9 @@
       <Project>{78d50339-b158-4218-b364-7cfb3079cc08}</Project>
       <Name>DDTE.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Schedule\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

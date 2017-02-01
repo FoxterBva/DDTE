@@ -19,6 +19,9 @@ namespace DDTE.Model
 				Description = album.Description
 			};
 
+            if (album.Photos != null)
+                res.PhotoCount = album.Photos.Count;
+
 			return res;
 		}
 

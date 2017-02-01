@@ -14,11 +14,14 @@ namespace DDTE.Web.Pages.SpecialSection
 			if (!IsPostBack)
 			{
 				documentList.RefreshList();
+				dlEducationReglament.RefreshList();
 				dlChoreography.RefreshList();
 				dlDecorativeCrafts.RefreshList();
 				dlFineArts.RefreshList();
 				dlTheater.RefreshList();
 				dlVocals.RefreshList();
+				dlSocPed.RefreshList();
+				dlMilitaryPatr.RefreshList();
 			}
 		}
 	}

@@ -18,6 +18,12 @@ namespace DDTE.Model.DTO
 			Date = ach.Date;
 			Participant = ach.Participant;
 			Result = ach.Result;
+
+            Participants = ach.UnionAchievementParticipants.Select(p => new UnionAchievementParticipantDTO() { 
+                ParticipantId = p.UnionAchievementParticipantId, 
+                ParticipantName = p.ParticipantName, 
+                Result = p.Result 
+            }).ToList();
 		}
 
 		public int UnionAchievementId { get; set; }
@@ -27,5 +33,7 @@ namespace DDTE.Model.DTO
 		public string Participant { get; set; }
 		public string Result { get; set; }
 		public bool IsActive { get; set; }
+
+        public List<UnionAchievementParticipantDTO> Participants { get; set; }
 	}
 }

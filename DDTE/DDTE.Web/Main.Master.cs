@@ -10,14 +10,9 @@ using DDTE.Web.Helpers;
 namespace DDTE.Web
 {
 	// for custom auth http://support.microsoft.com/kb/301240; http://tech.pro/tutorial/1216/implementing-custom-authentication-for-aspnet
-	public partial class Main : System.Web.UI.MasterPage
+	public partial class Main : DdteMasterPage
 	{
 		bool isLoginVisible = false;
-
-		protected void Page_Load(object sender, EventArgs e)
-		{
-
-		}
 
 		protected void btnLogin_Click(object sender, EventArgs e)
 		{
@@ -51,6 +46,8 @@ namespace DDTE.Web
 
 		protected override void OnPreRender(EventArgs e)
 		{
+			base.OnPreRender(e);
+
 			pnlLogIn.Visible = !Request.IsAuthenticated;
 			pnlLogOut.Visible = Request.IsAuthenticated;
 

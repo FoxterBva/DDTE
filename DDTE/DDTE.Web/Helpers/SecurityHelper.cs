@@ -76,14 +76,22 @@ namespace DDTE.Web.Helpers
 		public static IPrincipal CreatePrincipalFromTicket(string id, string data)
 		{
 			var parts = data.Split(new string[1]{ SecurityConstants.AuthCookieUserDataSeparator }, StringSplitOptions.None);
-			var roles = parts[2].Split(new string[1]{ SecurityConstants.AuthCookieRolesSeparator }, StringSplitOptions.RemoveEmptyEntries);
 
-			var principal = new DdtePrincipal(new GenericIdentity(id), roles)
-			{
-				CustomData = new CustomPrincipalData(data)
-			};
+            if (parts.Length >= 2)
+            {
+                var roles = parts[2].Split(new string[1] { SecurityConstants.AuthCookieRolesSeparator }, StringSplitOptions.RemoveEmptyEntries);
 
-			return principal;
+                var principal = new DdtePrincipal(new GenericIdentity(id), roles)
+                {
+                    CustomData = new CustomPrincipalData(data)
+                };
+
+                return principal;
+            }
+            else
+            {
+                return null;
+            }
 		}
 
 		public static void Logout()

@@ -1,0 +1,209 @@
+﻿.union-loading
+{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    opacity: 0.5;
+    background-color: #ABABAB;
+    z-index: 100;
+}
+
+.unions .union-title
+{
+    display: inline;
+    cursor: pointer;
+}
+
+.unions .actions
+{
+    position: absolute;
+    right: 5px;
+    top: 0px;
+}
+
+.unions > li
+{
+    margin-bottom: 10px;
+}
+
+.unions > li:hover
+{
+            
+}
+
+.unions .union-content
+{
+    margin-bottom: 25px;
+}
+
+.up-title
+{
+    margin-bottom: 3px;
+    margin-top: 15px;
+}
+
+.up-name
+{
+    text-decoration: underline;
+}
+
+.up-list
+{
+    margin-left: 30px;
+}
+
+.up-list .label
+{
+    font-weight: bold;
+}
+
+.up-tasks .up-task-title
+{
+    text-decoration: underline;
+}
+
+/* \/ edit -form \/ */
+.union-edit
+{
+    padding: 10px;
+    border: 2px solid;
+    box-shadow: #777777 2px 2px 2px 0px;
+    margin-bottom: 15px;
+}
+
+.union-edit .union-program
+{
+    padding: 10px;
+    border: 1px solid;
+    margin-top: 10px;
+    box-shadow: #777777 2px 2px 4px 2px;
+    margin-bottom: 15px;
+}
+
+.union-edit .union-program .row
+{
+    margin-bottom: 5px;
+}
+
+.union-edit input[type='text'],
+.union-edit .union-program .field input[type='text'],
+.union-edit .union-program .field textarea
+{
+    width: 98%;
+}
+
+.up-schedule-edit,
+.up-achievements-edit
+{
+    width: 100%;
+}
+
+.up-schedule-edit th,
+.up-schedule-edit td
+{
+    border: 1px solid;
+    padding: 2px;
+    line-height: 1;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.up-schedule-edit td input[type='text']
+{
+    width: 98%;
+}
+
+.up-schedule-edit th { background-color: #6BE2E0; }
+.up-schedule-edit .year { }
+.up-schedule-edit .duration { }
+.up-schedule-edit .hrs-day { }
+.up-schedule-edit .hrs-week { }
+.up-schedule-edit .hrs-year { }
+.up-schedule-edit .lessons {  }
+
+.up-achievements-edit th,
+.up-achievements-edit td
+{
+    border: 1px solid;
+    padding: 2px;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+.up-achievements-edit th { text-align: center; background-color: #6BE2E0; }
+.up-achievements-edit .name { width: 350px; }
+.up-achievements-edit .date { }
+.up-achievements-edit .participants { }
+.up-achievements-edit .results {  }
+
+.up-achievements-edit td input[type=text],
+.up-achievements-edit td textarea
+{
+    width: 98%;
+}
+
+.up-achievements-edit td textarea
+{
+    height: 90%;
+}
+
+/* /\ edit -form /\ */
+
+.up-schedule,
+.up-achievements
+{
+    width: 100%;
+}
+
+.up-schedule th,
+.up-schedule td
+{
+    border: 1px solid;
+    padding: 9px;
+    line-height: 1;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.up-schedule th { background-color: #6BE2E0; }
+.up-schedule .year { width: 100px; }
+.up-schedule .duration { width: 150px; }
+.up-schedule .hrs-day { width: 90px; }
+.up-schedule .hrs-week { width: 110px; }
+.up-schedule .hrs-year { width: 90px; }
+.up-schedule .lessons {  }
+
+.up-achievements th,
+.up-achievements td
+{
+    border: 1px solid;
+    padding: 9px;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+.up-achievements th { text-align: center; background-color: #6BE2E0; }
+.up-achievements .name { width: 350px; }
+.up-achievements .date { width: 150px; }
+.up-achievements .participants { width: 165px; }
+.up-achievements .results {  }
+.up-achievements .participants-results { }
+.up-achievements .grp-record { display: block; }
+
+.up-ach-participants
+{
+    width: 100%;
+}
+
+.up-ach-participants tr td
+{
+    border: 0px;
+    padding: 2px;
+    border-bottom: 1px dotted #6BE2E0
+}
+
+.up-ach-participants tr:last-child td{
+    border-bottom: 0px;
+}

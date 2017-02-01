@@ -78,6 +78,18 @@
             );
         }
 
+        factory.CanEditStaff = function (){
+            var httpParams = GetBaseJsonHttpParams();
+            httpParams.url = '/dataactionservice.asmx/caneditstaffdetails';
+            httpParams.data = { };
+
+            return $http(httpParams).then(
+                function (res) {
+                    return res.data.d;
+                }
+            );
+        }
+
         function GetEmptyEmployee() {
             return {
                 Name: '',

@@ -1,0 +1,10 @@
+﻿*:not(ymaps) {
+    color: black !important;
+    background-color: white !important;
+    background-image: none
+}
+
+img:not(.blind-visible)
+{
+    display: none !important;
+}

@@ -17,9 +17,12 @@ namespace DDTE.Web.Helpers
 			_file = file;
 		}
 
-		public void Save(string path)
+		public string Save(string path)
 		{
-			_file.SaveAs(path + "/" + _file.FileName);
+            var filePath = path + "/" + _file.FileName;
+			_file.SaveAs(filePath);
+
+            return filePath;
 		}
 
 		public string FileName { get { return _file.FileName; } }
@@ -36,25 +39,38 @@ namespace DDTE.Web.Helpers
 			_fileName = fileName;
 		}
 
-		public void Save(string path)
+		public string Save(string path)
 		{
 			var filePath = Path.Combine(path, _fileName);
-			//using (MemoryStream ms = new MemoryStream(_file))
-			//{
-			//	//Image image = Image.FromStream(ms);
-			//	//image.Save(filePath);
-			//	using (Bitmap bm2 = new Bitmap(ms))
-			//	{
-			//		bm2.Save(Path.Combine(path, _fileName));
-			//	}
-			//}
+
 			using (var imageFile = new FileStream(filePath, FileMode.Create))
 			{
 				imageFile.Write(_file, 0, _file.Length);
 				imageFile.Flush();
 			}
 
-			
+            return filePath;
+
+            // tumbnail
+            // vb: moved to provider
+            //using (var ms = new MemoryStream(_file))
+            //{
+            //    using (var img = System.Drawing.Image.FromStream(ms))
+            //    {
+            //        var imgSize = 176;
+            //        var ratio = img.Height / imgSize;
+            //        using (var tmbImg = img.GetThumbnailImage(img.Width * ratio, img.Height * ratio, null, IntPtr.Zero))
+            //        {
+
+            //            var extPos = filePath.LastIndexOf('.');
+            //            if (extPos >= 0)
+            //            {
+            //                var tmbPath = DDTE.Common.GeneralHelper.GetTumbPath(filePath);
+            //                tmbImg.Save(tmbPath);
+            //            }
+            //        }
+            //    }
+            //}
 		}
 
 		public string FileName { get { return _fileName; } }

@@ -12,6 +12,7 @@ using DDTE.Common.Exceptions;
 using DDTE.Model;
 using DDTE.Model.DTO;
 using System.Transactions;
+using DDTE.Common;
 
 namespace DDTE.BL.Providers
 {
@@ -119,7 +120,8 @@ namespace DDTE.BL.Providers
 							IsPublic = a.IsPublic,
 							Title = a.Title,
 							Description = a.Description,
-							CreatedDate = a.CreatedDate
+							CreatedDate = a.CreatedDate,
+                            PhotoCount = a.Photos.Count
 						};
 
 				albums.AddRange(q.ToList());
@@ -173,6 +175,26 @@ namespace DDTE.BL.Providers
 
 		#region Photo
 
+        public void CreateThumbnail(string photoPath, int imgSize)
+        {
+            if (!GeneralHelper.IsLocalPath(photoPath))
+                return;
+
+            using (var img = System.Drawing.Image.FromFile(photoPath))
+            {
+                var ratio = (double)img.Height / imgSize;
+                using (var tmbImg = img.GetThumbnailImage((int)Math.Round(img.Width / ratio), (int)Math.Round(img.Height / ratio), null, IntPtr.Zero))
+                {
+                    var extPos = photoPath.LastIndexOf('.');
+                    if (extPos >= 0)
+                    {
+                        var tmbPath = DDTE.Common.GeneralHelper.GetTumbPath(photoPath);
+                        tmbImg.Save(tmbPath);
+                    }
+                }
+            }
+        }
+
 		/// <summary>
 		/// Adds photo
 		/// </summary>
@@ -202,8 +224,13 @@ namespace DDTE.BL.Providers
 					db.Photos.Add(p);
 					db.SaveChanges();
 
-					if (fileContainer != null)
-						fileContainer.Save(Path.Combine(photoPath, AlbumFolderPrefix + p.AlbumId.ToString()));
+                    if (fileContainer != null)
+                    {
+                        var folderPath = Path.Combine(photoPath, AlbumFolderPrefix + p.AlbumId.ToString());
+                        var filePath = fileContainer.Save(folderPath);
+
+                        CreateThumbnail(filePath, 176);
+                    }
 
 					ts.Complete();
 				}
@@ -285,7 +312,8 @@ namespace DDTE.BL.Providers
 						Title = album.Title,
 						ImagePath = String.Empty,
 						IsPublic = album.IsPublic,
-						CreatedDate = album.CreatedDate
+						CreatedDate = album.CreatedDate,
+                        PhotoCount = album.PhotoCount
 					});
 				}
 			}
@@ -355,9 +383,13 @@ namespace DDTE.BL.Providers
 						db.Photos.Remove(q);
 						db.SaveChanges();
 
-						var filePath = Path.Combine(path, q.FileName);
+						var filePath = Path.Combine(path, q.FileName.Trim('/').Replace('/', '\\'));
 						if (File.Exists(filePath))
 							File.Delete(filePath);
+
+                        var tmbPath = GeneralHelper.GetTumbPath(filePath);
+                        if (File.Exists(tmbPath))
+                            File.Delete(tmbPath);
 
 						ts.Complete();
 					}

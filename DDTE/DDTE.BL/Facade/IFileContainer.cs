@@ -7,7 +7,10 @@ namespace DDTE.BL.Facade
 {
 	public interface IFileContainer
 	{
-		void Save(string path);
+        /// <summary>
+        /// Returns saved file path
+        /// </summary>
+		string Save(string path);
 
 		string FileName { get; }
 	}

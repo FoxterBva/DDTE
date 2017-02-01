@@ -16,6 +16,7 @@ namespace DDTE.BL.Facade
 		List<AlbumDTO> ListAlbums();
 		void DeleteAlbum(int albumId, string path);
 
+        void CreateThumbnail(string photoPath, int imgSize);
 		void AddPhoto(PhotoDTO photo, IFileContainer fileContainer, string photoPath);
 		void UpdatePhoto(PhotoDTO photo);
 		List<Photo> ListPhotos(int albumId);

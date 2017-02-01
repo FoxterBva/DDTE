@@ -124,6 +124,21 @@
             });
         }
 
+        factory.RecreateThumb = function (path) {
+            var httpParams = {
+                url: '/DataActionService.asmx/RecreateThumbnail',
+                dataType: 'json',
+                method: 'POST',
+                data: "{ 'path': '" + path + "' }"
+            };
+
+            return $http(httpParams).then(
+                function (res) {
+                    return res.data.d;
+                }
+            );
+        }
+
         return factory;
     }
 

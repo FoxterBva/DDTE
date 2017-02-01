@@ -85,7 +85,9 @@ namespace DDTE.Web.Pages
 					var rptrA = e.Item.FindControl("rptrUnionAchievements") as Repeater;
 					if (rptrA != null)
 					{
-						rptrA.DataSource = unionProvider.GroupAchievements(up.Achievements);
+                        rptrA.ItemDataBound += rptrAchvmnts_ItemDataBound;
+
+						rptrA.DataSource = up.Achievements;
 						rptrA.DataBind();
 
 						rptrA.Visible = rptrA.Items.Count > 0;
@@ -93,5 +95,25 @@ namespace DDTE.Web.Pages
 				}
 			}
 		}
+
+        void rptrAchvmnts_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.DataItem != null)
+            {
+                var ach = e.Item.DataItem as UnionAchievementDTO;
+
+                if (ach != null)
+                {
+                    var rptrAP = e.Item.FindControl("rptrUnionAchievementParticipants") as Repeater;
+                    if (rptrAP != null)
+                    {
+                        rptrAP.DataSource = ach.Participants;
+                        rptrAP.DataBind();
+
+                        rptrAP.Visible = rptrAP.Items.Count > 0;
+                    }
+                }
+            }
+        }
 	}
 }

@@ -2,113 +2,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cphContent" runat="server">
     <script src="/Scripts/angular.min.js"></script>
-    <style type="text/css">
-        .staff-list
-        {
-            
-        }
-
-        .staff-list td
-        {
-            
-        }
-
-        .staff-list .photo
-        {
-            vertical-align: middle;
-            text-align: center;
-        }
-
-        .staff-list .photo img
-        {
-            max-width: 200px;
-            max-height: 200px;
-        }
-
-        .staff-list .row-name
-        {
-            padding-left: 5px;
-            position: relative;
-        }
-
-        .staff-list .row-name span
-        {
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        .staff-list .row-name .actions
-        {
-            position: absolute;
-            right: 10px;
-            top: 0px;
-        }
-
-        .staff-list .row-title
-        {
-            padding: 1px 2px 1px 2px;
-            font-weight: bold;
-            vertical-align: middle;
-            /*border: 1px solid #6BDDE2*/
-            line-height: 1.5;
-        }
-
-        .staff-list .row-value
-        {
-            padding: 1px 2px 1px 2px;
-            vertical-align: middle;
-            /*border: 1px solid #6BDDE2*/
-            line-height: 1.5;
-        }
-
-        .staff-list .row-value span
-        {
-            display: block; 
-        }
-
-        .staff-list .divider td
-        {
-            height: 35px;
-        }
-        .staff-edit-form
-        {
-            width: 500px;
-            border: 1px solid;
-            padding: 10px;
-        }
-
-        .staff-edit-form .field-title
-        {
-            
-            padding-right: 5px;
-        }
-
-        .staff-edit-form .field-value
-        {
-            white-space:pre-wrap;
-        }
-
-        .staff-edit-form .field-value .photo-preview
-        {
-            max-width: 150px;
-            max-height: 120px;
-        }
-
-        .staff-edit-form .field-title,
-        .staff-edit-form .field-value
-        {
-            
-        }
-
-        .staff-edit-form .field-value input[type='text'],
-        .staff-edit-form .field-value textarea,
-        .staff-list .row-value input[type='text'],
-        .staff-list .row-value textarea
-        {
-            width: 95%;
-        }
-    </style>
-
+    <link href="/Content/themes/staff.css" rel="stylesheet" />
+    
     <h2>Руководство. Педагогический (научно-педагогический) состав</h2>
 
     <asp:Literal ID="ltlMessage" runat="server" EnableViewState="false" />
@@ -302,7 +197,7 @@
                 </tr>
                 <tr data-ng-repeat-start="empl in Data.Employees | filter : emplFilter">
                     <td colspan="4" class="row-name">
-                        <span>{{ empl.Name }}</span>
+                        <span class="staff-name" data-ng-click="DisplayDetails(empl.StaffId)">{{ empl.Name }}</span>
                         <div class="actions" data-ng-show="Data.CanEdit">
                             <a class="button" data-ng-click="EditDetails(empl.StaffId)" >Редактировать</a>
                             <a class="button" data-ng-click="DeleteEmployee(empl)" >Удалить</a>
@@ -332,8 +227,8 @@
                 <tr data-ng-repeat-end class="divider"><td colspan="4"><hr /></td></tr>
             </table>
 
-            <div data-ng-show="Data.DisplayDetailsForm" ng-cloak style="position: fixed; width: 100%; height: 100%; top: 0px; left: 0px; right: 0px; bottom: 0px;background-color: rgba(0, 0, 0, .5);color: rgba(0, 0, 0, .5);z-index: 500;"></div>
-            <div data-ng-show="Data.DisplayDetailsForm" ng-cloak style="position: fixed; top: 50px; z-index: 500; background-color: #D5E8EA; margin:auto; max-width: 1100px; left: 0px; right: 0px; border-radius: 5px; ">
+            <div data-ng-show="Data.DisplayDetailsForm" ng-cloak class="ag-edit-form-overlay" ></div>
+            <div data-ng-show="Data.DisplayDetailsForm" ng-cloak class="ag-edit-form" >
                 <%--<div data-ng-show="Data.IsEditMode">
                     <fieldset class="staff-edit-form" style="margin: auto">
                         <legend>Информация</legend>
@@ -400,9 +295,9 @@
                     </fieldset>
                 </div>--%>
 
-                <!-- display -->
-                <div style="padding: 10px;">
-                    <table class="staff-list" style="width: 100%" >
+                <!-- display & edit -->
+                <div name="fDetails" style="padding: 10px;">
+                    <table class="staff-list details" style="width: 100%" >
                         <tr>
                             <td colspan="3" class="row-name">
                                 <span data-ng-hide="Data.IsEditMode">{{ Data.ActiveEmployee.Name }}</span>
@@ -412,7 +307,7 @@
                         <tr>
                             <!-- Photo -->
                             <td rowspan="11" class="photo" style="width: 350px;">
-                                <img data-ng-src="{{ Data.ActiveEmployee.PhotoUrl }}"  />
+                                <img data-ng-src="{{ Data.ActiveEmployee.PhotoUrl | fullImg:'.full.jpg' }}"  />
                             </td>
                             <td class="row-title" style="width: 250px;">Должность</td>
                             <td class="row-value">

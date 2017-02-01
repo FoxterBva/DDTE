@@ -12,6 +12,7 @@
           <EntitySet Name="Staff" EntityType="Хранилище DdteDBModel.Staff" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Union" EntityType="Хранилище DdteDBModel.Union" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UnionAchievement" EntityType="Хранилище DdteDBModel.UnionAchievement" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UnionAchievementParticipant" EntityType="Хранилище DdteDBModel.UnionAchievementParticipant" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UnionProgram" EntityType="Хранилище DdteDBModel.UnionProgram" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UnionSchedule" EntityType="Хранилище DdteDBModel.UnionSchedule" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_Pghoto_AlbumId" Association="Хранилище DdteDBModel.FK_Pghoto_AlbumId">
@@ -21,6 +22,10 @@
           <AssociationSet Name="FK_UnionAchievement_UnionProgramId" Association="Хранилище DdteDBModel.FK_UnionAchievement_UnionProgramId">
             <End Role="UnionProgram" EntitySet="UnionProgram" />
             <End Role="UnionAchievement" EntitySet="UnionAchievement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UnionAchievementParticipant_UnionAchievementId" Association="Хранилище DdteDBModel.FK_UnionAchievementParticipant_UnionAchievementId">
+            <End Role="UnionAchievement" EntitySet="UnionAchievement" />
+            <End Role="UnionAchievementParticipant" EntitySet="UnionAchievementParticipant" />
           </AssociationSet>
           <AssociationSet Name="FK_UnionProgram_UnionId" Association="Хранилище DdteDBModel.FK_UnionProgram_UnionId">
             <End Role="Union" EntitySet="Union" />
@@ -114,6 +119,17 @@
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="UnionAchievementParticipant">
+          <Key>
+            <PropertyRef Name="UnionAchievementParticipantId" />
+          </Key>
+          <Property Name="UnionAchievementParticipantId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UnionAchievementId" Type="int" Nullable="false" />
+          <Property Name="ParticipantName" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Result" Type="nvarchar" MaxLength="200" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="UnionProgram">
           <Key>
             <PropertyRef Name="UnionProgramId" />
@@ -175,6 +191,20 @@
             </Principal>
             <Dependent Role="UnionAchievement">
               <PropertyRef Name="UnionProgramId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UnionAchievementParticipant_UnionAchievementId">
+          <End Role="UnionAchievement" Type="Хранилище DdteDBModel.UnionAchievement" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UnionAchievementParticipant" Type="Хранилище DdteDBModel.UnionAchievementParticipant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnionAchievement">
+              <PropertyRef Name="UnionAchievementId" />
+            </Principal>
+            <Dependent Role="UnionAchievementParticipant">
+              <PropertyRef Name="UnionAchievementId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -273,6 +303,11 @@
             <End Role="UnionProgram" EntitySet="UnionPrograms" />
             <End Role="UnionSchedule" EntitySet="UnionSchedules" />
           </AssociationSet>
+          <EntitySet Name="UnionAchievementParticipants" EntityType="DdteDBModel.UnionAchievementParticipant" />
+          <AssociationSet Name="FK_UnionAchievementParticipant_UnionAchievementId" Association="DdteDBModel.FK_UnionAchievementParticipant_UnionAchievementId">
+            <End Role="UnionAchievement" EntitySet="UnionAchievements" />
+            <End Role="UnionAchievementParticipant" EntitySet="UnionAchievementParticipants" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="News">
           <Key>
@@ -334,6 +369,7 @@
           <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
           <Property Type="DateTime" Name="ModifiedDate" Nullable="false" Precision="3" />
           <NavigationProperty Name="UnionProgram" Relationship="DdteDBModel.FK_UnionAchievement_UnionProgramId" FromRole="UnionAchievement" ToRole="UnionProgram" />
+          <NavigationProperty Name="UnionAchievementParticipants" Relationship="DdteDBModel.FK_UnionAchievementParticipant_UnionAchievementId" FromRole="UnionAchievement" ToRole="UnionAchievementParticipant" />
         </EntityType>
         <EntityType Name="UnionProgram">
           <Key>
@@ -416,6 +452,32 @@
             </Principal>
             <Dependent Role="UnionSchedule">
               <PropertyRef Name="UnionProgramId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UnionAchievementParticipant">
+          <Key>
+            <PropertyRef Name="UnionAchievementParticipantId" />
+          </Key>
+          <Property Type="Int32" Name="UnionAchievementParticipantId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UnionAchievementId" Nullable="false" />
+          <Property Type="String" Name="ParticipantName" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Result" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="false" Precision="3" />
+          <NavigationProperty Name="UnionAchievement" Relationship="DdteDBModel.FK_UnionAchievementParticipant_UnionAchievementId" FromRole="UnionAchievementParticipant" ToRole="UnionAchievement" />
+        </EntityType>
+        <Association Name="FK_UnionAchievementParticipant_UnionAchievementId">
+          <End Type="DdteDBModel.UnionAchievement" Role="UnionAchievement" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DdteDBModel.UnionAchievementParticipant" Role="UnionAchievementParticipant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnionAchievement">
+              <PropertyRef Name="UnionAchievementId" />
+            </Principal>
+            <Dependent Role="UnionAchievementParticipant">
+              <PropertyRef Name="UnionAchievementId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -551,6 +613,18 @@
                 <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="UnionProgramId" ColumnName="UnionProgramId" />
                 <ScalarProperty Name="UnionScheduleId" ColumnName="UnionScheduleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnionAchievementParticipants">
+            <EntityTypeMapping TypeName="DdteDBModel.UnionAchievementParticipant">
+              <MappingFragment StoreEntitySet="UnionAchievementParticipant">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="ParticipantName" ColumnName="ParticipantName" />
+                <ScalarProperty Name="UnionAchievementId" ColumnName="UnionAchievementId" />
+                <ScalarProperty Name="UnionAchievementParticipantId" ColumnName="UnionAchievementParticipantId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

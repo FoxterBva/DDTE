@@ -7,12 +7,12 @@ using System.Web.UI.WebControls;
 
 namespace DDTE.Web
 {
-	public partial class MainRight : System.Web.UI.MasterPage
+	public partial class MainRight : DdteMasterPage
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			var photoName = (new DDTE.BL.Providers.PhotoProvider()).GetRandomPublicPhotoUrl() ?? String.Empty;
-			imgRandom.ImageUrl = photoName.StartsWith("http") ? photoName : "/Photos" + photoName;
+			imgRandom.ImageUrl = photoName.StartsWith("http") ? photoName : DDTE.Common.GeneralHelper.GetTumbPath("/Photos" + photoName);
 		}
 	}
 }
